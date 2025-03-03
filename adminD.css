@@ -1,0 +1,132 @@
+
+.container {
+    width: 80%; /* Adjusted width for the container */
+    margin-left: 17%; /* Leave space for the sidebar */
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background for the container */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    height: 95vh; /* Full height of the viewport */
+   position: fixed;
+   border: 2px solid #A9A9A9; /* Dark gray border */
+}
+
+/* Heading styles */
+h1 {
+    text-align: center;
+    color: #333; /* Darker text color */
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+/* Wrapper for sidebar and main content */
+.wrapper {
+    display: flex; /* Use flexbox for layout */
+    height: 100vh; /* Full viewport height */
+}
+
+/* Sidebar styles */
+.sidebar {
+    width: 15%; /* Fixed width for the sidebar */
+    background-color: #2c3e50; /* Dark blue-gray background for the sidebar */
+    padding: 20px; /* Padding inside the sidebar */
+    border-right: 1px solid #ccc; /* Right border for separation */
+    height: 95vh; /* Full viewport height for the sidebar */
+    position: fixed; /* Fix the sidebar in place */
+}
+
+.sidebar-image {
+    width: 100%; /* Make the image full width of the sidebar */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px; /* Optional: rounded corners */
+    margin-bottom: 20px; /* Space below the image */
+}
+
+/* Sidebar heading styles */
+.sidebar h2 {
+    color: #ecf0f1; /* Light color for the heading */
+}
+
+/* Sidebar link styles */
+.sidebar ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+    margin-top: 60px;
+}
+
+.sidebar li {
+    margin: 35px 0; /* Space between links */
+}
+
+.sidebar a {
+    text-decoration: none; /* Remove underline */
+    color: #ecf0f1; /* Light color for links */
+    display: flex; /* Flexbox for icon and text alignment */
+    align-items: center; /* Center items vertically */
+    
+}
+
+.sidebar a i {
+    margin-right: 10px; /* Space between icon and text */
+}
+
+.sidebar a:hover {
+    text-decoration: underline; /* Underline on hover */
+    color: #1abc9c; /* Change color on hover */
+}
+
+/* Back to Home link styles */
+.back-home {
+    position: absolute; /* Position it at the bottom */
+    bottom: 20px; /* Space from the bottom */
+    left: 60px; /* Align to the left */
+    color: #ecf0f1; /* Light color */
+    text-decoration: none; /* Remove underline */
+    display: flex; /* Flexbox for icon and text alignment */
+    align-items: center; /* Center items vertically */
+}
+
+.back-home:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Remove space between borders */
+    margin-top: 20px; /* Space above the table */
+}
+
+/* Table header styles */
+th, td {
+    border: 1px solid #ccc; /* Light gray border */
+    padding: 12px; /* More padding for better spacing */
+    text-align: left; /* Align text to the left */
+}
+
+/* Table header background */   
+th {
+    background-color: #4CAF50; /* Green background for header */
+    color: white; /* White text color for header */
+}
+
+/* Row styles */
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Light gray for even rows */
+}
+
+tr:hover {
+    background-color: #e0e0e0; /* Slightly darker gray on hover */
+}
+
+/* Link styles */
+a {
+    display: inline-block; /* Make the link a block element */
+    margin-top: 20px; /* Space above the link */
+    text-decoration: none; /* Remove underline */
+    color: #4CAF50; /* Green color for the link */
+    font-weight: bold; /* Bold text */
+}
+
+a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
