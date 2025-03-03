@@ -13,9 +13,9 @@
 </head>
 <body>
     <div class="container">
-        <!-- Left Side: Design -->
+      
         <div class="left-side" style="position: relative;">
-            <!-- Back Arrow Icon -->
+          
             <a href="index.php" class="back-arrow">
                 <i class='bx bx-arrow-back'></i>
             </a>
@@ -27,7 +27,7 @@
             <p>Manage your account settings and security preferences here.</p>
         </div>
 
-        <!-- Right Side: Settings Form -->
+        
         <div class="right-side">
             <form action="">
                 <h1>Account Settings</h1>

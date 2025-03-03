@@ -1,9 +1,9 @@
 <?php
-include "db.php"; // Include database connection
+include "db.php"; 
 
-// Handle registration
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['firstname'])) {
-    // Check if the required fields are set
+   
     $firstname = trim($_POST['firstname']);
     $lastname = trim($_POST['lastname']);
     $email = trim($_POST['email']);
@@ -12,13 +12,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['firstname'])) {
     $type = $_POST['type'];
     $status = $_POST['status'];
 
-    // Prepare the SQL statement
+   
     $sql = "INSERT INTO tbl_user(u_fname, u_lname, u_email, u_username, u_password, u_type, u_status)
             VALUES (?, ?, ?, ?, ?, ?, ?)";
     
     $stmt = $conn->prepare($sql);
 
-    if (!$stmt) { // If prepare() fails, print the error
+    if (!$stmt) { 
         die("Prepare failed: " . $conn->error);
     } 
 
@@ -33,29 +33,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['firstname'])) {
     $stmt->close();
 }
 
-// Handle login
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
 
-    // Prepare the SQL statement to fetch user data
-    $sql = "SELECT u_password FROM tbl_user WHERE u_username = ?";
+    // Update the SQL query to fetch user ID
+    $sql = "SELECT u_id, u_password, u_type FROM tbl_user WHERE u_username = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $stmt->store_result();
 
-    // Check if the user exists
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($hashed_password);
+        $stmt->bind_result($user_id, $hashed_password, $user_type);
         $stmt->fetch();
 
-        // Verify the password
         if (password_verify($password, $hashed_password)) {
-            // Start session and redirect to adminD.php
             session_start();
-            $_SESSION['username'] = $username; // Store username in session
-            header("Location: adminD.php");
+            $_SESSION['username'] = $username; 
+            $_SESSION['user_id'] = $user_id; 
+
+            if ($user_type === 'admin') {
+                header("Location: adminD.php");
+            } elseif ($user_type === 'staff') {
+                header("Location: staff.php"); 
+            } else {
+                header("Location: userD.php"); 
+            }
             exit();
         } else {
             echo "<script>alert('Invalid username or password.');</script>";
@@ -117,8 +122,7 @@ $conn->close();
         </div>
 
         <div class="form-box register">
-    <form action="index.php" method="POST"> <!-- Action is set correctly -->
-        <h1>Registration</h1>
+    <form action="index.php" method="POST">
 
         <div class="input-box">
             <input type="text" name="firstname" placeholder="Firstname" required>
@@ -184,12 +188,12 @@ $conn->close();
             const registerBtn = document.querySelector(".register-btn");
             const loginBtn = document.querySelector(".login-btn");
 
-            // Event listener for the Register button
+          
             registerBtn.addEventListener("click", () => {
                 container.classList.add("active");
             });
 
-            // Event listener for the Login button
+          
             loginBtn.addEventListener("click", () => {
                 container.classList.remove("active");
             });

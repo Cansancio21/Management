@@ -135,57 +135,57 @@ form{
 }
 
 .btn:hover {
-    background-color: #5a7bbf; /* Darker shade on hover */
-    transform: translateY(-2px); /* Slight lift effect */
+    background-color: #5a7bbf; 
+    transform: translateY(-2px); 
 }
 
-/* Active effect */
+
 .btn:active {
-    transform: translateY(0); /* Reset lift effect */
-    background-color: #4a6fae; /* Even darker shade when active */
+    transform: translateY(0); 
+    background-color: #4a6fae; 
 }
 
-/* Disabled state */
+
 .btn:disabled {
-    background-color: #ccc; /* Gray background for disabled state */
-    color: #888; /* Gray text for disabled state */
-    cursor: not-allowed; /* Not-allowed cursor */
+    background-color: #ccc; 
+    color: #888; 
+    cursor: not-allowed; 
 }
 
 .button {
-    width: 100%; /* Full width */
-    max-width: 300px; /* Maximum width */
-    height: 48px; /* Height of the button */
-    background-color: #7494ec; /* Background color */
-    border: none; /* No border */
-    border-radius: 8px; /* Rounded corners */
-    color: #fff; /* Text color */
-    font-size: 16px; /* Font size */
-    font-weight: 600; /* Font weight */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Transition effects */
-    margin: 20px 0; /* Margin for spacing */
+    width: 100%; 
+    max-width: 300px;
+    height: 48px; 
+    background-color: #7494ec; 
+    border: none; 
+    border-radius: 8px; 
+    color: #fff; 
+    font-size: 16px; 
+    font-weight: 600; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+    margin: 20px 0; 
     margin-left: 50%;
     margin-top: -20px
 }
 
-/* Hover effect */
+
 .button:hover {
-    background-color: #5a7bbf; /* Darker shade on hover */
-    transform: translateY(-2px); /* Slight lift effect */
+    background-color: #5a7bbf; 
+    transform: translateY(-2px); 
 }
 
-/* Active effect */
+
 .button:active {
-    transform: translateY(0); /* Reset lift effect */
-    background-color: #4a6fae; /* Even darker shade when active */
+    transform: translateY(0); 
+    background-color: #4a6fae; 
 }
 
-/* Disabled state */
+
 .button:disabled {
-    background-color: #ccc; /* Gray background for disabled state */
-    color: #888; /* Gray text for disabled state */
-    cursor: not-allowed; /* Not-allowed cursor */
+    background-color: #ccc; 
+    color: #888; 
+    cursor: not-allowed; 
 }
 
  .container p{
@@ -275,9 +275,9 @@ form{
  }
 
  .toggle-panel p {
-    margin: 0; /* Remove default margin */
+    margin: 0; 
   
-    text-align: center; /* Center the text */
+    text-align: center; 
 }
 
  .toggle-panel .btn{
@@ -304,51 +304,51 @@ form{
    transition: 0.3s ease-in-out;
 }
 
-/* Icon Styling */
+
 .settings-link i {
    font-size: 24px;
    margin-right: 5px;
    transition: 0.3s ease-in-out;
 }
 
-/* Initially Hide Text */
+
 .settings-link span {
    opacity: 0;
    transform: translateX(-10px);
    transition: 0.3s ease-in-out;
 }
 
-/* Hover Effect: Show Text */
+
 .settings-link:hover span {
    opacity: 1;
    transform: translateX(0);
 }
 
 .input-box select {
-    width: 100%; /* Full width */
-    padding: 10px 40px 10px 20px; /* Padding for text and icon */
-    border: 1px solid #ccc; /* Border color */
-    border-radius: 5px; /* Rounded corners */
-    font-size: 16px; /* Font size */
-    appearance: none; /* Remove default dropdown arrow */
-    background-color: #fff; /* Background color */
+    width: 100%; 
+    padding: 10px 40px 10px 20px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    font-size: 16px; 
+    appearance: none; 
+    background-color: #fff; 
     
-    background-repeat: no-repeat; /* No repeat for the background image */
-    background-position: right 10px center; /* Position the arrow */
+    background-repeat: no-repeat; 
+    background-position: right 10px center; 
 }
 
-/* Style for the select dropdown when focused */
+
 .input-box select:focus {
-    border-color: #007bff; /* Change border color on focus */
-    outline: none; /* Remove outline */
+    border-color: #007bff; 
+    outline: none; 
 }
 
-/* Style for the icon */
+
 .input-box i {
-    position: absolute; /* Positioning relative to the input box */
-    top: 50%; /* Center vertically */
-    right: 10px; /* Space from the right */
-    transform: translateY(-50%); /* Adjust for vertical centering */
-    color: #888; /* Icon color */
-    font-size: 20px; /* Icon size */
+    position: absolute; 
+    top: 50%; 
+    right: 10px; 
+    transform: translateY(-50%); 
+    color: #888; 
+    font-size: 20px; 
 }
