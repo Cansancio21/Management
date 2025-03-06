@@ -1,16 +1,16 @@
-<?php
+<?php 
 include 'db.php'; 
-session_start();
+session_start(); 
 
 // Check if the user is logged in
-if (!isset($_SESSION['username'])) {
-    header("Location: index.php"); // Redirect to login page if not logged in
-    exit();
+if (!isset($_SESSION['username'])) { 
+    header("Location: index.php"); // Redirect to login page if not logged in 
+    exit(); 
 }
 
 // Update the SQL query to include the user ID
-$sql = "SELECT u_id, u_fname, u_lname, u_email, u_username, u_type, u_status FROM tbl_user";
-$result = $conn->query($sql);
+$sql = "SELECT u_id, u_fname, u_lname, u_email, u_username, u_type, u_status FROM tbl_user"; 
+$result = $conn->query($sql); 
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +18,7 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registered Users</title>
+    <title>Admin Dashboard</title>
     <link rel="stylesheet" href="adminD.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
 </head>
@@ -34,8 +34,13 @@ $result = $conn->query($sql);
         </ul>
         <a href="index.php" class="back-home"><i class="fas fa-home"></i> Back to Home</a>
     </div>
+
     <div class="container">
         <h1>Admin Dashboard</h1>
+        
+        <!-- Add User Button -->
+        <a href="addU.php" class="add-user-btn"><i class="fas fa-user-plus"></i> Add User</a>
+
         <table>
             <thead>
                 <tr>
@@ -44,27 +49,27 @@ $result = $conn->query($sql);
                     <th>Lastname</th>
                     <th>Email</th>
                     <th>Username</th>
-                    <th>User Type</th>
+                    <th>Type</th>
                     <th>Status</th>
                 </tr>
             </thead>
             <tbody>
-                <?php
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>
-                                <td>{$row['u_id']}</td>
-                                <td>{$row['u_fname']}</td>
-                                <td>{$row['u_lname']}</td>
-                                <td>{$row['u_email']}</td>
-                                <td>{$row['u_username']}</td>
-                                <td>{$row['u_type']}</td>
-                                <td>{$row['u_status']}</td>
-                              </tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='7'>No users found.</td></tr>";
-                }
+                <?php 
+                if ($result->num_rows > 0) { 
+                    while ($row = $result->fetch_assoc()) { 
+                        echo "<tr> 
+                                <td>{$row['u_id']}</td> 
+                                <td>{$row['u_fname']}</td> 
+                                <td>{$row['u_lname']}</td> 
+                                <td>{$row['u_email']}</td> 
+                                <td>{$row['u_username']}</td> 
+                                <td>" . ucfirst(strtolower($row['u_type'])) . "</td> 
+                                <td>" . ucfirst(strtolower($row['u_status'])) . "</td> 
+                              </tr>"; 
+                    } 
+                } else { 
+                    echo "<tr><td colspan='7'>No users found.</td></tr>"; 
+                } 
                 ?>
             </tbody>
         </table>
@@ -73,6 +78,6 @@ $result = $conn->query($sql);
 </body>
 </html>
 
-<?php
-$conn->close(); // Close the database connection
+<?php 
+$conn->close(); // Close the database connection 
 ?>

@@ -94,6 +94,9 @@ table {
     width: 100%;
     border-collapse: collapse; /* Remove space between borders */
     margin-top: 20px; /* Space above the table */
+    max-height: 90%; /* Set a maximum height for the table */
+    overflow-y: auto; /* Enable vertical scrolling */
+    display: block; /* Allow scrolling */
 }
 
 /* Table header styles */
@@ -101,6 +104,22 @@ th, td {
     border: 1px solid #ccc; /* Light gray border */
     padding: 12px; /* More padding for better spacing */
     text-align: left; /* Align text to the left */
+}
+
+/* Apply specific widths to columns */
+th:nth-child(1), td:nth-child(1) {
+    width: 15%; /* Adjust width of first column (e.g., Name or ID) */
+}
+
+th:nth-child(2), td:nth-child(2) {
+    width: 20%; /* Adjust width of second column */
+}
+
+th:nth-child(3), td:nth-child(3) {
+    width: 25%; /* Adjust width of third column */
+}
+th:last-child, td:last-child {
+    width: 15%; /* Adjust the width of the 'Status' column */
 }
 
 /* Table header background */   
@@ -129,4 +148,23 @@ a {
 
 a:hover {
     text-decoration: underline; /* Underline on hover */
+}
+
+.add-user-btn {
+    display: inline-block;
+    background-color: #7494ec;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+    position: absolute;
+    right: 30px;
+    top: 20px;
+}
+
+.add-user-btn:hover {
+    background-color: #7494ec;
 }

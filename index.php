@@ -1,32 +1,37 @@
 <?php
+session_start(); // Start session for login management
 include "db.php"; 
 
-// Initialize variables
-$firstnameErr = $lastnameErr = "";
-$firstname = $lastname = $email = $username = $type = $status = ""; 
-$hasError = false; // Error tracking flag
+// Initialize variables as empty (ensures fields are empty on initial load)
+$firstname = $lastname = $email = $username = "";
+$type = $status = ""; 
 
+$firstnameErr = $lastnameErr = $loginError = $passwordError = $typeError = "";
+$hasError = false;
+$successMessage = "";
+
+// User Registration
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['firstname'])) {
     $firstname = trim($_POST['firstname']);
     $lastname = trim($_POST['lastname']);
     $email = trim($_POST['email']);
     $username = trim($_POST['username']);
     $password = password_hash(trim($_POST['password']), PASSWORD_BCRYPT);
-    $type = $_POST['type'];
-    $status = $_POST['status'];
+    $type = trim($_POST['type']);
+    $status = trim($_POST['status']);
 
-    // Validate firstname and lastname (only letters and spaces allowed)
+    // Validate firstname (should not contain numbers)
     if (!preg_match("/^[a-zA-Z\s-]+$/", $firstname)) {
-        $firstnameErr = "Firstname must contain numbers.";
+        $firstnameErr = "Firstname should not contain numbers.";
         $hasError = true;
     }
 
+    // Validate lastname (should not contain numbers)
     if (!preg_match("/^[a-zA-Z\s-]+$/", $lastname)) {
-        $lastnameErr = "Lastname must contain numbers.";
+        $lastnameErr = "Lastname should not contain numbers.";
         $hasError = true;
     }
 
-    // If no errors, insert into database
     if (!$hasError) {
         $sql = "INSERT INTO tbl_user (u_fname, u_lname, u_email, u_username, u_password, u_type, u_status)
                 VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -39,16 +44,68 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['firstname'])) {
         $stmt->bind_param("sssssss", $firstname, $lastname, $email, $username, $password, $type, $status);
 
         if ($stmt->execute()) {
-            echo "<script>alert('Registration successful! Please log in.'); window.location.href='index.php';</script>";
-            exit();
+            echo "<script type='text/javascript'>
+        alert('Registration successful! Please log in.');
+    </script>";
         } else {
-            echo "Execution failed: " . $stmt->error;
+            die("Execution failed: " . $stmt->error);
         }
 
         $stmt->close();
     }
 }
+
+// User Login
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
+
+    $loginError = ""; 
+    $passwordError = ""; 
+    $typeError = ""; // Added type error variable
+
+    // Check if username exists
+    $sql = "SELECT u_id, u_username, u_password, u_type, u_status FROM tbl_user WHERE u_username = ?";
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        die("Prepare failed: " . $conn->error);
+    }
+
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 1) {
+        // Username exists
+        $row = $result->fetch_assoc();
+
+        // Check if the account status is "pending"
+        if (strtolower($row['u_status']) === "pending") {
+            $typeError = "Your account is pending approval.";
+        } elseif (password_verify($password, $row['u_password'])) {
+            // Successful login
+            $_SESSION['username'] = $row['u_username'];
+            $_SESSION['user_type'] = $row['u_type'];
+
+            // Redirect based on user type
+            if ($row['u_type'] == 'admin') {
+                header("Location: adminD.php");
+                exit();
+            } elseif ($row['u_type'] == 'staff') {
+                header("Location: staff.php");
+                exit();
+            }
+        } else {
+            $passwordError = "Incorrect password. Try again.";
+        }
+    } else {
+        $loginError = "Incorrect username. Try again.";
+    }
+
+    $stmt->close();
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -66,21 +123,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['firstname'])) {
         <div class="form-box login">
             <a href="settings.php" class="settings-link">
                 <i class='bx bx-cog'></i>
-                <span>Settings</span>
+                <span>Forgot Password</span>
             </a>
+
+
             <form action="" method="POST">
                 <h1>Login</h1>
+                <?php if (!empty($typeError)) echo "<p class='errors-message'>$typeError</p>"; ?>
                 <div class="input-box">
-                    <input type="text" name="username" placeholder="Username" required>
-                    <i class='bx bxs-user'></i>
-                </div>
-                <div class="input-box">
-                    <input type="password" name="password" placeholder="Password" required>
-                    <i class='bx bxs-lock-alt'></i>
-                </div>
-                <div class="forgot-pass">
-                    <a href="#">Forgot password?</a>
-                </div>
+            <input type="text" name="username" placeholder="Username" required>
+            <i class='bx bxs-user'></i>
+            <?php if (!empty($loginError)) echo "<p class='error-message'>$loginError</p>"; ?>
+        </div>
+        <div class="input-box">
+            <input type="password" name="password" placeholder="Password" required>
+            <i class='bx bxs-lock-alt'></i>
+            <?php if (!empty($passwordError)) echo "<p class='error-message'>$passwordError</p>"; ?>
+        </div> 
                 <button type="submit" name="login" class="btn">Login</button>
                 <p>or login with social platform</p>
                 <div class="social-icons">
@@ -92,31 +151,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['firstname'])) {
             </form>
         </div>
 
-        <!-- Registration Form -->
+     
         <div class="form-box register">
             <form action="" method="POST">
                 <h1>Registration</h1>
                 <div class="input-box">
-                    <input type="text" name="firstname" placeholder="Firstname" value="<?php echo htmlspecialchars($firstname); ?>" required>
-                    <i class='bx bxs-user'></i>
-                    <span class="error"><?php echo $firstnameErr; ?></span>
-                </div>
-                <div class="input-box">
-                    <input type="text" name="lastname" placeholder="Lastname" value="<?php echo htmlspecialchars($lastname); ?>" required>
-                    <i class='bx bxs-user'></i>
-                    <span class="error"><?php echo $lastnameErr; ?></span>
-                </div>
+                 <input type="text" name="firstname" placeholder="Firstname" value="<?php echo htmlspecialchars($firstname); ?>" required>
+                 <i class="bx bxs-user firstname-icon"></i>
+                    <?php if (!empty($firstnameErr)) echo "<span class='error'>$firstnameErr</span>"; ?>
+                 </div>
+
+               <div class="input-box">
+                <input type="text" name="lastname" placeholder="Lastname" value="<?php echo htmlspecialchars($lastname); ?>" required>
+                <i class="bx bxs-user lastname-icon"></i>
+                     <?php if (!empty($lastnameErr)) echo "<span class='error'>$lastnameErr</span>"; ?>
+                      </div>
                 <div class="input-box">
                     <input type="email" name="email" placeholder="Email" value="<?php echo htmlspecialchars($email); ?>" required>
-                    <i class='bx bxs-envelope'></i>
+                    <i class="bx bxs-envelope email-icon"></i>
                 </div>
                 <div class="input-box">
                     <input type="text" name="username" placeholder="Username" value="<?php echo htmlspecialchars($username); ?>" required>
-                    <i class='bx bxs-user'></i>
+                    <i class="bx bxs-user username-icon"></i>
                 </div>            
                 <div class="input-box">
                     <input type="password" name="password" placeholder="Password" required>
-                    <i class='bx bxs-lock-alt'></i>
+                    <i class="bx bxs-lock-alt password-icon"></i>
                 </div>
                 <div class="input-box">
                     <select name="type" required>
@@ -125,7 +185,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['firstname'])) {
                         <option value="admin" <?php if ($type == 'admin') echo 'selected'; ?>>Admin</option>
                         <option value="staff" <?php if ($type == 'staff') echo 'selected'; ?>>Staff</option>
                     </select>
-                    <i class='bx bxs-user'></i>
+                    <i class='bx bxs-user type-icon'></i>
                 </div>
                 <div class="input-box">
                     <select name="status" required>
@@ -133,7 +193,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['firstname'])) {
                         <option value="pending" <?php if ($status == 'pending') echo 'selected'; ?>>Pending</option>
                         <option value="active" <?php if ($status == 'active') echo 'selected'; ?>>Active</option>
                     </select>
-                    <i class='bx bxs-check-circle'></i>
+                    <i class='bx bxs-check-circle status-icon'></i>
                 </div>
                 <button type="submit" class="button">Register</button>
             </form>
@@ -155,19 +215,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['firstname'])) {
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const container = document.querySelector(".container");
-            const registerBtn = document.querySelector(".register-btn");
-            const loginBtn = document.querySelector(".login-btn");
+       document.addEventListener("DOMContentLoaded", () => {
+    // Toggle between Login & Register
+    const container = document.querySelector(".container");
+    const registerBtn = document.querySelector(".register-btn");
+    const loginBtn = document.querySelector(".login-btn");
 
-            registerBtn.addEventListener("click", () => {
-                container.classList.add("active");
-            });
+    registerBtn.addEventListener("click", () => {
+        container.classList.add("active");
+    });
 
-            loginBtn.addEventListener("click", () => {
-                container.classList.remove("active");
-            });
-        });
+    loginBtn.addEventListener("click", () => {
+        container.classList.remove("active");
+    });
+  
+});
     </script>
 
 </body>

@@ -19,3 +19,24 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+function updateSelectColor(select) {
+    if (select.value !== "") {
+        select.classList.add("filled"); // Add color when selected
+    } else {
+        select.classList.remove("filled"); // Remove color when unselected
+    }
+}
+
+// Add event listeners to select fields
+document.querySelectorAll(".input-box select").forEach(select => {
+    select.addEventListener("change", function() {
+        updateSelectColor(this);
+    });
+});
+
+// Check pre-selected values (in case of form reload)
+document.querySelectorAll(".input-box select").forEach(select => {
+    updateSelectColor(select);
+});
+
+
