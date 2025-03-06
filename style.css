@@ -352,3 +352,8 @@ form{
     color: #888; 
     font-size: 20px; 
 }
+
+.error {
+    color: red;
+    font-size: 0.9em;
+}
