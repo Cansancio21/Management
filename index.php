@@ -72,7 +72,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     }
 
     $stmt->bind_param("s", $username);
-    $stmt->execute();
+    
+    // Execute and check for errors
+    if ($stmt->execute() === false) {
+        die("Execute failed: " . $stmt->error);
+    }
+
     $result = $stmt->get_result();
 
     if ($result->num_rows === 1) {
@@ -92,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
                 header("Location: adminD.php");
                 exit();
             } elseif ($row['u_type'] == 'staff') {
-                header("Location: staff.php");
+                header("Location: staffD.php");
                 exit();
             }
         } else {
@@ -106,7 +111,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -114,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Registration & Login</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
 

@@ -23,7 +23,7 @@ body {
     height: 80vh; /* Same height as index.php */
     max-width: 1000px; /* Max width */
     max-height: 650px; /* Max height */
-    background: #fff;
+    background-color: #ffffff;
     border-radius: 30px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
     overflow: hidden;
@@ -32,7 +32,7 @@ body {
 /* Left Side */
 .left-side {
     width: 40%;
-    background: #7494ec;
+    background-color: #1b4d80;
     color: #fff;
     text-align: center;
     padding: 40px 20px;
@@ -66,7 +66,7 @@ body {
 
 .user-icon i {
     font-size: 60px;
-    color: #7494ec;
+    background-color: #1b4d80;
 }
 
 /* Right Side */
@@ -120,7 +120,7 @@ h1 {
     width: 80%;
     max-width: 300px;
     padding: 12px;
-    background: #7494ec;
+    background-color: #1b4d80;
     border: none;
     border-radius: 8px;
     color: #fff;
@@ -148,7 +148,7 @@ h1 {
     flex-direction: column;
     align-items: center;
     text-decoration: none;
-    color: #555;
+    color: #1b4d80;
     font-size: 16px;
     transition: 0.3s;
 }
@@ -156,7 +156,7 @@ h1 {
 .settings-icons i {
     font-size: 40px;
     margin-bottom: 5px;
-    color: #7494ec;
+    background-color: #ffffff;
 }
 
 .settings-icons a:hover {

@@ -19,7 +19,7 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="adminD.css"> 
+    <link rel="stylesheet" href="admin.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
 </head>
 <body>
@@ -32,16 +32,21 @@ $result = $conn->query($sql);
             <li><a href="view_incident_report.php"><i class="fas fa-exclamation-triangle"></i> View Incident Report</a></li>
             <li><a href="view_logs.php"><i class="fas fa-book"></i> View Logs</a></li>
         </ul>
+        <footer>
         <a href="index.php" class="back-home"><i class="fas fa-home"></i> Back to Home</a>
+        </footer>
     </div>
 
     <div class="container">
-        <h1>Admin Dashboard</h1>
+       
+        <div class="upper">
+        <h1>Registered Users</h1>
+        </div>  
         
-        <!-- Add User Button -->
-        <a href="addU.php" class="add-user-btn"><i class="fas fa-user-plus"></i> Add User</a>
-
-        <table>
+     <div class="table-box">
+     <h2>Users</h2>
+     <a href="addU.php" class="add-user-btn"><i class="fas fa-user-plus"></i> Add User</a>
+     <table>
             <thead>
                 <tr>
                     <th>ID</th>
@@ -51,6 +56,7 @@ $result = $conn->query($sql);
                     <th>Username</th>
                     <th>Type</th>
                     <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -64,7 +70,11 @@ $result = $conn->query($sql);
                                 <td>{$row['u_email']}</td> 
                                 <td>{$row['u_username']}</td> 
                                 <td>" . ucfirst(strtolower($row['u_type'])) . "</td> 
-                                <td>" . ucfirst(strtolower($row['u_status'])) . "</td> 
+                                <td>" . ucfirst(strtolower($row['u_status'])) . "</td>
+                                 <td>
+                                    <a href='edit_user.php?id={$row['u_id']}'><i class='fas fa-edit'></i></a>
+                                    <a href='delete_user.php?id={$row['u_id']}'><i class='fas fa-trash'></i></a>
+                                </td>
                               </tr>"; 
                     } 
                 } else { 
@@ -73,6 +83,7 @@ $result = $conn->query($sql);
                 ?>
             </tbody>
         </table>
+     </div>
     </div>
 </div>
 </body>
