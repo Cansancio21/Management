@@ -88,6 +88,15 @@ form{
     text-overflow: ellipsis; /* Add ellipsis if the text overflows */
 }
 
+.input-box .error {
+    color: red; /* Error message color */
+    font-size: 0.9em; /* Font size for error messages */
+    margin-top: 5px; /* Space above error messages */
+    position: absolute; /* Positioning the error message */
+    bottom: -20px; /* Position below the input field */
+    left: 0; /* Align to the left */
+}
+
 /* Adjusting icon position */
 .input-box i {
     position: absolute;
@@ -375,4 +384,5 @@ form{
     color: red;
     font-size: 0.9em;
 }
+
 

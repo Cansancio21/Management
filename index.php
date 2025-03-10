@@ -6,9 +6,8 @@ include "db.php";
 $firstname = $lastname = $email = $username = "";
 $type = $status = ""; 
 
-$firstnameErr = $lastnameErr = $loginError = $passwordError = $typeError = "";
+$firstnameErr = $lastnameErr = $loginError = $passwordError = $typeError = $usernameError = "";
 $hasError = false;
-$successMessage = "";
 
 // User Registration
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['firstname'])) {
@@ -16,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['firstname'])) {
     $lastname = trim($_POST['lastname']);
     $email = trim($_POST['email']);
     $username = trim($_POST['username']);
-    $password = password_hash(trim($_POST['password']), PASSWORD_BCRYPT);
+    $password = trim($_POST['password']);
     $type = trim($_POST['type']);
     $status = trim($_POST['status']);
 
@@ -27,9 +26,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['firstname'])) {
     }
 
     // Validate lastname (should not contain numbers)
-    if (!preg_match("/^[a-zA-Z\s-]+$/", $lastname)) {
+    if (!preg_match("/^[a-zA-Z\s-]+$/", $lastname)) {   
         $lastnameErr = "Lastname should not contain numbers.";
         $hasError = true;
+    }
+
+    // Check if username already exists
+    $sql = "SELECT u_id FROM tbl_user WHERE u_username = ?";
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        die("Prepare failed: " . $conn->error);
+    }
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $usernameError = "Username already exists.";
+        $hasError = true;
+    }
+
+    // Validate password (must contain letters, numbers, and special characters)
+    if (!preg_match("/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/", $password)) {
+        $passwordError = "Password is weak.";
+        $hasError = true;
+    } else {
+        // Hash the password if validation passes
+        $password = password_hash($password, PASSWORD_BCRYPT);
     }
 
     if (!$hasError) {
@@ -45,8 +68,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['firstname'])) {
 
         if ($stmt->execute()) {
             echo "<script type='text/javascript'>
-        alert('Registration successful! Please log in.');
-    </script>";
+                alert('Registration successful! Please log in.');
+            </script>";
         } else {
             die("Execution failed: " . $stmt->error);
         }
@@ -59,10 +82,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['firstname'])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
-
-    $loginError = ""; 
-    $passwordError = ""; 
-    $typeError = ""; // Added type error variable
 
     // Check if username exists
     $sql = "SELECT u_id, u_username, u_password, u_type, u_status FROM tbl_user WHERE u_username = ?";
@@ -110,7 +129,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     $stmt->close();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -119,6 +137,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     <title>User Registration & Login</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="index.css">
+
+    <script>
+        function validatePassword() {
+            const passwordInput = document.getElementById('password');
+            const passwordError = document.getElementById('passwordError');
+            const password = passwordInput.value;
+
+            // Regular expression for strong password
+            const strongPasswordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+            if (strongPasswordPattern.test(password)) {
+                passwordError.textContent = "Password is strong.";
+                passwordError.style.color = "green"; // Change text color to green
+            } else {
+                passwordError.textContent = "Password  is weak.";
+                passwordError.style.color = "red"; // Change text color to red
+            }
+        }
+    </script>
 </head>
 <body>
 
@@ -145,6 +182,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
             <?php if (!empty($passwordError)) echo "<p class='error-message'>$passwordError</p>"; ?>
         </div> 
                 <button type="submit" name="login" class="btn">Login</button>
+       
                 <p>or login with social platform</p>
                 <div class="social-icons">
                     <a href="#"><i class='bx bxl-google'></i></a>
@@ -173,15 +211,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
                 <div class="input-box">
                     <input type="email" name="email" placeholder="Email" value="<?php echo htmlspecialchars($email); ?>" required>
                     <i class="bx bxs-envelope email-icon"></i>
+                  
                 </div>
                 <div class="input-box">
                     <input type="text" name="username" placeholder="Username" value="<?php echo htmlspecialchars($username); ?>" required>
                     <i class="bx bxs-user username-icon"></i>
+                    <?php if (!empty($usernameError)) echo "<span class='error'>$usernameError</span>"; ?><br>
                 </div>            
                 <div class="input-box">
-                    <input type="password" name="password" placeholder="Password" required>
-                    <i class="bx bxs-lock-alt password-icon"></i>
-                </div>
+                <input type="password" id="password" name="password" placeholder="Password" oninput="validatePassword()">
+                <span id="passwordError" class="error"><?php echo $passwordError; ?></span>
+            </div>
                 <div class="input-box">
                     <select name="type" required>
                         <option value="" disabled selected>Select Type</option>

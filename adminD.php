@@ -72,8 +72,8 @@ $result = $conn->query($sql);
                                 <td>" . ucfirst(strtolower($row['u_type'])) . "</td> 
                                 <td>" . ucfirst(strtolower($row['u_status'])) . "</td>
                                  <td>
-                                    <a href='edit_user.php?id={$row['u_id']}'><i class='fas fa-edit'></i></a>
-                                    <a href='delete_user.php?id={$row['u_id']}'><i class='fas fa-trash'></i></a>
+                                    <a href='editU.php?id={$row['u_id']}'><i class='fas fa-edit'></i></a>
+                                    <a href='deleteU.php?id={$row['u_id']}'><i class='fas fa-trash'></i></a>
                                 </td>
                               </tr>"; 
                     } 
