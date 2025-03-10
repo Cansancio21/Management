@@ -13,7 +13,7 @@ $sql = "SELECT u_id, u_fname, u_lname, u_email, u_username, u_type, u_status FRO
 $result = $conn->query($sql); 
 ?>
 
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -24,67 +24,9 @@ $result = $conn->query($sql);
 </head>
 <body>
 <div class="wrapper">
-    <div class="sidebar">
-        <h2>Task Management</h2>
-        <ul>
-            <li><a href="view_users.php"><i class="fas fa-users"></i> View Users</a></li>
-            <li><a href="view_service_record.php"><i class="fas fa-file-alt"></i> View Service Record</a></li>
-            <li><a href="view_incident_report.php"><i class="fas fa-exclamation-triangle"></i> View Incident Report</a></li>
-            <li><a href="view_logs.php"><i class="fas fa-book"></i> View Logs</a></li>
-        </ul>
-        <footer>
-        <a href="index.php" class="back-home"><i class="fas fa-home"></i> Back to Home</a>
-        </footer>
-    </div>
-
-    <div class="container">
-       
-        <div class="upper">
-        <h1>Registered Users</h1>
-        </div>  
-        
-     <div class="table-box">
-     <h2>Users</h2>
-     <a href="addU.php" class="add-user-btn"><i class="fas fa-user-plus"></i> Add User</a>
-     <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Email</th>
-                    <th>Username</th>
-                    <th>Type</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php 
-                if ($result->num_rows > 0) { 
-                    while ($row = $result->fetch_assoc()) { 
-                        echo "<tr> 
-                                <td>{$row['u_id']}</td> 
-                                <td>{$row['u_fname']}</td> 
-                                <td>{$row['u_lname']}</td> 
-                                <td>{$row['u_email']}</td> 
-                                <td>{$row['u_username']}</td> 
-                                <td>" . ucfirst(strtolower($row['u_type'])) . "</td> 
-                                <td>" . ucfirst(strtolower($row['u_status'])) . "</td>
-                                 <td>
-                                    <a href='editU.php?id={$row['u_id']}'><i class='fas fa-edit'></i></a>
-                                    <a href='deleteU.php?id={$row['u_id']}'><i class='fas fa-trash'></i></a>
-                                </td>
-                              </tr>"; 
-                    } 
-                } else { 
-                    echo "<tr><td colspan='7'>No users found.</td></tr>"; 
-                } 
-                ?>
-            </tbody>
-        </table>
-     </div>
-    </div>
+  <div class="container">
+    
+  </div>
 </div>
 </body>
 </html>

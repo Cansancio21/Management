@@ -132,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php if ($successMessage): ?>
     <div class="message-box">
         <p><?php echo $successMessage; ?></p>
-        <button onclick="window.location.href='adminD.php'">OK</button>
+        <button onclick="window.location.href='viewU.php'">OK</button>
     </div>
 <?php endif; ?>
 

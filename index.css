@@ -342,25 +342,26 @@ form{
 
 /* Custom Icon Colors */
 .input-box i.firstname-icon {
-    color: #007bff; /* Blue */
+    color: black; /* Blue */
 }
 .input-box i.lastname-icon {
-    color: #ffcc00; /* Yellow */
+    color: black; /* Yellow */
 }
 .input-box i.email-icon {
-    color: #ff5733; /* Red-Orange */
+    color:  black; /* Yellow */
+    ; /* Red-Orange */
 }
 .input-box i.username-icon {
-    color: #9c27b0; /* Purple */
+    color: black; /* Purple */
 }
 .input-box i.password-icon {
-    color: #e91e63; /* Pink */
+    color: black; /* Pink */
 }
 .input-box i.type-icon {
-    color: #28a745; /* Green */
+    color: black; /* Green */
 }
 .input-box i.status-icon {
-    color: #ff9800; /* Orange */
+    color: black; /* Orange */
 }
 
 .error {

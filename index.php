@@ -113,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
 
             // Redirect based on user type
             if ($row['u_type'] == 'admin') {
-                header("Location: adminD.php");
+                header("Location: viewU.php");
                 exit();
             } elseif ($row['u_type'] == 'staff') {
                 header("Location: staffD.php");
