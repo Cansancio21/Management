@@ -1,10 +1,69 @@
+<?php
+session_start(); // Start session for login management
+include "db.php"; 
+
+// Initialize variables as empty
+$firstname = $lastname = $area = $contact = $email = $dob = "";
+$ONU = $caller = $address = $remarks = "";
+$firstnameErr = $dobErr = $issuetypeError = $ticketstatusErr = "";
+$hasError = false;
+
+// User Registration
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $firstname = trim($_POST['firstname']);
+    $lastname = trim($_POST['lastname']);
+    $area = trim($_POST['area']);
+    $contact = trim($_POST['contact']);
+    $email = trim($_POST['email']);
+    $dob = trim($_POST['date']);
+    $ONU = trim($_POST['ONU']);
+    $caller = trim($_POST['caller']);
+    $address = trim($_POST['address']);
+    $remarks = trim($_POST['remarks']);
+
+    // Validate account name
+    if (!preg_match("/^[a-zA-Z\s-]+$/", $firstname)) {
+        $firstnameErr = "Account Name should not contain numbers.";
+        $hasError = true;
+    }
+
+    // Insert into database if no errors
+    if (!$hasError) {
+        $sql = "INSERT INTO tbl_customer (c_fname, c_lname, c_area, c_contact, c_email, c_date, c_onu, c_caller, c_address, c_rem)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            die("Prepare failed: " . $conn->error);
+        }
+
+        // Bind parameters correctly
+        $stmt->bind_param("ssssssssss", $firstname, $lastname, $area, $contact, $email, $dob, $ONU, $caller, $address, $remarks);
+
+        if ($stmt->execute()) {
+            // Show alert and then redirect using JavaScript
+            echo "<script type='text/javascript'>
+                    alert('Customer has been registered successfully.');
+                    window.location.href = 'customersT.php'; // Redirect to customersT.php
+                  </script>";
+        } else {
+            die("Execution failed: " . $stmt->error);
+        }
+        
+        $stmt->close();
+    }
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="addC.css"> 
+    <link rel="stylesheet" href="addsC.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
 </head>
 <body>
@@ -14,8 +73,9 @@
         <ul>
         <li><a href="staffD.php"><i class="fas fa-ticket-alt"></i> View Tickets</a></li>
         <li><a href="view_service_record.php"><i class="fas fa-box"></i> View Assets</a></li>
+        <li><a href="customersT.php"><i class="fas fa-box"></i> View Customers</a></li>
         <li><a href="createTickets.php"><i class="fas fa-file-invoice"></i> Ticket Registration</a></li>
-        <li><a href="view_incident_report.php"><i class="fas fa-user-plus"></i> Add Customer</a></li>
+        <li><a href="addC.php"><i class="fas fa-user-plus"></i> Add Customer</a></li>
             
         </ul>
         <footer>
@@ -72,77 +132,39 @@
 
             <h2>Advance Profile</h2>
             <hr class="title-line"> <!-- Add this line -->
-
-            <div class="secondrow">
-                <div class="input-box">
-                    <i class="bx bxs-user"></i>
-                    <label for="contact"> OLT Device:</label>
-                    <select name="contact" required>
-                        <option value="" disabled selected>Select Type</option>
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
-                        <option value="staff">Staff</option>
-                    </select>
-                </div>
-                <div class="input-box">
-                    <i class="bx bxs-user"></i>
-                    <label for="email">Pon Port:</label>
-                    <select name="contact" required>
-                        <option value="" disabled selected>Select Type</option>
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
-                        <option value="staff">Staff</option>
-                    </select>
-                </div>
-                <div class="input-box">
-                    <i class="bx bxs-user"></i>
-                    <label for="date">Nap Device:</label>
-                    <select name="contact" required>
-                        <option value="" disabled selected>Select Type</option>
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
-                        <option value="staff">Staff</option>
-                    </select>
-                </div>
-                <div class="input-box">
-                    <i class="bx bxs-user"></i>
-                    <label for="date">Nap Port:</label>
-                    <select name="contact" required>
-                        <option value="" disabled selected>Select Type</option>
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
-                        <option value="staff">Staff</option>
-                    </select>
-                </div>
-            </div>
-
             <div class="secondrow">
                 <div class="input-box">
                     <i class="bx bxs-user"></i>
                     <label for="contact"> ONU Name:</label>
-                    <input type="text" name="contact" placeholder="Select OLT Device" required>
+                    <input type="text" name="ONU" placeholder="ONU Name" required>
                 </div>
                 <div class="input-box">
                     <i class="bx bxs-user"></i>
                     <label for="email">Caller ID:</label>
-                    <input type="text" name="email" placeholder="Select PON port" required>
+                    <input type="text" name="caller" placeholder="Caller ID" required>
                 </div>
                 <div class="input-box">
                     <i class="bx bxs-user"></i>
-                    <label for="date">Mac Adress:</label>
-                    <input type="text" name="date" placeholder="Select NAP Device" required>
+                    <label for="date">Mac Address:</label>
+                    <input type="text" name="address" placeholder="Mac Address" required>
                 </div>
                 <div class="input-box">
                     <i class="bx bxs-user"></i>
                     <label for="date">Remarks:</label>
-                    <input type="date" name="date" placeholder="Select NAP Port" required>
+                    <input type="text" name="remarks" placeholder="Remarks" required>
                 </div>
             </div>
-
+            <div class="button-container">
+           <button type="submit">Submit</button>
+           </div>
             </form>
 
-     </div>
+            </div>
+          
     </div>
+    
+
+
 </div>
 </body>
 </html>

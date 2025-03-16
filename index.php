@@ -139,6 +139,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     <link rel="stylesheet" href="index.css">
 
     <script>
+        // Function to validate password strength
         function validatePassword() {
             const passwordInput = document.getElementById('password');
             const passwordError = document.getElementById('passwordError');
@@ -151,10 +152,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
                 passwordError.textContent = "Password is strong.";
                 passwordError.style.color = "green"; // Change text color to green
             } else {
-                passwordError.textContent = "Password  is weak.";
+                passwordError.textContent = "Password is weak.";
                 passwordError.style.color = "red"; // Change text color to red
             }
         }
+
+        // Toggle password visibility
+        document.addEventListener('DOMContentLoaded', function () {
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+            const loginPasswordInput = document.getElementById('loginPassword');
+
+            togglePassword.addEventListener('click', function () {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.classList.toggle('bx-show');
+                this.classList.toggle('bx-hide');
+            });
+
+            // Add event listener for login password toggle
+            const toggleLoginPassword = document.getElementById('toggleLoginPassword');
+            toggleLoginPassword.addEventListener('click', function () {
+                const type = loginPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                loginPasswordInput.setAttribute('type', type);
+                this.classList.toggle('bx-show');
+                this.classList.toggle('bx-hide');
+            });
+        });
     </script>
 </head>
 <body>
@@ -162,27 +186,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     <div class="container <?php echo ($hasError) ? 'active' : ''; ?>">
         <!-- Login Form -->
         <div class="form-box login">
-            <a href="settings.php" class="settings-link">
+        <a href="settings.php" class="settings-link">
                 <i class='bx bx-cog'></i>
                 <span>Forgot Password</span>
             </a>
-
 
             <form action="" method="POST">
                 <h1>Login</h1>
                 <?php if (!empty($typeError)) echo "<p class='errors-message'>$typeError</p>"; ?>
                 <div class="input-box">
-            <input type="text" name="username" placeholder="Username" required>
-            <i class='bx bxs-user'></i>
-            <?php if (!empty($loginError)) echo "<p class='error-message'>$loginError</p>"; ?>
-        </div>
-        <div class="input-box">
-            <input type="password" name="password" placeholder="Password" required>
-            <i class='bx bxs-lock-alt'></i>
-            <?php if (!empty($passwordError)) echo "<p class='error-message'>$passwordError</p>"; ?>
-        </div> 
+                    <input type="text" name="username" placeholder="Username" required>
+                    <i class='bx bxs-user'></i>
+                    <?php if (!empty($loginError)) echo "<p class='error-message'>$loginError</p>"; ?>
+                </div>
+                <div class="input-box">
+                    <input type="password" id="loginPassword" name="password" placeholder="Password" required>
+                    <i class='bx bxs-lock-alt' id="toggleLoginPassword" style="cursor: pointer;"></i>
+                    <?php if (!empty($passwordError)) echo "<p class='error-message'>$passwordError</p>"; ?>
+                </div> 
                 <button type="submit" name="login" class="btn">Login</button>
-       
                 <p>or login with social platform</p>
                 <div class="social-icons">
                     <a href="#"><i class='bx bxl-google'></i></a>
@@ -193,25 +215,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
             </form>
         </div>
 
-     
+        <!-- Registration Form -->
         <div class="form-box register">
             <form action="" method="POST">
                 <h1>Registration</h1>
                 <div class="input-box">
-                 <input type="text" name="firstname" placeholder="Firstname" value="<?php echo htmlspecialchars($firstname); ?>" required>
-                 <i class="bx bxs-user firstname-icon"></i>
+                    <input type="text" name="firstname" placeholder="Firstname" value="<?php echo htmlspecialchars($firstname); ?>" required>
+                    <i class="bx bxs-user firstname-icon"></i>
                     <?php if (!empty($firstnameErr)) echo "<span class='error'>$firstnameErr</span>"; ?>
-                 </div>
+                </div>
 
-               <div class="input-box">
-                <input type="text" name="lastname" placeholder="Lastname" value="<?php echo htmlspecialchars($lastname); ?>" required>
-                <i class="bx bxs-user lastname-icon"></i>
-                     <?php if (!empty($lastnameErr)) echo "<span class='error'>$lastnameErr</span>"; ?>
-                      </div>
+                <div class="input-box">
+                    <input type="text" name="lastname" placeholder="Lastname" value="<?php echo htmlspecialchars($lastname); ?>" required>
+                    <i class="bx bxs-user lastname-icon"></i>
+                    <?php if (!empty($lastnameErr)) echo "<span class='error'>$lastnameErr</span>"; ?>
+                </div>
                 <div class="input-box">
                     <input type="email" name="email" placeholder="Email" value="<?php echo htmlspecialchars($email); ?>" required>
                     <i class="bx bxs-envelope email-icon"></i>
-                  
                 </div>
                 <div class="input-box">
                     <input type="text" name="username" placeholder="Username" value="<?php echo htmlspecialchars($username); ?>" required>
@@ -219,13 +240,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
                     <?php if (!empty($usernameError)) echo "<span class='error'>$usernameError</span>"; ?><br>
                 </div>            
                 <div class="input-box">
-                <input type="password" id="password" name="password" placeholder="Password" oninput="validatePassword()">
-                <span id="passwordError" class="error"><?php echo $passwordError; ?></span>
-            </div>
+                    <input type="password" id="password" name="password" placeholder="Password" oninput="validatePassword()" required>
+                    <span id="passwordError" class="error"><?php echo $passwordError; ?></span>
+                    <i class='bx bxs-lock-alt' id="togglePassword" style="cursor: pointer;"></i>
+                </div>
                 <div class="input-box">
                     <select name="type" required>
                         <option value="" disabled selected>Select Type</option>
-                        <option value="user" <?php if ($type == 'user') echo 'selected'; ?>>User</option>
+                        <option value="user" <?php if ($type == 'user') echo 'selected'; ?>>User  </option>
                         <option value="admin" <?php if ($type == 'admin') echo 'selected'; ?>>Admin</option>
                         <option value="staff" <?php if ($type == 'staff') echo 'selected'; ?>>Staff</option>
                     </select>
@@ -259,21 +281,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     </div>
 
     <script>
-       document.addEventListener("DOMContentLoaded", () => {
-    // Toggle between Login & Register
-    const container = document.querySelector(".container");
-    const registerBtn = document.querySelector(".register-btn");
-    const loginBtn = document.querySelector(".login-btn");
+        document.addEventListener("DOMContentLoaded", () => {
+            // Toggle between Login & Register
+            const container = document.querySelector(".container");
+            const registerBtn = document.querySelector(".register-btn");
+            const loginBtn = document.querySelector(".login-btn");
 
-    registerBtn.addEventListener("click", () => {
-        container.classList.add("active");
-    });
+            registerBtn.addEventListener("click", () => {
+                container.classList.add("active");
+            });
 
-    loginBtn.addEventListener("click", () => {
-        container.classList.remove("active");
-    });
-  
-});
+            loginBtn.addEventListener("click", () => {
+                container.classList.remove("active");
+            });
+        });
     </script>
 
 </body>

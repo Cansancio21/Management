@@ -9,6 +9,7 @@ body {
     min-height: 100vh;
     display: flex;
     align-items: center;
+    background-color: #2d3250;
 }
 
 .container {
@@ -21,10 +22,12 @@ body {
     position: fixed;
 }
 
+
+
 .table-box {
     margin-top: 50px;
-    width: 80%; 
-    padding: 20px 0;
+    width: 78%; 
+    padding: 20px;
     margin-right: 10px;
     margin-left: 10px;
     border-radius: 5px;
@@ -33,21 +36,12 @@ body {
     height: 70vh; 
     position: fixed;
     align-items: center;
-    justify-content: center;
-
 }
 
 .table-box h2{
-    text-align: center;
-    margin-top: 10px;
-    font-size: 1.8rem;
-}
-
-.title-line {
-    border: none; 
-    height: 2px; 
-    background-color: #6c6b6b; 
-    margin: 15px 0; 
+    text-align: left;
+    margin-top: 25px;
+    font-size: 2rem;
 }
 
 .container .upper{
@@ -57,14 +51,13 @@ body {
     width: 100%;
     height: 8vh;
     background-color: #ffffff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
 }
 
 .upper h1{
     padding-top: 20px;
     padding-left: 10px;
     text-align: left;
-    color: #333; /* Darker text color */
+    color: #333;
 }
 
 .wrapper {
@@ -74,7 +67,7 @@ body {
 
 /* Sidebar styles */
 .sidebar {
-    width: 15%; 
+    width: 16%; 
     background-color: #1b4d80; 
     padding: 20px; 
     border-right: 1px solid #ccc; 
@@ -83,13 +76,13 @@ body {
 }
 
 .sidebar-image {
-    width: 100%; 
-    height: auto; 
-    border-radius: 8px; 
-    margin-bottom: 20px; 
+    width: 100%; /* Make the image full width of the sidebar */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px; /* Optional: rounded corners */
+    margin-bottom: 20px; /* Space below the image */
 }
 
-
+/* Sidebar heading styles */
 .sidebar h2 {
     margin-top: 10px;
     text-align: center;
@@ -101,19 +94,19 @@ body {
     list-style-type: none; /* Remove bullet points */
     padding: 0; /* Remove padding */
     margin-top: 100px;
-    margin-left: 10px;
+    margin-left: 15px;
     margin-bottom: 30px;
 }
 
 .sidebar li {
-    margin: 55px 0; /* Space between links */
+    margin: 60px 0; /* Space between links */
 }
 
 .sidebar a {
-    text-decoration: none; /* Remove underline */
-    color: #ecf0f1; /* Light color for links */
-    display: flex; /* Flexbox for icon and text alignment */
-    align-items: center; /* Center items vertically */
+    text-decoration: none; 
+    color: #ecf0f1;
+    display: flex; 
+    align-items: center; 
     text-align: center;  
 }
 
@@ -145,16 +138,15 @@ footer a{
     text-decoration: underline; /* Underline on hover */
 }
 
-
+/* Table styles */
 table {
     width: 100%;
-    margin-left: 160px;
+    margin-right: 10px;
     border-collapse: collapse; 
-    margin-top: 150px; 
-    max-height: 100%; 
-    overflow-y: auto; 
-    display: block; 
-    
+    margin-top: 10px; /* Space above the table */
+    max-height: 90%; /* Set a maximum height for the table */
+    overflow-y: auto; /* Enable vertical scrolling */
+    display: block; /* Allow scrolling */
 }
 
 /* Table header styles */
@@ -164,32 +156,91 @@ th, td {
     text-align: center; /* Align text to the left */
 }
 
-/* Apply specific widths to columns */
+
+
+/* Row styling */
+tr {
+    border-bottom: 1px solid #ddd; /* Add a bottom border to rows */
+}
+
+/* Cell styling */
+td {
+    padding: 10px; /* Padding for table cells */
+}
+
+/* Alternating row colors */
+tr:nth-child(even) {
+    background-color: #ffffff; /* Light gray for even rows */
+}
+
+tr:nth-child(odd) {
+    background-color: #ffffff; /* White for odd rows */
+}
+
+/* Hover effect for rows */
+tr:hover {
+    background-color: #ddd; /* Darker gray on hover */
+}
+
 th:nth-child(1), td:nth-child(1) {
-    width: 15%; /* Adjust width of first column (e.g., Name or ID) */
+    width: 10%;
 }
 
 th:nth-child(2), td:nth-child(2) {
-    width: 20%; /* Adjust width of second column */
+    width: 10%;
 }
 
 th:nth-child(3), td:nth-child(3) {
-    width: 25%; /* Adjust width of third column */
-}
-th:last-child, td:last-child {
-    width: 15%; /* Adjust the width of the 'Status' column */
+    width: 10%;
 }
 
+th:nth-child(4), td:nth-child(4) {
+    width: 10%;
+}
+
+
+th:nth-child(5), td:nth-child(5) {
+    width: 10%;
+}
+
+th:nth-child(6), td:nth-child(6) {
+    width: 10%;
+}
+
+th:nth-child(7), td:nth-child(7) {
+    width: 10%;
+}
+
+th:nth-child(8), td:nth-child(8) {
+    width: 10%;
+}
+
+th:nth-child(9){
+    width: 10%;
+}
+
+/* Styling for action icons */
+td a {
+    text-decoration: none; /* Remove underline from links */
+    color: #4CAF50; /* Green color for links */
+    margin-right: 10px; /* Space between icons */
+}
+
+td a:hover {
+    color: #d9534f; /* Change color on hover */
+}
+
+/* Table header background */   
 th {
     background-color: #c8cbd1; 
     color: rgb(0, 0, 0);
 }
 
-
+/* Row styles */
 
 
 tr:hover {
-    background-color: #e0e0e0; 
+    background-color: #e0e0e0; /* Slightly darker gray on hover */
 }
 
 /* Link styles */
@@ -205,7 +256,7 @@ a:hover {
     text-decoration: underline; /* Underline on hover */
 }
 
-.add-user-btn {
+.add-btn {
     display: inline-block;
     background-color: #cf752b;
     color: white;
@@ -216,12 +267,12 @@ a:hover {
     font-weight: lighter;
     transition: 0.3s;
     position: absolute;
-    right: 140px;
-    top: 130px;
+    right: 20px;
+    top: 35px;
     
 }
 
-.add-user-btn:hover {
+.add-btn:hover {
     background-color: #7494ec;
 }
 
@@ -245,55 +296,5 @@ a:hover {
     justify-content: center; 
 }
 
-.row {
-    display: flex;
-    gap: -10px;
-}
-
-.secondrow {
-        display: flex;
-        gap: -10px;
-}
-
-.input-box {
-    position: relative;
-    width: 100%;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    margin-left: 100px;
-}
-
-.input-box label {
-    display: block; 
-    margin-bottom: 5px; 
-    font-weight: bold; 
-}
 
 
-.input-box input,
-.input-box select {
-    width: 60%;
-    height: 20%;
-    padding: 18px;
-    padding-right: 40px; 
-    border: 1px solid #3d3e3f;
-    border-radius: 25px;
-    font-size: 18px;
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
-    text-align: center;
-}
-
-/* Input Icons */
-.input-box i {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 22px;
-    color: #007bff;
-}
-
-input::placeholder {
-    color: #000000; 
-    opacity: 1; 
-}

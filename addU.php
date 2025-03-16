@@ -14,7 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $type = $_POST['type'];
     $status = $_POST['status'];
-
     $hasError = false;
 
     // Validation
@@ -62,6 +61,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 
+<div class="wrapper">
+    
 <div class="container">
     <div class="left-section">
         <div class="user-icon">
@@ -127,6 +128,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </div>
 </div>
+
+
+
+
+</div>
+
 
 <!-- Success Message (Will Show Only If User is Added) -->
 <?php if ($successMessage): ?>
