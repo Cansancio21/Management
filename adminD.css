@@ -205,3 +205,35 @@ footer a{
     z-index: 1; /* Ensure the icon is above the input field */
     margin-left: -100%;
 }
+
+
+.settings-link {
+    position: absolute;
+    top: 25px;
+    right: -400px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.3s ease-in-out;
+ }
+ 
+ .settings-link i {
+    font-size: 24px;
+    margin-right: 5px;
+    transition: 0.3s ease-in-out;
+ }
+ 
+ .settings-link span {
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: 0.3s ease-in-out;
+ }
+ 
+ .settings-link:hover span {
+    opacity: 1;
+    transform: translateX(0);
+ }
+ 

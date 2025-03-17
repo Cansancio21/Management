@@ -25,7 +25,7 @@ body {
 
 
 .table-box {
-    margin-top: 50px;
+    margin-top: -50px;
     width: 78%; 
     padding: 20px;
     margin-right: 10px;
@@ -141,7 +141,7 @@ footer a{
 /* Table styles */
 table {
     width: 100%;
-    margin-right: 10px;
+    margin-right: -10px;
     border-collapse: collapse; 
     margin-top: 10px; /* Space above the table */
     max-height: 90%; /* Set a maximum height for the table */
@@ -299,5 +299,38 @@ a:hover {
     justify-content: center; 
 }
 
+.admin-icon {
+    margin-left: 5px; /* Space between name and icon */
+    color: #007bff; /* Icon color */
+}
+
+.search-container {
+    position: relative; /* Position relative to allow absolute positioning of the icon */
+    width: 300px; /* Set a width for the search container */
+    margin: 20px auto; /* Center the container horizontally and add top margin */
+    top: -95px;
+}
+
+.search-bar {
+    width: 100%; /* Full width of the container */
+    padding: 10px 10px 10px 40px; /* Add padding to the left for the icon */
+    border: 1px solid #ccc; /* Border for the input */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+    margin-left: -100%;
+    margin-top: 20px;
+   
+}
+
+.search-icon {
+    position: absolute; /* Position the icon absolutely within the container */
+    left: 10px; /* Position the icon */
+    top: 65%; /* Center the icon vertically */
+    transform: translateY(-50%); /* Adjust for vertical centering */
+    color: #aaa; /* Icon color */
+    pointer-events: none; /* Prevent mouse events on the icon */
+    z-index: 1; /* Ensure the icon is above the input field */
+    margin-left: -100%;
+}
 
 

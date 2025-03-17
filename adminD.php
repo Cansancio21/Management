@@ -69,6 +69,11 @@ if ($result) {
         <div class="search-container">
     <input type="text" class="search-bar" placeholder="Search...">
     <span class="search-icon">🔍</span> <!-- Replace with your icon -->
+
+    <a href="settings.php" class="settings-link">
+                <i class='bx bx-cog'></i>
+                <span>Settings</span>
+            </a>
 </div>
 
 </div>

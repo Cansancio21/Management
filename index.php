@@ -186,10 +186,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     <div class="container <?php echo ($hasError) ? 'active' : ''; ?>">
         <!-- Login Form -->
         <div class="form-box login">
-        <a href="settings.php" class="settings-link">
-                <i class='bx bx-cog'></i>
-                <span>Forgot Password</span>
-            </a>
+       
 
             <form action="" method="POST">
                 <h1>Login</h1>

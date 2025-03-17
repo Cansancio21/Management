@@ -8,9 +8,31 @@ if (!isset($_SESSION['username'])) {
     exit(); 
 }
 
-// Update the SQL query to include the user ID
-$sql = "SELECT u_id, u_fname, u_lname, u_email, u_username, u_type, u_status FROM tbl_user"; 
-$result = $conn->query($sql); 
+$firstName = '';
+$userType = '';
+
+// Check database connection
+if ($conn) {
+    // Fetch user data based on the logged-in username
+    $sqlUser  = "SELECT u_fname, u_type FROM tbl_user WHERE u_username = ?";
+    $stmt = $conn->prepare($sqlUser );
+    $stmt->bind_param("s", $_SESSION['username']);
+    $stmt->execute();
+    $resultUser  = $stmt->get_result();
+
+    if ($resultUser ->num_rows > 0) {
+        $row = $resultUser ->fetch_assoc();
+        $firstName = $row['u_fname'];
+        $userType = $row['u_type'];
+    }
+
+    // Fetch all users data
+    $sql = "SELECT u_id, u_fname, u_lname, u_email, u_username, u_type, u_status FROM tbl_user"; 
+    $result = $conn->query($sql); 
+} else {
+    echo "Database connection failed.";
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +41,7 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="viewU.css"> 
+    <link rel="stylesheet" href="viewu.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
 </head>
@@ -44,8 +66,18 @@ $result = $conn->query($sql);
         <div class="upper">
         <h1>Registered Users</h1>
         </div>  
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search...">
+            <span class="search-icon">🔍</span> <!-- Replace with your icon -->
+        </div>
         
      <div class="table-box">
+     <?php if ($userType === 'admin'): ?>
+                <div class="username">
+                    Welcome Back, <?php echo htmlspecialchars($firstName); ?>!
+                    <i class="fas fa-user-shield admin-icon"></i> <!-- Admin icon -->
+                </div>
+            <?php endif; ?>
      <h2>Users</h2>
      <a href="addU.php" class="add-user-btn"><i class="fas fa-user-plus"></i> Add User</a>
      <table>

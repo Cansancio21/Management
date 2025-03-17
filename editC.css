@@ -4,11 +4,11 @@
     font-family: 'Roboto', sans-serif;
 }
 
+
 body {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background-color: #2d3250;
 }
 
 .container {
@@ -21,11 +21,10 @@ body {
     position: fixed;
 }
 
-
 .table-box {
-    margin-top: -50px;
-    width: 78%; 
-    padding: 20px;
+    margin-top: 50px;
+    width: 80%; 
+    padding: 20px 0;
     margin-right: 10px;
     margin-left: 10px;
     border-radius: 5px;
@@ -34,12 +33,21 @@ body {
     height: 70vh; 
     position: fixed;
     align-items: center;
+    justify-content: center;
+
 }
 
 .table-box h2{
-    text-align: left;
-    margin-top: 5px;
-    font-size: 2rem;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 1.8rem;
+}
+
+.title-line {
+    border: none; 
+    height: 2px; 
+    background-color: #6c6b6b; 
+    margin: 15px 0; 
 }
 
 .container .upper{
@@ -49,13 +57,14 @@ body {
     width: 100%;
     height: 8vh;
     background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
 }
 
 .upper h1{
     padding-top: 20px;
     padding-left: 10px;
     text-align: left;
-    color: #333;
+    color: #333; /* Darker text color */
 }
 
 .wrapper {
@@ -65,7 +74,7 @@ body {
 
 /* Sidebar styles */
 .sidebar {
-    width: 16%; 
+    width: 15%; 
     background-color: #1b4d80; 
     padding: 20px; 
     border-right: 1px solid #ccc; 
@@ -74,13 +83,13 @@ body {
 }
 
 .sidebar-image {
-    width: 100%; /* Make the image full width of the sidebar */
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 8px; /* Optional: rounded corners */
-    margin-bottom: 20px; /* Space below the image */
+    width: 100%; 
+    height: auto; 
+    border-radius: 8px; 
+    margin-bottom: 20px; 
 }
 
-/* Sidebar heading styles */
+
 .sidebar h2 {
     margin-top: 10px;
     text-align: center;
@@ -92,19 +101,19 @@ body {
     list-style-type: none; /* Remove bullet points */
     padding: 0; /* Remove padding */
     margin-top: 100px;
-    margin-left: 15px;
+    margin-left: 10px;
     margin-bottom: 30px;
 }
 
 .sidebar li {
-    margin: 60px 0; /* Space between links */
+    margin: 55px 0; /* Space between links */
 }
 
 .sidebar a {
-    text-decoration: none; 
-    color: #ecf0f1;
-    display: flex; 
-    align-items: center; 
+    text-decoration: none; /* Remove underline */
+    color: #ecf0f1; /* Light color for links */
+    display: flex; /* Flexbox for icon and text alignment */
+    align-items: center; /* Center items vertically */
     text-align: center;  
 }
 
@@ -136,16 +145,16 @@ footer a{
     text-decoration: underline; /* Underline on hover */
 }
 
-/* Table styles */
+
 table {
-    border-radius: 5px;
     width: 100%;
-    margin-right: 10px;
+    margin-left: 160px;
     border-collapse: collapse; 
-    margin-top: 10px; /* Space above the table */
-    max-height: 90%; /* Set a maximum height for the table */
-    overflow-y: auto; /* Enable vertical scrolling */
-    display: block; /* Allow scrolling */
+    margin-top: 150px; 
+    max-height: 100%; 
+    overflow-y: auto; 
+    display: block; 
+    
 }
 
 /* Table header styles */
@@ -154,8 +163,6 @@ th, td {
     padding: 12px; /* More padding for better spacing */
     text-align: center; /* Align text to the left */
 }
-
-
 
 /* Apply specific widths to columns */
 th:nth-child(1), td:nth-child(1) {
@@ -173,21 +180,20 @@ th:last-child, td:last-child {
     width: 15%; /* Adjust the width of the 'Status' column */
 }
 
-/* Table header background */   
 th {
     background-color: #c8cbd1; 
     color: rgb(0, 0, 0);
 }
 
-/* Row styles */
+
 tr:hover {
-    background-color: #e0e0e0; /* Slightly darker gray on hover */
+    background-color: #e0e0e0; 
 }
 
 /* Link styles */
 a {
     display: inline-block; /* Make the link a block element */
-    margin-top: 20px; /* Space above the link */
+    margin-top: 15px; /* Space above the link */
     text-decoration: none; /* Remove underline */
     color: #4CAF50; /* Green color for the link */
     font-weight: bold; /* Bold text */
@@ -208,8 +214,9 @@ a:hover {
     font-weight: lighter;
     transition: 0.3s;
     position: absolute;
-    right: 40px;
-    top: 20px;
+    right: 140px;
+    top: 130px;
+    
 }
 
 .add-user-btn:hover {
@@ -225,6 +232,7 @@ a:hover {
     margin-left: 10px;
     transition: color 0.3s; /* Smooth transition for hover effect */
     text-align: center;
+    margin-top: 5px;
 }
 
 .table-box a:hover {
@@ -235,37 +243,100 @@ a:hover {
     justify-content: center; 
 }
 
-
-.admin-icon {
-    margin-left: 5px; /* Space between name and icon */
-    color: #007bff; /* Icon color */
+.row {
+    display: flex;
+    gap: -10px;
 }
 
-.search-container {
-    position: relative; /* Position relative to allow absolute positioning of the icon */
-    width: 300px; /* Set a width for the search container */
-    margin: 20px auto; /* Center the container horizontally and add top margin */
-    top: -95px;
+.secondrow {
+        display: flex;
+        gap: -10px;
 }
 
-.search-bar {
-    width: 100%; /* Full width of the container */
-    padding: 10px 10px 10px 40px; /* Add padding to the left for the icon */
-    border: 1px solid #ccc; /* Border for the input */
+.input-box {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-left: 100px;
+}
+
+.input-box label {
+    display: block; 
+    margin-bottom: 5px; 
+    font-weight: bold; 
+}
+
+.input-box input,
+.input-box select {
+    width: 60%;
+    height: 20%;
+    padding: 18px;
+    padding-right: 40px; 
+    border: 1px solid #3d3e3f;
+    border-radius: 25px;
+    font-size: 18px;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+    text-align: center;
+}
+
+/* Input Icons */
+.input-box i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 22px;
+    color: #007bff;
+}
+
+input::placeholder {
+    color: #aaa;
+    font-style: italic;
+    opacity: 1;
+    font-size: 15px;
+}
+
+input[type="date"] {
+    color: #aaa;
+    font-style: italic;
+    opacity: 1;
+    font-size: 15px;
+}
+
+
+/* Button Styles */
+/* Button Styles */
+button[type="submit"] {
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding for top/bottom and left/right */
+    border: none; /* Remove border */
     border-radius: 5px; /* Rounded corners */
     font-size: 16px; /* Font size */
-    margin-left: -100%;
-    margin-top: 20px;
-   
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+    margin-top: 10px; /* Space above the button */
+    text-align: center; /* Center text inside the button */
 }
 
-.search-icon {
-    position: absolute; /* Position the icon absolutely within the container */
-    left: 10px; /* Position the icon */
-    top: 65%; /* Center the icon vertically */
-    transform: translateY(-50%); /* Adjust for vertical centering */
-    color: #aaa; /* Icon color */
-    pointer-events: none; /* Prevent mouse events on the icon */
-    z-index: 1; /* Ensure the icon is above the input field */
-    margin-left: -100%;
+/* Hover effect */
+button[type="submit"]:hover {
+    background-color: #0056b3; /* Darker blue on hover */
 }
+
+/* Focus effect */
+button[type="submit"]:focus {
+    outline: none; /* Remove outline */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Add shadow on focus */
+}
+
+/* Button container styles */
+.button-container {
+    display: flex; /* Enable flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically (if needed) */
+    margin-top: 20px; /* Space above the button container */
+}
+
+
