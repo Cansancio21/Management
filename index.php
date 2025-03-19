@@ -78,6 +78,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['firstname'])) {
     }
 }
 
+// Initialize success message variable
+$successMessage = "";
+
+// Check if there's a session message for account status
+if (isset($_SESSION['account_status_message'])) {
+    $successMessage = $_SESSION['account_status_message'];
+    unset($_SESSION['account_status_message']); // Clear the message after displaying it
+}
+
 // User Login
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     $username = trim($_POST['username']);

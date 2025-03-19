@@ -13,7 +13,7 @@ if (isset($_GET['id'])) {
     $customerId = $_GET['id'];
 
     // Fetch customer details based on the customer ID
-    $sql = "SELECT c_id, c_fname, c_lname, c_area, c_contact, c_email, c_onu, c_caller, c_address, c_rem FROM tbl_customer WHERE c_id = ?";
+    $sql = "SELECT c_id, c_fname, c_lname, c_area, c_contact, c_email, c_onu, c_caller, c_address, c_rem, c_date FROM tbl_customer WHERE c_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $customerId);
     $stmt->execute();
@@ -64,65 +64,92 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Edit Customer</title>
     <link rel="stylesheet" href="editC.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+   
 </head>
 <body>
     <div class="wrapper">
-        <div class="container">
-            <a href="customersT.php" class="back-icon">
-                <i class='bx bx-arrow-back'></i>
-            </a>
-            <h1>Edit Customer</h1>
-            <form method="POST" action="" class="form">
-                <div class="form-row">
-                    <label for="firstname">First Name:</label>
-                    <input type="text" id="firstname" name="firstname" value="<?php echo htmlspecialchars($customer['c_fname']); ?>" required>
-                </div>
-                <div class="form-row">
-                    <label for="lastname">Last Name:</label>
-                    <input type="text" id="lastname" name="lastname" value="<?php echo htmlspecialchars($customer['c_lname']); ?>" required>
-                </div>
-                <div class="form-row">
-                    <label for="area">Area:</label>
-                    <input type="text" id="area" name="area" value="<?php echo htmlspecialchars($customer['c_area']); ?>" required>
-                </div>
-                <div class="form-row">
-                    <label for="contact">Contact:</label>
-                    <input type="text" id="contact" name="contact" value="<?php echo htmlspecialchars($customer['c_contact']); ?>" required>
-                </div>
-                <div class="form-row">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($customer['c_email']); ?>" required>
-                </div>
-                <div class="form-row">
-    <label for="date">Date:</label>
-    <input type="date" id="date" name="date" 
-           value="<?php echo (!empty($customer['c_date']) && strtotime($customer['c_date'])) ? date('Y-m-d', strtotime($customer['c_date'])) : ''; ?>" 
-           required>
-</div>
+    <div class="container">
+       
+       <div class="upper">
+       <h1>Edit Customer</h1>
+       </div>  
+       
+    <div class="table-box">
+    <h2>Customer Profile</h2>
+    <hr class="title-line"> <!-- Add this line -->
 
-                <h2>Advanced Profile</h2>
-                <hr class="title-line">
-                <div class="form-row">
-                    <label for="ONU">ONU Name:</label>
-                    <input type="text" id="ONU" name="ONU" value="<?php echo htmlspecialchars($customer['c_onu']); ?>" required>
-                </div>
-                <div class="form-row">
-                    <label for="caller">Caller ID:</label>
-                    <input type="text" id="caller" name="caller" value="<?php echo htmlspecialchars($customer['c_caller']); ?>" required>
-                </div>
-                <div class="form-row">
-                    <label for="address">Mac Address:</label>
-                    <input type="text" id="address" name="address" value="<?php echo htmlspecialchars($customer['c_address']); ?>" required>
-                </div>
-                <div class="form-row">
-                    <label for="remarks">Remarks:</label>
-                    <input type="text" id="remarks" name="remarks" value="<?php echo htmlspecialchars($customer['c_rem']); ?>" required>
-                </div>
-                <div class="button-container">
+    <form action="" method="POST">
+           <div class="row">
+               <div class="input-box">
+                   <i class="bx bxs-user"></i>
+                   <label for="firstname">First Name:</label>
+                   <input type="text" id="firstname" name="firstname" value="<?php echo htmlspecialchars($customer['c_fname']); ?>" required>
+               </div>
+               <div class="input-box">
+                   <i class="bx bxs-user"></i>
+                   <label for="lastname">Last Name:</label>
+                    <input type="text" id="lastname" name="lastname" value="<?php echo htmlspecialchars($customer['c_lname']); ?>" required>
+               </div>
+               <div class="input-box">
+                   <i class="bx bxs-user"></i>
+                   <label for="area">Area:</label>
+                   <input type="text" id="area" name="area" value="<?php echo htmlspecialchars($customer['c_area']); ?>" required>
+               </div>
+           </div>
+
+           <div class="row">
+               <div class="input-box">
+                   <i class="bx bxs-user"></i>
+                   <label for="contact">Contact:</label>
+                        <input type="text" id="contact" name="contact" value="<?php echo htmlspecialchars($customer['c_contact']); ?>" required>
+               </div>
+               <div class="input-box">
+                   <i class="bx bxs-user"></i>
+                   <label for="email">Email:</label>
+                   <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($customer['c_email']); ?>" required>
+               </div>
+               <div class="input-box">
+                   <i class="bx bxs-user"></i>
+                   <label for="date">Date of Birth:</label>
+                   <input type="date" id="date" name="date" value="<?php echo htmlspecialchars($customer['c_date']); ?>" required>
+               </div>
+           </div>
+
+           <h2>Advance Profile</h2>
+           <hr class="title-line"> <!-- Add this line -->
+           <div class="secondrow">
+               <div class="input-box">
+                   <i class="bx bxs-user"></i>
+                   <label for="ONU">ONU Name:</label>
+                   <input type="text" id="ONU" name="ONU" value="<?php echo htmlspecialchars($customer['c_onu']); ?>" required>
+               </div>
+               <div class="input-box">
+                   <i class="bx bxs-user"></i>
+                   <label for="caller">Caller ID:</label>
+                   <input type="text" id="caller" name="caller" value="<?php echo htmlspecialchars($customer['c_caller']); ?>" required>
+               </div>
+               <div class="input-box">
+                   <i class="bx bxs-user"></i>
+                   <label for="address">Mac Address:</label>
+        <input type="text" id="address" name="address" value="<?php echo htmlspecialchars($customer['c_address']); ?>" required>
+               </div>
+               <div class="input-box">
+                   <i class="bx bxs-user"></i>
+                   <label for="remarks">Remarks:</label>
+                   <input type="text" id="remarks" name="remarks" value="<?php echo htmlspecialchars($customer['c_rem']); ?>" required>
+               </div>
+           </div>
+           <div class="button-container">
                     <button type="submit">Update Customer</button>
                 </div>
-            </form>
-        </div>
-    </div>
+           </form>
+
+           </div>
+         
+   </div>
+   
+
+
+</div>
 </body>
 </html>

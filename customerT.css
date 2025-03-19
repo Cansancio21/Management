@@ -23,10 +23,9 @@ body {
 }
 
 
-
 .table-box {
     margin-top: -50px;
-    width: 78%; 
+    width: 90%; 
     padding: 20px;
     margin-right: 10px;
     margin-left: 10px;
@@ -34,13 +33,27 @@ body {
     background-color: #ffffff; 
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
     height: 70vh; 
-    position: fixed;
-    align-items: center;
+    position: relative; /* Change to relative for sticky header */
+   
 }
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Collapse borders */
+}
+
+thead th {
+    background-color: #c8cbd1; /* Header background color */
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
+    z-index: 10; /* Ensure it is above other content */
+}
+
+
 
 .table-box h2{
     text-align: left;
-    margin-top: 25px;
+    margin-top: 5px;
     font-size: 2rem;
 }
 
@@ -141,7 +154,7 @@ footer a{
 /* Table styles */
 table {
     width: 100%;
-    margin-right: -10px;
+    margin-right: 10px;
     border-collapse: collapse; 
     margin-top: 10px; /* Space above the table */
     max-height: 90%; /* Set a maximum height for the table */
@@ -183,40 +196,40 @@ tr:hover {
 }
 
 th:nth-child(1), td:nth-child(1) {
-    width: 15%;
+    width: 10%;
 }
 
 th:nth-child(2), td:nth-child(2) {
-    width: 15%;
+    width: 10%;
 }
 
 th:nth-child(3), td:nth-child(3) {
-    width: 15%;
+    width: 10%;
 }
 
 th:nth-child(4), td:nth-child(4) {
-    width: 15%;
+    width: 10%;
 }
 
-/* Specific styling for the "Ticket Details" column (5th column) */
+
 th:nth-child(5), td:nth-child(5) {
-    width: 15%;
+    width: 10%;
 }
 
-td:nth-child(5) {
-    font-style: italic;
-    color: #0056b3;
+th:nth-child(6), td:nth-child(6) {
+    width: 10%;
 }
 
-/* Specific styling for the "Date" column (6th column) */
-td:nth-child(6) {
-    text-align: center; /* Center align the date */
-    width: 20%;
+th:nth-child(7), td:nth-child(7) {
+    width: 10%;
 }
 
-/* Specific styling for the "Actions" column (7th column) */
-td:nth-child(7) {
-    text-align: center;
+th:nth-child(8), td:nth-child(8) {
+    width: 10%;
+}
+
+th:nth-child(9){
+    width: 10%;
 }
 
 /* Styling for action icons */
@@ -229,9 +242,6 @@ td a {
 td a:hover {
     color: #d9534f; /* Change color on hover */
 }
-
-
-
 
 /* Table header background */   
 th {
@@ -259,7 +269,7 @@ a:hover {
     text-decoration: underline; /* Underline on hover */
 }
 
-.ticket-btn {
+.add-btn {
     display: inline-block;
     background-color: #cf752b;
     color: white;
@@ -270,12 +280,12 @@ a:hover {
     font-weight: lighter;
     transition: 0.3s;
     position: absolute;
-    right: 35px;
-    top: 35px;
+    right: 20px;
+    top: 25px;
     
 }
 
-.ticket-btn:hover {
+.add-btn:hover {
     background-color: #7494ec;
 }
 
@@ -298,6 +308,7 @@ a:hover {
 .table-box a i {
     justify-content: center; 
 }
+
 
 .admin-icon {
     margin-left: 5px; /* Space between name and icon */
