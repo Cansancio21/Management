@@ -25,9 +25,9 @@ if ($conn) {
         $userType = $row['u_type'];
     }
 
-    // Fetch customer data
+   // Fetch customer data
     $sql = "SELECT c_id, c_fname, c_lname, c_area, c_contact, c_email, c_date, c_onu, c_caller, c_address, c_rem FROM tbl_customer"; 
-    $result = $conn->query($sql); 
+    $result = $conn->query($sql);  
 } else {
     echo "Database connection failed.";
     exit();
@@ -48,7 +48,7 @@ if ($conn) {
         <h2>Task Management</h2>
         <ul>
             <li><a href="staffD.php"><i class="fas fa-ticket-alt"></i> View Tickets</a></li>
-            <li><a href="view_service_record.php"><i class="fas fa-box"></i> View Assets</a></li>
+            <li><a href="assetsT.php"><i class="fas fa-box"></i> View Assets</a></li>
             <li><a href="createTickets.php"><i class="fas fa-file-invoice"></i> Ticket Registration</a></li>
             <li><a href="addC.php"><i class="fas fa-user-plus"></i> Add Customer</a></li>
             <li><a href="addC.php"><i class="fas fa-user-plus"></i> Register Assets</a></li>     
@@ -76,10 +76,11 @@ if ($conn) {
             <?php endif; ?>
             <h2>Reports</h2>
             <a href="addC.php" class="add-btn"><i class="fas fa-user-plus"></i> Add Customer</a>
+            <a href="addC.php" class="export-btn"><i class="fas fa-download"></i> Export</a>
             <table>
                 <thead>
                     <tr>
-                        <th>Customer Id</th>
+                        <th>ID</th>
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Area</th>
@@ -87,7 +88,7 @@ if ($conn) {
                         <th>Email</th>
                         <th>Date</th>
                         <th>ONU Name</th>
-                        <th>Caller ID</th>
+                        <th>Call Id</th>
                         <th>Mac Address</th>
                         <th>Remarks</th>
                         <th>Actions</th>

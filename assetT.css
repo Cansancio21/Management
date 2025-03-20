@@ -24,7 +24,7 @@ body {
 
 
 .table-box {
-    margin-top: -30px;
+    margin-top: -50px;
     width: 90%; 
     padding: 20px;
     margin-right: 10px;
@@ -49,12 +49,11 @@ thead th {
     z-index: 10; /* Ensure it is above other content */
 }
 
-
-
 .table-box h2{
     text-align: left;
-    margin-top: 5px;
-    font-size: 2rem;
+    margin-top: 20px;
+    font-size: 1.7rem;
+    color: #6b6969;
 }
 
 .container .upper{
@@ -121,7 +120,7 @@ thead th {
     text-decoration: none; /* Remove underline from links */
     color: #ffffff; /* Default text color */
     padding: 10px 15px; /* Padding around the link */
-    transition: background-color 0.3s; /* Smooth background transition */ 
+    transition: background-color 0.3s; /* Smooth background transition */
 }
 
 footer a{
@@ -136,7 +135,6 @@ footer a{
     background-color: #e2dddd; /* Light gray background on hover */
     color: #333;
 }
-
 
 /* Back to Home link styles */
 .back-home {
@@ -153,9 +151,11 @@ footer a{
     text-decoration: underline; /* Underline on hover */
 }
 
+/* Table styles */
 table {
     width: 100%;
-    margin-right: -10px;
+    margin-right: 10px;
+    margin-left: 120px;
     border-collapse: collapse; 
     margin-top: 10px; /* Space above the table */
     max-height: 90%; /* Set a maximum height for the table */
@@ -168,7 +168,6 @@ th, td {
     border: 1px solid #ccc; /* Light gray border */
     padding: 12px; /* More padding for better spacing */
     text-align: center; /* Align text to the left */
-    font-size: 15px;
 }
 
 /* Row styling */
@@ -196,7 +195,7 @@ tr:hover {
 }
 
 th:nth-child(1), td:nth-child(1) {
-    width: 5%;
+    width: 10%;
 }
 
 th:nth-child(2), td:nth-child(2) {
@@ -208,37 +207,30 @@ th:nth-child(3), td:nth-child(3) {
 }
 
 th:nth-child(4), td:nth-child(4) {
-    width: 8%;
+    width: 10%;
 }
 
 
 th:nth-child(5), td:nth-child(5) {
-    width: 5%;
+    width: 10%;
 }
 
 th:nth-child(6), td:nth-child(6) {
-    width: 5%;
+    width: 10%;
 }
 
 th:nth-child(7), td:nth-child(7) {
-    width: 8%;
+    width: 10%;
 }
 
 th:nth-child(8), td:nth-child(8) {
-    width: 8%;
-}
-
-
-th:nth-child(9){
-    width: 5%;
-}
-th:nth-child(10), td:nth-child(10) {
-    width: 12%;
-}
-
-th:nth-child(12), td:nth-child(12) {
     width: 10%;
 }
+
+th:nth-child(9){
+    width: 10%;
+}
+
 /* Styling for action icons */
 td a {
     text-decoration: none; /* Remove underline from links */
@@ -287,8 +279,8 @@ a:hover {
     font-weight: lighter;
     transition: 0.3s;
     position: absolute;
-    right: 20px;
-    top: 15px;
+    right: 150px;
+    top: 10px;
     
 }
 
@@ -298,7 +290,7 @@ a:hover {
 
 .export-btn {
     display: inline-block;
-    background-color: #2bcf2b;
+    background-color: #63c216;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
@@ -307,14 +299,54 @@ a:hover {
     font-weight: lighter;
     transition: 0.3s;
     position: absolute;
-    right: 170px;
-    top: 15px;
-    
+    right: 280px;
+    top: 10px;
 }
+
 
 .export-btn:hover {
     background-color: #7494ec;
 }
+
+.borrow-btn {
+    background-color: #c23e16;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: lighter;
+    transition: 0.3s;
+    margin-left: 120px;
+    margin-top: -100px;
+    margin-bottom: 50px;
+}
+
+
+.borrow-btn:hover {
+    background-color: #7494ec;
+}
+
+.return-btn {
+    background-color: #c2b116;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: lighter;
+    transition: 0.3s;
+    margin-left: 5px;
+    margin-top: -100px;
+    margin-bottom: 50px;
+}
+
+
+.return-btn:hover {
+    background-color: #7494ec;
+}
+
+
 
 .table-box table a {
     font-size: 18px; 
@@ -370,5 +402,15 @@ a:hover {
     z-index: 1; /* Ensure the icon is above the input field */
     margin-left: -100%;
 }
+
+.borrow table{
+    margin-bottom: 50px;
+    margin-top: -20px;
+  }
+
+.deploy table{
+    margin-top: 20px;
+}
+
 
 

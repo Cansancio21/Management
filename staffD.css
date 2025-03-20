@@ -4,7 +4,6 @@
     font-family: 'Roboto', sans-serif;
 }
 
-
 body {
     min-height: 100vh;
     display: flex;
@@ -22,7 +21,6 @@ body {
     position: fixed;
 }
 
-
 .table-box {
     margin-top: -30px;
     width: 90%; 
@@ -34,7 +32,6 @@ body {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
     height: 70vh; 
     position: relative; /* Change to relative for sticky header */
-   
 }
 
 table {
@@ -49,15 +46,19 @@ thead th {
     z-index: 10; /* Ensure it is above other content */
 }
 
+th, td {
+    border: 1px solid #ccc; /* Light gray border */
+    padding: 12px; /* More padding for better spacing */
+    text-align: center; /* Align text to the center */
+}
 
-
-.table-box h2{
+.table-box h2 {
     text-align: left;
     margin-top: 5px;
     font-size: 2rem;
 }
 
-.container .upper{
+.container .upper {
     border-radius: 5px;
     margin-top: -20px;
     margin-left: -20px;
@@ -66,7 +67,7 @@ thead th {
     background-color: #ffffff;
 }
 
-.upper h1{
+.upper h1 {
     padding-top: 20px;
     padding-left: 10px;
     text-align: left;
@@ -113,18 +114,11 @@ thead th {
 
 .sidebar li {
     margin: 60px 0; /* Space between links */
+    position: relative; /* Position relative for sub-menu */
 }
 
-.sidebar a {
-    display: flex; /* Use flexbox for alignment */
-    align-items: center; /* Center items vertically */
-    text-decoration: none; /* Remove underline from links */
-    color: #ffffff; /* Default text color */
-    padding: 10px 15px; /* Padding around the link */
-    transition: background-color 0.3s; /* Smooth background transition */ 
-}
 
-footer a{
+footer a {
     margin-bottom: 50px;
 }
 
@@ -132,13 +126,6 @@ footer a{
     margin-right: 25px;
 }
 
-.sidebar a:hover {
-    background-color: #e2dddd; /* Light gray background on hover */
-    color: #333;
-}
-
-
-/* Back to Home link styles */
 .back-home {
     position: absolute; /* Position it at the bottom */
     bottom: 20px; /* Space from the bottom */
@@ -153,6 +140,7 @@ footer a{
     text-decoration: underline; /* Underline on hover */
 }
 
+/* Table styles */
 table {
     width: 100%;
     margin-right: -10px;
@@ -196,7 +184,7 @@ tr:hover {
 }
 
 th:nth-child(1), td:nth-child(1) {
-    width: 5%;
+    width: 8%;
 }
 
 th:nth-child(2), td:nth-child(2) {
@@ -208,37 +196,31 @@ th:nth-child(3), td:nth-child(3) {
 }
 
 th:nth-child(4), td:nth-child(4) {
-    width: 8%;
-}
-
-
-th:nth-child(5), td:nth-child(5) {
-    width: 5%;
-}
-
-th:nth-child(6), td:nth-child(6) {
-    width: 5%;
-}
-
-th:nth-child(7), td:nth-child(7) {
-    width: 8%;
-}
-
-th:nth-child(8), td:nth-child(8) {
-    width: 8%;
-}
-
-
-th:nth-child(9){
-    width: 5%;
-}
-th:nth-child(10), td:nth-child(10) {
-    width: 12%;
-}
-
-th:nth-child(12), td:nth-child(12) {
     width: 10%;
 }
+
+/* Specific styling for the "Ticket Details" column (5th column) */
+th:nth-child(5), td:nth-child(5) {
+    width: 15%;
+}
+
+td:nth-child(5) {
+    font-style: italic;
+    color: #0056b3;
+}
+
+/* Specific styling for the "Date" column (6th column) */
+td:nth-child(6) {
+    text-align: center; /* Center align the date */
+    width: 10%;
+}
+
+/* Specific styling for the "Actions" column (7th column) */
+td:nth-child(7) {
+    width: 10%;
+    text-align: center;
+}
+
 /* Styling for action icons */
 td a {
     text-decoration: none; /* Remove underline from links */
@@ -257,8 +239,6 @@ th {
 }
 
 /* Row styles */
-
-
 tr:hover {
     background-color: #e0e0e0; /* Slightly darker gray on hover */
 }
@@ -276,7 +256,7 @@ a:hover {
     text-decoration: underline; /* Underline on hover */
 }
 
-.add-btn {
+.ticket-btn {
     display: inline-block;
     background-color: #cf752b;
     color: white;
@@ -287,18 +267,17 @@ a:hover {
     font-weight: lighter;
     transition: 0.3s;
     position: absolute;
-    right: 20px;
+    right: 35px;
     top: 15px;
-    
 }
 
-.add-btn:hover {
+.ticket-btn:hover {
     background-color: #7494ec;
 }
 
 .export-btn {
     display: inline-block;
-    background-color: #2bcf2b;
+    background-color: #63c216;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
@@ -307,10 +286,10 @@ a:hover {
     font-weight: lighter;
     transition: 0.3s;
     position: absolute;
-    right: 170px;
+    right: 165px;
     top: 15px;
-    
 }
+
 
 .export-btn:hover {
     background-color: #7494ec;
@@ -336,7 +315,6 @@ a:hover {
     justify-content: center; 
 }
 
-
 .admin-icon {
     margin-left: 5px; /* Space between name and icon */
     color: #007bff; /* Icon color */
@@ -357,7 +335,6 @@ a:hover {
     font-size: 16px; /* Font size */
     margin-left: -100%;
     margin-top: 20px;
-   
 }
 
 .search-icon {
@@ -371,4 +348,53 @@ a:hover {
     margin-left: -100%;
 }
 
+.sub-menu {
+    display: none; /* Initially hide the submenu */
+    margin-top: -50px;
+}
 
+.sub-menu li {
+    padding: -5px 0; /* Add some padding to submenu items */
+}
+
+/* Style for the sidebar links */
+.sidebar a {
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center items vertically */
+    text-decoration: none; /* Remove underline from links */
+    color: #ffffff; /* Default text color */
+    padding: 10px 15px; /* Padding around the link */
+    transition: background-color 0.3s; /* Smooth background transition */
+}
+
+/* Change background color on hover */
+.sidebar a:hover {
+    background-color: #e2dddd; /* Light gray background on hover */
+    color: #333;
+}
+
+/* Style for the Boxicons */
+.toggle-arrow i {
+    font-size: 35px; /* Set the size of the icon */
+    color: #ffffff; /* Default color of the icon */
+    margin-left: auto; /* Push the icon to the right */
+    transition: color 0.3s; /* Smooth color transition */
+}
+
+/* Change color of the icon on hover */
+.sidebar a:hover .toggle-arrow i {
+    color: #007bff; /* Change color on hover (e.g., blue) */
+}
+
+/* Optional: Rotate the icon when the sub-menu is active */
+.sub-menu.active + .toggle-arrow i {
+    transform: rotate(100deg); /* Rotate the icon when the sub-menu is open */
+    transition: transform 0.3s; /* Smooth rotation transition */
+}
+
+/* Optional: Adjust the size of the icon */
+.toggle-arrow i {
+    font-size: 18px; /* Adjust the size of the icon */
+    margin-left: 10px; /* Space between the text and the icon */
+    margin-top: -50px;
+}

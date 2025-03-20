@@ -55,8 +55,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <li><a href="view_service_record.php"><i class="fas fa-box"></i> View Assets</a></li>
         <li><a href="customersT.php"><i class="fas fa-box"></i> View Customers</a></li>
         <li><a href="createTickets.php"><i class="fas fa-file-invoice"></i> Ticket Registration</a></li>
-        <li><a href="addC.php"><i class="fas fa-user-plus"></i> Add Customer</a></li>
+        <li><a href="registerAssets.php"><i class="fas fa-user-plus"></i>Register Assets</a></li>
             
         </ul>
         <footer>

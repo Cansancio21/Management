@@ -4,7 +4,6 @@
     font-family: 'Roboto', sans-serif;
 }
 
-
 body {
     min-height: 100vh;
     display: flex;
@@ -22,8 +21,6 @@ body {
     position: fixed;
 }
 
-
-
 .table-box {
     margin-top: -30px;
     width: 90%; 
@@ -35,7 +32,6 @@ body {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
     height: 70vh; 
     position: relative; /* Change to relative for sticky header */
-   
 }
 
 table {
@@ -56,14 +52,13 @@ th, td {
     text-align: center; /* Align text to the center */
 }
 
-
-.table-box h2{
+.table-box h2 {
     text-align: left;
     margin-top: 5px;
     font-size: 2rem;
 }
 
-.container .upper{
+.container .upper {
     border-radius: 5px;
     margin-top: -20px;
     margin-left: -20px;
@@ -72,7 +67,7 @@ th, td {
     background-color: #ffffff;
 }
 
-.upper h1{
+.upper h1 {
     padding-top: 20px;
     padding-left: 10px;
     text-align: left;
@@ -119,6 +114,7 @@ th, td {
 
 .sidebar li {
     margin: 60px 0; /* Space between links */
+    position: relative; /* Position relative for sub-menu */
 }
 
 .sidebar a {
@@ -129,7 +125,7 @@ th, td {
     text-align: center;  
 }
 
-footer a{
+footer a {
     margin-bottom: 50px;
 }
 
@@ -142,7 +138,18 @@ footer a{
     color: #f51e02; /* Change color on hover */
 }
 
-/* Back to Home link styles */
+/* Sub-menu styles */
+.sub-menu {
+    display: none; /* Hide sub-menus by default */
+    list-style-type: none; /* Remove bullet points */
+    padding-left: 20px; /* Indent sub-menu items */
+}
+
+.toggle-arrow {
+    cursor: pointer; /* Change cursor to pointer for the toggle arrow */
+    margin-left: 5px; /* Space between link and arrow */
+}
+
 .back-home {
     position: absolute; /* Position it at the bottom */
     bottom: 20px; /* Space from the bottom */
@@ -173,9 +180,8 @@ th, td {
     border: 1px solid #ccc; /* Light gray border */
     padding: 12px; /* More padding for better spacing */
     text-align: center; /* Align text to the left */
+    font-size: 15px;
 }
-
-
 
 /* Row styling */
 tr {
@@ -202,19 +208,19 @@ tr:hover {
 }
 
 th:nth-child(1), td:nth-child(1) {
-    width: 15%;
+    width: 8%;
 }
 
 th:nth-child(2), td:nth-child(2) {
-    width: 15%;
+    width: 10%;
 }
 
 th:nth-child(3), td:nth-child(3) {
-    width: 15%;
+    width: 10%;
 }
 
 th:nth-child(4), td:nth-child(4) {
-    width: 15%;
+    width: 10%;
 }
 
 /* Specific styling for the "Ticket Details" column (5th column) */
@@ -230,11 +236,12 @@ td:nth-child(5) {
 /* Specific styling for the "Date" column (6th column) */
 td:nth-child(6) {
     text-align: center; /* Center align the date */
-    width: 20%;
+    width: 10%;
 }
 
 /* Specific styling for the "Actions" column (7th column) */
 td:nth-child(7) {
+    width: 10%;
     text-align: center;
 }
 
@@ -249,9 +256,6 @@ td a:hover {
     color: #d9534f; /* Change color on hover */
 }
 
-
-
-
 /* Table header background */   
 th {
     background-color: #c8cbd1; 
@@ -259,8 +263,6 @@ th {
 }
 
 /* Row styles */
-
-
 tr:hover {
     background-color: #e0e0e0; /* Slightly darker gray on hover */
 }
@@ -290,11 +292,30 @@ a:hover {
     transition: 0.3s;
     position: absolute;
     right: 35px;
-    top: 35px;
-    
+    top: 15px;
 }
 
 .ticket-btn:hover {
+    background-color: #7494ec;
+}
+
+.export-btn {
+    display: inline-block;
+    background-color: #2bcf2b;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: lighter;
+    transition: 0.3s;
+    position: absolute;
+    right: 165px;
+    top: -15;
+
+}
+
+.export-btn:hover {
     background-color: #7494ec;
 }
 
@@ -338,7 +359,6 @@ a:hover {
     font-size: 16px; /* Font size */
     margin-left: -100%;
     margin-top: 20px;
-   
 }
 
 .search-icon {
@@ -351,5 +371,3 @@ a:hover {
     z-index: 1; /* Ensure the icon is above the input field */
     margin-left: -100%;
 }
-
-

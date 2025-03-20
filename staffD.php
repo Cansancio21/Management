@@ -13,11 +13,11 @@ $userType = '';
 
 // Fetch user data based on the logged-in username
 if ($conn) {
-    $sqlUser    = "SELECT u_fname, u_type FROM tbl_user WHERE u_username = ?";
+    $sqlUser   = "SELECT u_fname, u_type FROM tbl_user WHERE u_username = ?";
     $stmt = $conn->prepare($sqlUser );
     $stmt->bind_param("s", $_SESSION['username']);
     $stmt->execute();
-    $resultUser  = $stmt->get_result();
+    $resultUser   = $stmt->get_result();
 
     if ($resultUser ->num_rows > 0) {
         $row = $resultUser ->fetch_assoc();
@@ -40,25 +40,47 @@ if ($conn) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="stafD.css"> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+    <link rel="stylesheet" href="staffD.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@latest/css/boxicons.min.css'> 
 </head>
 <body>
 <div class="wrapper">
-    <div class="sidebar">
-        <h2>Task Management</h2>
-        <ul>
-            <li><a href="staffD.php"><i class="fas fa-ticket-alt"></i> View Tickets</a></li>
-            <li><a href="view_service_record.php"><i class="fas fa-box"></i> View Assets</a></li>
-            <li><a href="customersT.php"><i class="fas fa-box"></i> View Customers</a></li>
-            <li><a href="createTickets.php"><i class="fas fa-file-invoice"></i> Ticket Registration</a></li>
-            <li><a href="addC.php"><i class="fas fa-user-plus"></i> Add Customer</a></li>
-            <li><a href="addC.php"><i class="fas fa-user-plus"></i> Register Assets</a></li>     
-        </ul>
-        <footer>
-            <a href="index.php" class="back-home"><i class="fas fa-home"></i> Back to Home</a>
-        </footer>
-    </div>
+<div class="sidebar">
+    <h2>Task Management</h2>
+    <ul>
+        <li>
+            <a href="staffD.php"><i class="fas fa-ticket-alt"></i> View Tickets</a>
+            <span class="toggle-arrow" onclick="toggleSubMenu('ticketsSubMenu')">
+                <i class='bx bx-chevron-down'></i>
+            </span>
+            <ul class="sub-menu" id="ticketsSubMenu" style="display: none;">
+                <li><a href="createTickets.php"><i class="fas fa-file-invoice"></i> Ticket Registration</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="assetsT.php"><i class="fas fa-user-plus"></i> View Assets</a>
+            <span class="toggle-arrow" onclick="toggleSubMenu('assetsSubMenu')">
+                <i class='bx bx-chevron-down'></i>
+            </span>
+            <ul class="sub-menu" id="assetsSubMenu" style="display: none;">
+                <li><a href="registerAssets.php"><i class="fas fa-user-plus"></i> Register Assets</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="customersT.php"><i class="fas fa-box"></i> View Customers</a>
+            <span class="toggle-arrow" onclick="toggleSubMenu('customersSubMenu')">
+                <i class='bx bx-chevron-down'></i>
+            </span>
+            <ul class="sub-menu" id="customersSubMenu" style="display: none;">
+                <li><a href="addC.php"><i class="fas fa-user-plus"></i> Add Customer</a></li>
+            </ul>
+        </li>
+    </ul>
+    <footer>
+        <a href="index.php" class="back-home"><i class="fas fa-home"></i> Back to Home</a>
+    </footer>
+</div>
 
     <div class="container">
         <div class="upper">
@@ -78,10 +100,11 @@ if ($conn) {
             <?php endif; ?>
             <h2>Reports</h2>
             <a href="createTickets.php" class="ticket-btn"><i class="fas fa-user-plus"></i>Add Ticket</a>
+            <a href="createTickets.php" class="export-btn"><i class="fas fa-download"></i>Export</a>
             <table>
                 <thead>
                     <tr>
-                        <th>Ticket ID</th>
+                        <th>ID</th>
                         <th>Account Name</th>
                         <th>Issue Type</th>
                         <th>Ticket Status</th>
@@ -116,6 +139,9 @@ if ($conn) {
         </div>
     </div>
 </div>
+
+<!-- Include the JavaScript file -->
+<script src="staff.js"></script>
 </body>
 </html>
 
