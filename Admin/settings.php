@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include 'db.php'; 
+include '../database/db.php';
 
 // Check if the user is logged in
 if (!isset($_SESSION['username'])) { 
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Settings</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="setting.css">
+    <link rel="stylesheet" href="../css/setting.css">
     <script>
         // Toggle password visibility
         function togglePasswordVisibility(inputId, iconId) {

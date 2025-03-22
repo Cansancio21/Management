@@ -1,5 +1,6 @@
 <?php
-include 'db.php';
+include '../database/db.php';
+
 session_start();
 
 // Initialize the success message variable
@@ -65,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit User</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css">
-    <link rel="stylesheet" href="editU.css">
+    <link rel="stylesheet" href="../css/editU.css">
 </head>
 <body>
 
@@ -132,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <?php if ($successMessage): ?>
             <div class="message-box">
                 <p><?php echo $successMessage; ?></p>
-                <button onclick="window.location.href='adminD.php'">OK</button>
+                <button onclick="window.location.href='viewU.php'">OK</button>
             </div>
         <?php endif; ?>
     </div>
