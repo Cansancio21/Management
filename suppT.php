@@ -14,7 +14,7 @@ $c_lname = htmlspecialchars($user['c_lname']);
 $c_fname = htmlspecialchars($user['c_fname']);
 
 // Fetch only this user's support tickets
-$query = "SELECT id, c_id, c_lname, c_fname, s_subject, s_message, s_status FROM tbl_supp_tickets WHERE c_id = '$c_id' ORDER BY id DESC";
+$query = "SELECT id, c_id, c_lname, c_fname, s_subject, s_type, s_message, s_status FROM tbl_supp_tickets WHERE c_id = '$c_id' ORDER BY id ASC";
 $result = mysqli_query($conn, $query);
 
 if (!$result) {
@@ -35,6 +35,10 @@ if (!$result) {
         <div class="container">
             <h1>Support Tickets</h1>
             
+            <!-- Create Ticket Button -->
+    <div class="button-container">
+        <button type="button" onclick="openModal()">Create Ticket</button>
+    </div>
             <div class="table-box">
                 <h2>Customer Support Requests</h2>
                 <hr>
@@ -45,6 +49,7 @@ if (!$result) {
                             <th>Customer ID</th>
                             <th>Name</th>
                             <th>Subject</th>
+                            <th>Type</th>
                             <th>Message</th>
                             <th>Status</th>
                         </tr>
@@ -56,21 +61,18 @@ if (!$result) {
                                 <td><?php echo htmlspecialchars($row['c_id']); ?></td>
                                 <td><?php echo htmlspecialchars($row['c_lname'] . ', ' . $row['c_fname']); ?></td>
                                 <td><?php echo htmlspecialchars($row['s_subject']); ?></td>
+                                <td><?php echo htmlspecialchars($row['s_type']); ?></td>
                                 <td><?php echo htmlspecialchars($row['s_message']); ?></td>
-                                <td>
-                                    <select name="status" onchange="updateStatus(this, '<?php echo $row['id']; ?>')">
-                                        <option value="1" <?php echo ($row['s_status'] == 1) ? 'selected' : ''; ?>>Open</option>
-                                        <option value="0" <?php echo ($row['s_status'] == 0) ? 'selected' : ''; ?>>Closed</option>
-                                    </select>
-                                </td>
+                                <td onclick="openCloseModal('<?php echo $row['id']; ?>', '<?php echo htmlspecialchars($row['s_status']); ?>')">
+                                    <?php echo htmlspecialchars($row['s_status']); ?>
+                                </td> <!-- Clickable status -->
                             </tr>
                         <?php } ?>
                     </tbody>
                 </table>
             </div>
 
-            <!-- Create Ticket Button -->
-            <button onclick="openModal()">Create Ticket</button>
+         
 
             <!-- Modal for Creating Ticket -->
             <div id="modalBackground" class="modal-background"></div>
@@ -87,27 +89,67 @@ if (!$result) {
                     <input type="text" id="subject" name="subject" readonly>
                     <br>
 
+                    <!-- Ticket Type Dropdown -->
+                    <label for="type">Ticket Type:</label>
+                    <select name="type" id="type" required>
+                        <option value="Critical" selected>Critical</option>
+                        <option value="Minor">Minor</option>
+                    </select>
+                    <br>
+
                     <label for="message">Message:</label>
                     <textarea id="message" name="message" required></textarea>
                     <br>
-                    <button type="submit">Submit Ticket</button>
+                    <button type="submit">Report Ticket</button>
                 </form>
+            </div>
+
+            <!-- Modal for Closing Ticket -->
+            <div id="closeTicketModal" class="modal-content" style="display:none;">
+                <span onclick="closeCloseModal()" class="close">&times;</span>
+                <input type="text" id="closeTicketId" placeholder="Enter Ticket ID to close the ticket">
+                <div class="button-container">
+        <button class="close-ticket" onclick="confirmClose()">Close Ticket</button>
+    </div>
+</div>
             </div>
         </div>
     </div>
 
     <script>
-        function updateStatus(select, ticketId) {
-            const status = select.value;
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", "updateS.php", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    alert("Status updated successfully!");
-                }
-            };
-            xhr.send("id=" + ticketId + "&status=" + status);
+        let currentTicketId = null; // Variable to store the current ticket ID
+
+        function openCloseModal(ticketId, status) {
+            if (status === "Open") {
+                currentTicketId = ticketId; // Store the current ticket ID
+                document.getElementById('closeTicketModal').style.display = 'block';
+                document.getElementById('modalBackground').style.display = 'block';
+            } else {
+                alert("This ticket is already closed.");
+            }
+        }
+
+        function closeCloseModal() {
+            document.getElementById('closeTicketModal').style.display = 'none';
+            document.getElementById('modalBackground').style.display = 'none';
+        }
+
+        function confirmClose() {
+            const confirmationId = document.getElementById('closeTicketId').value;
+            if (confirmationId === currentTicketId) {
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "updateS.php", true); // Assuming you have an updateS.php to handle this
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        alert("Ticket closed successfully!");
+                        location.reload(); // Reload the page to see the updated status
+                    }
+                };
+                xhr.send("id=" + currentTicketId + "&status=Closed"); // Send the ticket ID and new status
+            } else {
+                alert("Incorrect ID entered. Ticket not closed.");
+            }
         }
 
         function openModal() {

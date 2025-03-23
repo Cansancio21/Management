@@ -1,23 +1,34 @@
 <?php
-include 'db.php';
-session_start();
+include 'db.php'; // Include database connection
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $c_id = mysqli_real_escape_string($conn, $_POST['c_id']);
-    $c_lname = mysqli_real_escape_string($conn, $_POST['c_lname']);
-    $c_fname = mysqli_real_escape_string($conn, $_POST['c_fname']);
-    $s_subject = mysqli_real_escape_string($conn, $_POST['subject']);
-    $s_message = mysqli_real_escape_string($conn, $_POST['message']);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Retrieve form data
+    $c_id = htmlspecialchars($_POST['c_id']);
+    $c_lname = htmlspecialchars($_POST['c_lname']);
+    $c_fname = htmlspecialchars($_POST['c_fname']);
+    $subject = htmlspecialchars($_POST['subject']);
+    $message = htmlspecialchars($_POST['message']);
+    $type = htmlspecialchars($_POST['type']); // Get ticket type (Critical or Minor)
 
-    $query = "INSERT INTO tbl_supp_tickets (c_id, c_lname, c_fname, s_subject, s_message, s_status) 
-              VALUES ('$c_id', '$c_lname', '$c_fname', '$s_subject', '$s_message', 1)";
+    // Prepare the SQL statement to prevent SQL injection
+    $stmt = $conn->prepare("INSERT INTO tbl_supp_tickets (c_id, c_lname, c_fname, s_subject, s_message, s_type, s_status) 
+                             VALUES (?, ?, ?, ?, ?, ?, ?)");
+    
+    // Set the default status to "Open"
+    $status = "Open";
 
-    if (mysqli_query($conn, $query)) {
-        echo "success";
+    // Bind parameters
+    $stmt->bind_param("issssss", $c_id, $c_lname, $c_fname, $subject, $message, $type, $status);
+
+    // Execute the statement
+    if ($stmt->execute()) {
+        echo "success"; // If the insert is successful
     } else {
-        echo "Error: " . mysqli_error($conn);
+        echo "Error: " . $stmt->error; // If there is an error
     }
 
-    mysqli_close($conn);
+    // Close the statement and connection
+    $stmt->close();
+    $conn->close();
 }
 ?>

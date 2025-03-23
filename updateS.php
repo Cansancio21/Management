@@ -1,17 +1,23 @@
 <?php
-include 'db.php';
+include 'db.php'; // Include database connection
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $c_id = mysqli_real_escape_string($conn, $_POST['c_id']); // Use customer ID instead
-    $status = mysqli_real_escape_string($conn, $_POST['status']);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $ticketId = htmlspecialchars($_POST['id']);
+    $status = htmlspecialchars($_POST['status']);
 
-    $query = "UPDATE tbl_supp_tickets SET s_status = '$status' WHERE c_id = '$c_id'";  
-    if (mysqli_query($conn, $query)) {
-        echo "Status updated successfully!";
+    // Prepare the SQL statement to prevent SQL injection
+    $stmt = $conn->prepare("UPDATE tbl_supp_tickets SET s_status = ? WHERE id = ?");
+    $stmt->bind_param("si", $status, $ticketId); // "si" means string and integer
+
+    // Execute the statement
+    if ($stmt->execute()) {
+        echo "success"; // If the update is successful
     } else {
-        echo "Error: " . mysqli_error($conn);
+        echo "Error: " . $stmt->error; // If there is an error
     }
 
-    mysqli_close($conn);
+    // Close the statement and connection
+    $stmt->close();
+    $conn->close();
 }
 ?>

@@ -16,166 +16,79 @@ body {
     margin-left: 17%; /* Leave space for the sidebar */
     padding: 20px;
     background-color: #e2dddd; /* Light background for the container */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-top: -450px;
     height: 100vh; /* Full height of the viewport */
     position: fixed;
 }
-
 .table-box {
-    margin-top: 50px;
-    width: 80%; 
+    margin-top: 20px;
+    width: 90%; 
     padding: 20px 0;
     margin-right: 10px;
-    margin-left: 10px;
+    margin-left: 40px;
     border-radius: 5px;
     background-color: #ffffff; 
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
-    height: 70vh; 
-    position: fixed;
-    align-items: center;
-    justify-content: center;
-
-}
-
-.table-box h2{
-    text-align: center;
-    margin-top: 50px;
-    font-size: 1.8rem;
-}
-
-.title-line {
-    border: none; 
-    height: 2px; 
-    background-color: #6c6b6b; 
-    margin: 15px 0; 
-}
-
-.container .upper{
-    border-radius: 5px;
-    margin-top: -20px;
-    margin-left: -20px;
-    width: 100%;
-    height: 8vh;
-    background-color: #ffffff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
-}
-
-.upper h1{
-    padding-top: 20px;
-    padding-left: 10px;
-    text-align: left;
-    color: #333; /* Darker text color */
-}
-
-.wrapper {
-    display: flex; 
-    height: 100vh; 
-}
-
-/* Sidebar styles */
-.sidebar {
-    width: 15%; 
-    background-color: #1b4d80; 
-    padding: 20px; 
-    border-right: 1px solid #ccc; 
-    height: 100vh; 
-    position: fixed; 
-}
-
-.sidebar-image {
-    width: 100%; 
-    height: auto; 
-    border-radius: 8px; 
-    margin-bottom: 20px; 
-}
-
-
-.sidebar h2 {
-    margin-top: 10px;
-    text-align: center;
-    color: #ecf0f1; /* Light color for the heading */
-}
-
-/* Sidebar link styles */
-.sidebar ul {
-    list-style-type: none; /* Remove bullet points */
-    padding: 0; /* Remove padding */
-    margin-top: 100px;
-    margin-left: 10px;
-    margin-bottom: 30px;
-}
-
-.sidebar li {
-    margin: 55px 0; /* Space between links */
-}
-
-.sidebar a {
-    text-decoration: none; /* Remove underline */
-    color: #ecf0f1; /* Light color for links */
-    display: flex; /* Flexbox for icon and text alignment */
-    align-items: center; /* Center items vertically */
-    text-align: center;  
-}
-
-footer a{
-    margin-bottom: 50px;
-}
-
-.sidebar a i {
-    margin-right: 25px;
-}
-
-.sidebar a:hover {
-    text-decoration: underline; /* Underline on hover */
-    color: #f51e02; /* Change color on hover */
-}
-
-/* Back to Home link styles */
-.back-home {
-    position: absolute; /* Position it at the bottom */
-    bottom: 20px; /* Space from the bottom */
-    left: 60px; /* Align to the left */
-    color: #ecf0f1; /* Light color */
-    text-decoration: none; /* Remove underline */
-    display: flex; /* Flexbox for icon and text alignment */
-    align-items: center; /* Center items vertically */
-}
-
-.back-home:hover {
-    text-decoration: underline; /* Underline on hover */
+    height: 70vh; /* Set a fixed height for the table box */
+    overflow: hidden; /* Hide overflow */
 }
 
 
 table {
     width: 100%;
-    margin-left: 160px;
+    margin-left: 5px;
     border-collapse: collapse; 
-    margin-top: 150px; 
+    margin-top: 5px; 
     max-height: 100%; 
     overflow-y: auto; 
     display: block; 
     
 }
 
-/* Table header styles */
+
+th {
+    background-color: #c8cbd1; 
+    color: rgb(0, 0, 0);
+    border: none; /* Remove border from header */
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top of the table */
+    z-index: 1; /* Ensure it is above other content */
+}
+
+
+
 th, td {
     border: 1px solid #ccc; /* Light gray border */
     padding: 12px; /* More padding for better spacing */
-    text-align: center; /* Align text to the left */
+    text-align: center; /* Align text to the center */
+    width: auto; /* Allow columns to adjust based on content */
 }
 
 /* Apply specific widths to columns */
 th:nth-child(1), td:nth-child(1) {
-    width: 15%; /* Adjust width of first column (e.g., Name or ID) */
+    width: 10%; /* Adjust width of first column (e.g., Ticket ID) */
 }
 
 th:nth-child(2), td:nth-child(2) {
-    width: 20%; /* Adjust width of second column */
+    width: 10%; /* Adjust width of second column (Customer ID) */
 }
 
 th:nth-child(3), td:nth-child(3) {
-    width: 25%; /* Adjust width of third column */
+    width: 15%; /* Adjust width of third column (Name) */
 }
+
+th:nth-child(4), td:nth-child(4) {
+    width: 15%; /* Adjust width of fourth column (Subject) */
+}
+
+th:nth-child(5), td:nth-child(5) {
+    width: 15%; /* Adjust width of fifth column (Type) */
+}
+
+th:nth-child(6), td:nth-child(6) {
+    width: 20%; /* Adjust width of sixth column (Message) */
+}
+
 th:last-child, td:last-child {
     width: 15%; /* Adjust the width of the 'Status' column */
 }
@@ -183,141 +96,26 @@ th:last-child, td:last-child {
 th {
     background-color: #c8cbd1; 
     color: rgb(0, 0, 0);
+    border: none; /* Remove border from header */
 }
-
 
 tr:hover {
     background-color: #e0e0e0; 
 }
-
-/* Link styles */
-a {
-    display: inline-block; /* Make the link a block element */
-    margin-top: 15px; /* Space above the link */
-    text-decoration: none; /* Remove underline */
-    color: #4CAF50; /* Green color for the link */
-    font-weight: bold; /* Bold text */
-}
-
-a:hover {
-    text-decoration: underline; /* Underline on hover */
-}
-
-.add-user-btn {
-    display: inline-block;
-    background-color: #cf752b;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: lighter;
-    transition: 0.3s;
-    position: absolute;
-    right: 140px;
-    top: 100px;
-    
-}
-
-.add-user-btn:hover {
-    background-color: #7494ec;
-}
-
-.table-box table a {
-    font-size: 18px; 
-    color: #193d46; 
-    display: inline-flex; /* Use inline-flex for better alignment */
-    align-items: center; /* Center items vertically */
-    margin-right: 5px;
-    margin-left: 10px;
-    transition: color 0.3s; /* Smooth transition for hover effect */
-    text-align: center;
-    margin-top: 5px;
-}
-
-.table-box a:hover {
-    color: #0056b3; /* Change color on hover */
-}
-
-.table-box a i {
-    justify-content: center; 
-}
-
-.row {
-    display: flex;
-    gap: -10px;
-}
-
-.secondrow {
-        display: flex;
-        gap: -10px;
-}
-
-.input-box {
-    position: relative;
-    width: 100%;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    margin-left: 100px;
-}
-
-.input-box label {
-    display: block; 
-    margin-bottom: 5px; 
-    font-weight: bold; 
-}
-
-.input-box input,
-.input-box select {
-    width: 60%;
-    height: 20%;
-    padding: 18px;
-    padding-right: 40px; 
-    border: 1px solid #3d3e3f;
-    border-radius: 25px;
-    font-size: 18px;
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
-    text-align: center;
-}
-
-/* Input Icons */
-.input-box i {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 22px;
-    color: #007bff;
-}
-
-input::placeholder {
-    color: #aaa;
-    font-style: italic;
-    opacity: 1;
-    font-size: 15px;
-}
-
-input[type="date"] {
-    color: #aaa;
-    font-style: italic;
-    opacity: 1;
-    font-size: 15px;
-}
-
-
-/* Button Styles */
-/* Button Styles */
 button[type="submit"] {
+    width: 45%;
     background-color: #007bff; /* Blue background */
     color: white; /* White text */
-    padding: 10px 20px; /* Padding for top/bottom and left/right */
+    padding: 20px 20px; /* Padding for top/bottom and left/right */
     border: none; /* Remove border */
     border-radius: 5px; /* Rounded corners */
     font-size: 16px; /* Font size */
     cursor: pointer; /* Pointer cursor on hover */
+    margin-left: 28%;
     transition: background-color 0.3s ease; /* Smooth transition for background color */
-    margin-top: 10px; /* Space above the button */
+    margin-top: 10%; 
     text-align: center; /* Center text inside the button */
+    margin-left: 10px;
 }
 
 /* Hover effect */
@@ -343,33 +141,110 @@ button[type="submit"]:focus {
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 0 auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 35%; /* Could be more or less, depending on screen size */
     position: relative;
+    height: 80%;
     z-index: 1000; /* Ensure modal is above other content */
+    margin-left: 20%;
 }
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+#closeTicketModal {
+    width: 250px; /* Set a smaller width for the close ticket modal */
+    padding: 15px; /* Adjust padding */
+    height: 100px;
+    margin-top: -500px;
+    margin-left: 35%;
+    
+
 }
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
+
 /* Blurring effect for background */
-.modal-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    display: none; /* Hidden by default */
-    z-index: 999; /* Ensure it is below the modal */
+.modal-content {
+    background-color: #fefefe;
+    margin: -700px; /* Center the modal horizontally */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 35%; /* Could be more or less, depending on screen size */
+    position: relative;
+    height: auto; /* Allow height to adjust based on content */
+    z-index: 1000; /* Ensure modal is above other content */
+    display: flex; /* Enable flexbox */
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center children horizontally */
+    margin-left: 400px;
 }
+form {
+    width: 100%; /* Full width of the form */
+    display: flex; /* Enable flexbox */
+    flex-direction: column; /* Stack form elements vertically */
+    align-items: center; /* Center form elements horizontally */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: center; /* Center the label text */
+}
+/* Input and Textarea Styles */
+input[type="text"],
+textarea,
+select {
+    width: 80%; /* Set a width for inputs and textarea */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensures padding is included in width */
+}
+/* Textarea Specific Styles */
+textarea {
+    height: 250px; /* Set a height for the textarea */
+    resize: vertical; /* Allow vertical resizing only */
+}
+
+
+button {
+    background-color: #007bff; /* Darker blue */
+    color: white; /* White text */
+    padding: 10px 15px; /* Padding for buttons */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
+    font-size: 16px; /* Font size */
+    margin-left: -70%;
+  
+  
+}
+
+button:hover {
+    background-color: #002244; /* Even darker blue on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Specific Styles for Close Ticket Button */
+button.close-ticket {
+    background-color: #007bff; /* Bootstrap danger color (red) */
+    margin-left: 200px; /* Optional: Remove this if using flexbox */
+}
+
+button.close-ticket:hover {
+    background-color: #003366; /* Darker red on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+button.close-ticket:focus {
+    outline: none; /* Remove outline */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Add shadow on focus */
+}
+
+/* Button Container Styles */
+.button-container {
+    display: flex; /* Enable flexbox */
+    justify-content: center; /* Center horizontally */
+   margin-left: -200px;
+}
+
