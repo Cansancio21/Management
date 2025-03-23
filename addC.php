@@ -1,6 +1,6 @@
 <?php
 session_start(); // Start session for login management
-include '../database/db.php';
+include 'db.php';
 
 
 // Initialize variables as empty
@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="../css/addsC.css"> 
+    <link rel="stylesheet" href="addsC.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
 </head>
 <body>

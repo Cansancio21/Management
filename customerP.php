@@ -1,6 +1,6 @@
 <?php
 session_start(); // Start session for login management
-include '../database/db.php';
+include 'db.php';
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="../css/customer.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="customer.css"> <!-- Link to your CSS file -->
 </head>
 <body>
 <div class="wrapper">

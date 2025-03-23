@@ -1,5 +1,5 @@
 <?php
-include '../database/db.php';
+include 'db.php';
 session_start();
 
 // Check if the user is logged in

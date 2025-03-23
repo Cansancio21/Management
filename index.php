@@ -1,6 +1,6 @@
 <?php
 session_start(); // Start session for login management
-include '../database/db.php';
+include 'db.php';
 
 // Initialize variables as empty (ensures fields are empty on initial load)
 $firstname = $lastname = $email = $username = "";
@@ -145,7 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Registration & Login</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="index.css">
 
     <script>
         // Function to validate password strength

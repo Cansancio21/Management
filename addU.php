@@ -1,5 +1,5 @@
 <?php
-include '../database/db.php'; // Ensure db.php contains a valid connection to $conn
+include 'db.php'; // Ensure db.php contains a valid connection to $conn
 
 
 $firstnameErr = $lastnameErr = "";
@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add User</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css">
-    <link rel="stylesheet" href="../css/add.css">
+    <link rel="stylesheet" href="add.css">
 </head>
 <body>
 

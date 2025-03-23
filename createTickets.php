@@ -1,7 +1,7 @@
 <?php
 
 session_start(); // Start session for login management
-include '../database/db.php';
+include 'db.php';
 
 // Initialize variables as empty
 $accountname = $issuedetails = $dob = "";
@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ticket Registration</title>
-    <link rel="stylesheet" href="../css/create.css">
+    <link rel="stylesheet" href="create.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>

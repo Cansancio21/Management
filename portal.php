@@ -14,7 +14,7 @@ $user = $_SESSION['user']; // Get user data from session
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Portal</title>
-    <link rel="stylesheet" href="../css/portal.css">
+    <link rel="stylesheet" href="portal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -25,7 +25,9 @@ $user = $_SESSION['user']; // Get user data from session
             <li><a href="staffD.php"><i class="fas fa-ticket-alt"></i> View Tickets</a></li>
             <li><a href="view_service_record.php"><i class="fas fa-box"></i> View Assets</a></li>
             <li><a href="customersT.php"><i class="fas fa-box"></i> View Customers</a></li>
-            <li><a href="createTickets.php"><i class="fas fa-file-invoice"></i> Ticket Registration</a></li>
+            <li><a href="suppT.php"><i class="fas fa-file-invoice"></i> Support tickets</a></li>
+
+
             <li><a href="addC.php"><i class="fas fa-user-plus"></i> Add Customer</a></li>
         </ul>
         <footer>
