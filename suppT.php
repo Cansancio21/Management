@@ -32,10 +32,25 @@ if (!$result) {
 </head>
 <body>
     <div class="wrapper">
-        <div class="container">
-            <h1>Support Tickets</h1>
+    <div class="sidebar">
+        <h2>Task Management</h2>
+        <ul>
+        <li><a href="staffD.php"><i class="fas fa-ticket-alt"></i> View Tickets</a></li>
+        <li><a href="view_service_record.php"><i class="fas fa-box"></i> View Assets</a></li>
+        <li><a href="customersT.php"><i class="fas fa-box"></i> View Customers</a></li>
+        <li><a href="createTickets.php"><i class="fas fa-file-invoice"></i> Ticket Registration</a></li>
+        <li><a href="registerAssets.php"><i class="fas fa-user-plus"></i>Register Assets</a></li>
             
-            <!-- Create Ticket Button -->
+        </ul>
+        <footer>
+        <a href="index.php" class="back-home"><i class="fas fa-home"></i> Back to Home</a>
+        </footer>
+    </div>
+        <div class="container">
+        <div class="upper">
+        <h1>Support Tickets</h1>
+        </div>  
+            
     <div class="button-container">
         <button type="button" onclick="openModal()">Create Ticket</button>
     </div>
@@ -45,7 +60,7 @@ if (!$result) {
                 <table border="1">
                     <thead>
                         <tr>
-                            <th>Ticket ID</th>
+                            <th>Report ID</th>
                             <th>Customer ID</th>
                             <th>Name</th>
                             <th>Subject</th>

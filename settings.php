@@ -1,50 +1,77 @@
 <?php 
 session_start();
-include '../database/db.php';
+include 'db.php';
 
 // Check if the user is logged in
 if (!isset($_SESSION['username'])) { 
-    header("Location: index.php"); // Redirect to login page if not logged in 
-    exit(); 
+    header("Location: index.php");
+    exit();
 }
 
-if ($conn) {
-    // Fetch user data based on the logged-in username
-    $sqlUser  = "SELECT u_password FROM tbl_user WHERE u_username = ?";
-    $stmt = $conn->prepare($sqlUser );
-    $stmt->bind_param("s", $_SESSION['username']);
-    $stmt->execute();
-    $resultUser  = $stmt->get_result();
+$username = $_SESSION['username'];
 
-    if ($resultUser ->num_rows > 0) {
-        $row = $resultUser ->fetch_assoc();
-        $currentPasswordHash = $row['u_password']; // Assuming passwords are hashed
+// Default avatar
+$avatarPath = 'default-avatar.png'; 
+$avatarFolder = 'uploads/avatars/';
+
+// Ensure the avatars directory exists
+if (!is_dir($avatarFolder)) {
+    mkdir($avatarFolder, 0777, true);
+}
+
+// Check if user has a custom avatar
+if (file_exists($avatarFolder . $username . '.png')) {
+    $avatarPath = $avatarFolder . $username . '.png?' . time(); // Force browser to reload new image
+}
+
+// Handle avatar upload
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['avatar'])) {
+    $uploadFile = $_FILES['avatar'];
+    $targetFile = $avatarFolder . $username . '.png'; 
+
+    $imageFileType = strtolower(pathinfo($uploadFile['name'], PATHINFO_EXTENSION));
+    if (in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif'])) {
+        if (move_uploaded_file($uploadFile['tmp_name'], $targetFile)) {
+            echo "<script>alert('Avatar uploaded successfully!'); window.location.href='settings.php';</script>";
+        } else {
+            echo "<script>alert('Error uploading avatar.');</script>";
+        }
+    } else {
+        echo "<script>alert('Invalid image format. Please upload JPG, PNG, or GIF images.');</script>";
     }
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+// Handle password change
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['old_password'], $_POST['new_password'], $_POST['confirm_password'])) {
     $oldPassword = $_POST['old_password'];
     $newPassword = $_POST['new_password'];
     $confirmPassword = $_POST['confirm_password'];
 
-    if (password_verify($oldPassword, $currentPasswordHash)) {
+    // Fetch current password from database
+    $stmt = $conn->prepare("SELECT u_password FROM tbl_user WHERE u_username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $stmt->bind_result($storedPassword);
+    $stmt->fetch();
+    $stmt->close();
+
+    if (password_verify($oldPassword, $storedPassword)) {
         if ($newPassword === $confirmPassword) {
-            $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT);
-            $sqlUpdate = "UPDATE tbl_user SET u_password = ? WHERE u_username = ?";
-            $stmtUpdate = $conn->prepare($sqlUpdate);
-            $stmtUpdate->bind_param("ss", $newPasswordHash, $_SESSION['username']);
-            if ($stmtUpdate->execute()) {
-                echo "<script>alert('Password changed successfully!');</script>";
-                header("Location: index.php"); // Redirect to index.php after successful password change
-                exit();
+            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+            $stmt = $conn->prepare("UPDATE tbl_user SET u_password = ? WHERE u_username = ?");
+            $stmt->bind_param("ss", $hashedPassword, $username);
+            if ($stmt->execute()) {
+                $_SESSION['password_updated'] = true; // Prevent logout
+                echo "<script>alert('Password changed successfully!'); window.location.href='index.php';</script>";
             } else {
                 echo "<script>alert('Error updating password.');</script>";
             }
+            $stmt->close();
         } else {
-            echo "<script>alert('New password and confirm password do not match.');</script>";
+            echo "<script>alert('New passwords do not match.');</script>";
         }
     } else {
-        echo "<script>alert('Old password is incorrect.');</script>";
+        echo "<script>alert('Incorrect old password.');</script>";
     }
 }
 ?>
@@ -56,9 +83,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Settings</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="../css/setting.css">
+    <link rel="stylesheet" href="setting.css">
     <script>
-        // Toggle password visibility
         function togglePasswordVisibility(inputId, iconId) {
             const passwordInput = document.getElementById(inputId);
             const icon = document.getElementById(iconId);
@@ -67,6 +93,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             icon.classList.toggle('bx-show');
             icon.classList.toggle('bx-hide');
         }
+
+        function previewAvatar(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            const defaultUserIcon = document.getElementById('defaultUserIcon');
+            
+            reader.onload = function(e) {
+                const avatarPreview = document.getElementById('avatarPreview');
+                avatarPreview.src = e.target.result;
+                defaultUserIcon.style.display = 'none';
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+
+        window.onload = function() {
+            const avatarPath = '<?php echo htmlspecialchars($avatarPath); ?>';
+            if (avatarPath !== 'default-avatar.png') {
+                document.getElementById('defaultUserIcon').style.display = 'none';
+                document.getElementById('avatarPreview').src = avatarPath;
+            }
+        };
     </script>
 </head>
 <body>
@@ -75,16 +125,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <a href="index.php" class="back-arrow">
                 <i class='bx bx-arrow-back'></i>
             </a>
-            <div class="user-icon">
-                <i class='bx bxs-user-circle'></i>
+            <div class="user-icon" style="cursor: pointer; position: relative;" onclick="document.getElementById('avatarInput').click();">
+                <img id="avatarPreview" src="<?php echo htmlspecialchars($avatarPath); ?>" alt="User Avatar" style="width: 100px; height: 100px; border-radius: 50%;">
+                <i class='bx bxs-user-circle' id="defaultUserIcon" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 40px; color: white;"></i>
             </div>
-            <h2>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h2>
+            <p>Click the user icon to choose your avatar.</p>
+            <h2>Welcome, <?php echo htmlspecialchars($username); ?>!</h2>
             <p>Manage your account settings and security preferences here.</p>
         </div>
 
         <div class="right-side">
-            <form action="" method="POST">
+            <form action="" method="POST" enctype="multipart/form-data">
                 <h1>Account Settings</h1>
+
+                <input type="file" id="avatarInput" name="avatar" accept="image/*" style="display: none;" onchange="previewAvatar(event); this.form.submit();">
 
                 <div class="input-box">
                     <i class='bx bxs-lock-alt'></i>

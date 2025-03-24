@@ -127,6 +127,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
             } elseif ($row['u_type'] == 'staff') {
                 header("Location: staffD.php");
                 exit();
+            } elseif ($row['u_type'] == 'technician') {
+                header("Location: customerP.php"); // Redirect to portal.php for technicians
+                exit();
             }
         } else {
             $passwordError = "Incorrect password. Try again.";
@@ -253,7 +256,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
                 <div class="input-box">
                     <select name="type" required>
                         <option value="" disabled selected>Select Type</option>
-                        <option value="user" <?php if ($type == 'user') echo 'selected'; ?>>User  </option>
+                        <option value="technician" <?php if ($type == 'technician') echo 'selected'; ?>>Technician</option>
                         <option value="admin" <?php if ($type == 'admin') echo 'selected'; ?>>Admin</option>
                         <option value="staff" <?php if ($type == 'staff') echo 'selected'; ?>>Staff</option>
                     </select>
