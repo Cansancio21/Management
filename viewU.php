@@ -8,15 +8,23 @@ if (!isset($_SESSION['username'])) {
     exit(); 
 }
 
+$username = $_SESSION['username'];
 $firstName = '';
 $userType = '';
+$avatarPath = 'default-avatar.png'; // Default avatar
+$avatarFolder = 'uploads/avatars/';
 
-// Check database connection
+// Check if user has a custom avatar
+$userAvatar = $avatarFolder . $username . '.png';
+if (file_exists($userAvatar)) {
+    $avatarPath = $userAvatar . '?' . time(); // Force browser to reload new image
+}
+
 if ($conn) {
     // Fetch user data based on the logged-in username
-    $sqlUser    = "SELECT u_fname, u_type FROM tbl_user WHERE u_username = ?";
+    $sqlUser  = "SELECT u_fname, u_type FROM tbl_user WHERE u_username = ?";
     $stmt = $conn->prepare($sqlUser );
-    $stmt->bind_param("s", $_SESSION['username']);
+    $stmt->bind_param("s", $username);
     $stmt->execute();
     $resultUser  = $stmt->get_result();
 
@@ -57,53 +65,52 @@ if ($conn) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="viewU.css"> 
+    <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
     <style>
-     .table-box {
-    display: flex;
-    flex-direction: column;
-  
-}
+        .table-box {
+            display: flex;
+            flex-direction: column;
+        }
 
-/* Keep the table content to the top, and push the pagination to the bottom */
-.table-box table {
-    flex-grow: 1; /* This will make the table take up the available space */
-    margin-bottom: 10px; /* Ensure space for pagination */
-}
+        /* Keep the table content to the top, and push the pagination to the bottom */
+        .table-box table {
+            flex-grow: 1; /* This will make the table take up the available space */
+            margin-bottom: 10px; /* Ensure space for pagination */
+        }
 
-/* Pagination styling */
-.pagination {
-    text-align: center; /* Center the pagination links */
-    padding: 10px 0;
-   
-    width: 100%; /* Full width */
-    margin-left: 45%;
-}
+        /* Pagination styling */
+        .pagination {
+            text-align: center; /* Center the pagination links */
+            padding: 10px 0;
+            width: 100%; /* Full width */
+            margin-left: 45%;
+        }
 
-.pagination-link {
-    display: inline-block;
-    margin: 0 5px;
-    padding: 8px 12px;
-    background-color: #007bff; /* Bootstrap primary color */
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-}
+        .pagination-link {
+            display: inline-block;
+            margin: 0 5px;
+            padding: 8px 12px;
+            background-color: #007bff; /* Bootstrap primary color */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
 
-.pagination-link:hover {
-    background-color: #0056b3; /* Darker shade on hover */
-}
+        .pagination-link:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
 
-.pagination-link.active {
-    background-color: #0056b3; /* Active page color */
-    font-weight: bold; /* Bold text for active page */
-}
+        .pagination-link.active {
+            background-color: #0056b3; /* Active page color */
+            font-weight: bold; /* Bold text for active page */
+        }
 
-.disabled {
-    background-color: #ccc; /* Gray background for disabled */
-    pointer-events: none; /* Disable click events */
-    color: #666; /* Gray text */
-}
+        .disabled {
+            background-color: #ccc; /* Gray background for disabled */
+            pointer-events: none; /* Disable click events */
+            color: #666; /* Gray text */
+        }
     </style>
 </head>
 <body>
@@ -128,9 +135,20 @@ if ($conn) {
         </div>  
         <div class="search-container">
             <input type="text" class="search-bar" placeholder="Search...">
-            <span class="search-icon">🔍</span> <!-- Replace with your icon -->
+            <span class="search-icon">🔍</span> 
         </div>
-        
+
+        <div class="user-icon">
+    <?php if (!empty($avatarPath)): ?>
+        <img src="<?php echo htmlspecialchars($avatarPath, ENT_QUOTES, 'UTF-8') . '?v=' . time(); ?>" 
+            alt="" 
+            style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+            
+    <?php else: ?>
+        <i class='bx bxs-user-circle' style="font-size: 40px; color: #555;"></i>
+    <?php endif; ?>
+</div>
+
         <div class="table-box">
             <?php if ($userType === 'admin'): ?>
                 <div class="username">

@@ -20,18 +20,20 @@ if (!is_dir($avatarFolder)) {
 }
 
 // Check if user has a custom avatar
-if (file_exists($avatarFolder . $username . '.png')) {
-    $avatarPath = $avatarFolder . $username . '.png?' . time(); // Force browser to reload new image
+$userAvatar = $avatarFolder . $username . '.png';
+if (file_exists($userAvatar)) {
+    $avatarPath = $userAvatar . '?' . time(); // Force browser to reload new image
 }
 
 // Handle avatar upload
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['avatar'])) {
     $uploadFile = $_FILES['avatar'];
     $targetFile = $avatarFolder . $username . '.png'; 
-
     $imageFileType = strtolower(pathinfo($uploadFile['name'], PATHINFO_EXTENSION));
-    if (in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif'])) {
+
+    if (in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif', 'jfif'])) {
         if (move_uploaded_file($uploadFile['tmp_name'], $targetFile)) {
+            $_SESSION['avatar'] = $targetFile . '?' . time(); // Update session with new avatar
             echo "<script>alert('Avatar uploaded successfully!'); window.location.href='settings.php';</script>";
         } else {
             echo "<script>alert('Error uploading avatar.');</script>";

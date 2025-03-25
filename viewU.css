@@ -284,3 +284,16 @@ a:hover {
     z-index: 1; /* Ensure the icon is above the input field */
     margin-left: -100%;
 }
+.user-icon {
+    position: absolute;  /* Position it within a relative container */
+    margin-left: 50%;
+    top: 4%;  /* Align vertically */
+    transform: translateY(-50%);  /* Center it vertically */
+    font-size: 50px;  /* Adjust size */
+    color: #007bff;  /* Change color (adjust as needed) */
+    cursor: pointer;  /* Make it clickable */
+}
+
+.user-icon:hover {
+    color: #0056b3;  /* Darker shade on hover */
+}
