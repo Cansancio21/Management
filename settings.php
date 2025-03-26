@@ -4,8 +4,8 @@ include 'db.php';
 
 // Check if the user is logged in
 if (!isset($_SESSION['username'])) { 
-    header("Location: index.php");
-    exit();
+    header("Location: index.php"); // Redirect to login page if not logged in 
+    exit(); 
 }
 
 $username = $_SESSION['username'];
@@ -26,15 +26,19 @@ if (file_exists($userAvatar)) {
 }
 
 // Handle avatar upload
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['avatar'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['avatar'])) {
     $uploadFile = $_FILES['avatar'];
     $targetFile = $avatarFolder . $username . '.png'; 
     $imageFileType = strtolower(pathinfo($uploadFile['name'], PATHINFO_EXTENSION));
 
+    // Check if the uploaded file is a valid image type
     if (in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif', 'jfif'])) {
+        // Move the uploaded file to the target directory
         if (move_uploaded_file($uploadFile['tmp_name'], $targetFile)) {
-            $_SESSION['avatar'] = $targetFile . '?' . time(); // Update session with new avatar
+            // Update the session with the new avatar path
+            $_SESSION['avatarPath'] = 'uploads/icons/' . $username . '.png' . '?' . time();
             echo "<script>alert('Avatar uploaded successfully!'); window.location.href='settings.php';</script>";
+            exit();
         } else {
             echo "<script>alert('Error uploading avatar.');</script>";
         }
@@ -44,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['avatar'])) {
 }
 
 // Handle password change
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['old_password'], $_POST['new_password'], $_POST['confirm_password'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['old_password'], $_POST['new_password'], $_POST['confirm_password'])) {
     $oldPassword = $_POST['old_password'];
     $newPassword = $_POST['new_password'];
     $confirmPassword = $_POST['confirm_password'];
@@ -65,6 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['old_password'], $_POST
             if ($stmt->execute()) {
                 $_SESSION['password_updated'] = true; // Prevent logout
                 echo "<script>alert('Password changed successfully!'); window.location.href='index.php';</script>";
+                exit();
             } else {
                 echo "<script>alert('Error updating password.');</script>";
             }
@@ -77,6 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['old_password'], $_POST
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

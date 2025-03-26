@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2025 at 10:25 AM
+-- Generation Time: Mar 26, 2025 at 09:22 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -111,25 +111,26 @@ CREATE TABLE `tbl_supp_tickets` (
   `c_lname` varchar(200) NOT NULL,
   `c_fname` varchar(200) NOT NULL,
   `s_subject` varchar(200) NOT NULL,
+  `s_type` varchar(200) NOT NULL,
   `s_message` varchar(200) NOT NULL,
-  `s_status` varchar(200) NOT NULL
+  `status` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_supp_tickets`
 --
 
-INSERT INTO `tbl_supp_tickets` (`id`, `c_id`, `c_lname`, `c_fname`, `s_subject`, `s_message`, `s_status`) VALUES
-(1, 0, 'awawawa', 'ref#-23-03-2025-211213', 'aqaqaqaqaq', '0', ''),
-(4, 0, 'awawa', 'ref#-23-03-2025-558320', 'awaw', '1', ''),
-(5, 0, 'awawa', 'ref#-23-03-2025-590610', 'awawawawaw', '0', ''),
-(9, 0, '', 'ref#-23-03-2025-155334', 'awaw', '1', ''),
-(10, 0, '', 'ref#-23-03-2025-702429', 'aw', '1', ''),
-(11, 0, '', 'ref#-23-03-2025-707144', 'awaw', '1', ''),
-(12, 8, 'awawa', 'awawaw', 'ref#-23-03-2025-610925', 'awaw', '1'),
-(13, 8, 'awawa', 'awawaw', 'ref#-23-03-2025-469749', 'awawaw', '1'),
-(14, 8, 'awawa', 'awawaw', 'ref#-23-03-2025-859139', 'awawaw', '1'),
-(15, 10, 'Mcdaniel', 'Mohammad', 'ref#-23-03-2025-786879', 'awawawaw', '1');
+INSERT INTO `tbl_supp_tickets` (`id`, `c_id`, `c_lname`, `c_fname`, `s_subject`, `s_type`, `s_message`, `status`) VALUES
+(1, 0, 'awawawa', 'ref#-23-03-2025-211213', 'aqaqaqaqaq', '0', '', ''),
+(4, 0, 'awawa', 'ref#-23-03-2025-558320', 'awaw', '1', '', ''),
+(5, 0, 'awawa', 'ref#-23-03-2025-590610', 'awawawawaw', '0', '', ''),
+(9, 0, '', 'ref#-23-03-2025-155334', 'awaw', '1', '', ''),
+(10, 0, '', 'ref#-23-03-2025-702429', 'aw', '1', '', ''),
+(11, 0, '', 'ref#-23-03-2025-707144', 'awaw', '1', '', ''),
+(12, 8, 'awawa', 'awawaw', 'ref#-23-03-2025-610925', 'awaw', '1', ''),
+(13, 8, 'awawa', 'awawaw', 'ref#-23-03-2025-469749', 'awawaw', '1', ''),
+(14, 8, 'awawa', 'awawaw', 'ref#-23-03-2025-859139', 'awawaw', '1', ''),
+(15, 10, 'Mcdaniel', 'Mohammad', 'ref#-23-03-2025-786879', 'awawawaw', '1', '');
 
 -- --------------------------------------------------------
 
@@ -205,7 +206,18 @@ INSERT INTO `tbl_user` (`u_id`, `u_fname`, `u_lname`, `u_email`, `u_username`, `
 (32, 'awawawa', 'wawawawawa', 'waw@gmail.com', 'oicnasnac', '$2y$10$EUZJMcTTpel2tHpMjIgT6.kDty.VTXcPU2rWbBWuARUFCdZCMao/W', 'admin', 'active'),
 (33, 'awawawawa', 'wawawawaawaa', 'waw@gmail.com', 'oicnasnac12', '$2y$10$lNctiWTaf5CP1FYhlhgl3ehntsiEOMfsBnjnbjlq2BKHb9WOAYPa.', 'staff', 'active'),
 (34, 'awawawawa', 'wawawawaawaa', 'waw@gmail.com', 'oicnasnac1234', '$2y$10$xVlsAy4RAGbUNwPIxTy6BuO2kCO3eoZ8aDJWw10h64CQ.RuPh6maC', 'staff', 'active'),
-(35, 'awawawa', 'wawawawawa', 'waw@gmail.com', 'oicnasnac123', '$2y$10$HrYeqM5sk0e8gTZaRnJDau0JSPQp1NAe6UC4r4NllomMSaFbPvFJG', 'admin', 'active');
+(35, 'awawawa', 'wawawawawa', 'waw@gmail.com', 'oicnasnac123', '$2y$10$HrYeqM5sk0e8gTZaRnJDau0JSPQp1NAe6UC4r4NllomMSaFbPvFJG', 'admin', 'active'),
+(36, 'awawa', 'wawaw', 'awaw@gmail.com', 'andales', '$2y$10$DvWi5FD.bTmoVfrEWNn1W.iPBoX4AFKL5UPEmcxVpsf2IcYbc3VcG', 'admin', 'active'),
+(37, 'awaw', 'awawa', 'wawa@gmail.com', 'andales12', '$2y$10$y0b6bW2TeaV3wV.MLX6VP.FagPXN0f4LfM1p.hc/MA5QAg6CgP/ni', 'admin', 'active'),
+(38, 'awawawa', 'wawawaw', 'awaw@gmail.com', 'lolo', '$2y$10$OCCmNNkGjz3ny7gC3oM2Lepq7BuNg8rccTxfkZxEe2HXTqMvHlUtC', 'admin', 'active'),
+(39, 'awawa', 'awawaw', 'awaw@gmail.com', 'lolo123', '$2y$10$9XrF3ybtP6JwDvn3YY7m5.tUSYsZQqfdZcZ9nG4ADot/Wq1lF5sbO', 'admin', 'active'),
+(40, 'awawawa', 'awaw', 'awaw@gmail.com', 'lolo1233', '$2y$10$r9opYBh4vM5ierZ69CY5b.DYw9UcgYWc0KngdwSVhTe1YyNWsmkq6', 'admin', 'active'),
+(41, 'awawawa', 'awawa', 'awaw@gmail.com', 'awaw', '$2y$10$d09xnI0p1ilIOrCfxU9dSezxY45Lq5woIyFyVkPCtSOCylo.g1g3K', 'admin', 'active'),
+(42, 'awawawa', 'awawa', 'awaw@gmail.com', 'ryan111', '$2y$10$mu/oZdvy7S7o/d7DxqdsY.hyZXC4Wcz3bsfA0vG38GucXQzH5C8n.', 'admin', 'active'),
+(43, 'awawaw', 'awawaw', 'awawaw@gmail.com', 'kapoya', '$2y$10$8zW0/nPmhk1rfwbmdqJOs.ZsnHUbn2q8RafoSxDgcTp7Hf/APCLpu', 'admin', 'active'),
+(44, 'awawaw', 'awawaw', 'awaw@gmail.com', 'bro', '$2y$10$u9.JQYSG8TX.p4IcS9SOBuvjEwsbMDgRFqP3VxpR.mqP8VVLt5G.O', 'admin', 'active'),
+(45, 'awawaw', 'awawaw', 'awawawaw@gmail.com', 'kapoya12', '$2y$10$sGES0cvfv202O9aMIR8xee4qfE5TLLQ5b18COPIqKXz8jTR1PpTW6', 'admin', 'active'),
+(46, 'awawaw', 'awawaw', 'awawawaw@gmail.com', 'kapoya123', '$2y$10$G.ECPNocgOfgLs4FmYi.deDH0iBYKq6EZozEjUB19aT.t25oOUBly', 'staff', 'active');
 
 --
 -- Indexes for dumped tables
@@ -285,7 +297,7 @@ ALTER TABLE `tbl_ticket`
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `u_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `u_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

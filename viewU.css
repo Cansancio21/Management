@@ -97,9 +97,8 @@ body {
     padding: 20px;
     background-color: #e2dddd; /* Light background for the container */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    height: 100vh; /* Full height of the viewport */
     position: relative; /* Changed to relative for proper layout */
-    overflow: auto; /* Allow scrolling within the container if needed */
+  
 }
 
 .container .upper {
@@ -285,15 +284,19 @@ a:hover {
     margin-left: -100%;
 }
 .user-icon {
-    position: absolute;  /* Position it within a relative container */
+    position: absolute;
+    left: 70px; /* Adjust as needed */
+    top: 40px;
+    transform: translateY(-50%);
     margin-left: 50%;
-    top: 4%;  /* Align vertically */
-    transform: translateY(-50%);  /* Center it vertically */
-    font-size: 50px;  /* Adjust size */
-    color: #007bff;  /* Change color (adjust as needed) */
-    cursor: pointer;  /* Make it clickable */
 }
 
-.user-icon:hover {
-    color: #0056b3;  /* Darker shade on hover */
+
+.user-details {
+    position: absolute;
+    left: 120px; /* Adjust as needed */
+    top: 40px;
+    transform: translateY(-50%);
+    margin-left: 50%;
+   
 }

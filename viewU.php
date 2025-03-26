@@ -9,28 +9,36 @@ if (!isset($_SESSION['username'])) {
 }
 
 $username = $_SESSION['username'];
+$lastName = '';
 $firstName = '';
 $userType = '';
 $avatarPath = 'default-avatar.png'; // Default avatar
 $avatarFolder = 'uploads/avatars/';
+$userAvatar = $avatarFolder . $username . '.png';
 
 // Check if user has a custom avatar
-$userAvatar = $avatarFolder . $username . '.png';
 if (file_exists($userAvatar)) {
-    $avatarPath = $userAvatar . '?' . time(); // Force browser to reload new image
+    $_SESSION['avatarPath'] = $userAvatar . '?' . time(); // Prevent caching issues
+} else {
+    $_SESSION['avatarPath'] = 'default-avatar.png';
 }
+
+// Use the updated session variable
+$avatarPath = $_SESSION['avatarPath'];
 
 if ($conn) {
     // Fetch user data based on the logged-in username
-    $sqlUser  = "SELECT u_fname, u_type FROM tbl_user WHERE u_username = ?";
-    $stmt = $conn->prepare($sqlUser );
+    $sqlUser = "SELECT u_fname, u_lname, u_type FROM tbl_user WHERE u_username = ?";
+
+    $stmt = $conn->prepare($sqlUser);
     $stmt->bind_param("s", $username);
     $stmt->execute();
-    $resultUser  = $stmt->get_result();
+    $resultUser = $stmt->get_result();
 
-    if ($resultUser ->num_rows > 0) {
-        $row = $resultUser ->fetch_assoc();
+    if ($resultUser->num_rows > 0) {
+        $row = $resultUser->fetch_assoc();
         $firstName = $row['u_fname'];
+        $lastName = $row['u_lname']; // <-- Add this line
         $userType = $row['u_type'];
     }
 
@@ -136,18 +144,27 @@ if ($conn) {
         <div class="search-container">
             <input type="text" class="search-bar" placeholder="Search...">
             <span class="search-icon">🔍</span> 
-        </div>
-
-        <div class="user-icon">
-    <?php if (!empty($avatarPath)): ?>
-        <img src="<?php echo htmlspecialchars($avatarPath, ENT_QUOTES, 'UTF-8') . '?v=' . time(); ?>" 
-            alt="" 
-            style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
             
-    <?php else: ?>
-        <i class='bx bxs-user-circle' style="font-size: 40px; color: #555;"></i>
-    <?php endif; ?>
+        </div>
+        <div class="user-icon">
+    <?php 
+    $avatarPath = isset($_SESSION['avatarPath']) ? $_SESSION['avatarPath'] : 'default-avatar.png'; 
+    
+    if (!empty($avatarPath) && file_exists(str_replace('?' . time(), '', $avatarPath))) {
+        echo "<img src='" . htmlspecialchars($avatarPath, ENT_QUOTES, 'UTF-8') . "' 
+              style='width: 40px; height: 40px; border-radius: 50%; object-fit: cover;'>";
+    } else {
+        echo "<i class='bx bxs-user-circle' style='font-size: 40px; color: #555; margin-top: 10px;'></i>";
+
+    }
+    ?>
 </div>
+<div class="user-details">
+    <span><?php echo htmlspecialchars($firstName . ' ' . $lastName, ENT_QUOTES, 'UTF-8'); ?></span><br>
+    <small><?php echo htmlspecialchars(ucfirst($userType), ENT_QUOTES, 'UTF-8'); ?></small>
+</div>
+
+
 
         <div class="table-box">
             <?php if ($userType === 'admin'): ?>
@@ -197,19 +214,22 @@ if ($conn) {
             </table>
 
             <!-- Pagination Controls -->
-            <div class="pagination">
-                <?php if ($page > 1): ?>
-                    <a href="?page=<?php echo $page - 1; ?>" class="pagination-link">&lt;</a> <!-- Less than symbol -->
-                <?php else: ?>
-                    <span class="pagination-link disabled">&lt;</span> <!-- Disabled less than symbol -->
-                <?php endif; ?>
+          <!-- Pagination Controls -->
+          <div class="pagination">
+            <?php if ($page > 1): ?>
+                <a href="?page=<?php echo $page - 1; ?>" class="pagination-link">&lt;</a> <!-- Previous Page -->
+            <?php else: ?>
+                <span class="pagination-link disabled">&lt;</span> <!-- Disabled Previous -->
+            <?php endif; ?>
 
-                <?php if ($page < $totalPages): ?>
-                    <a href="?page=<?php echo $page + 1; ?>" class="pagination-link">&gt;</a> <!-- Greater than symbol -->
-                <?php else: ?>
-                    <span class="pagination-link disabled">&gt;</span> <!-- Disabled greater than symbol -->
-                <?php endif; ?>
-            </div>
+            <span class="current-page">Page <?php echo $page; ?> of <?php echo $totalPages; ?></span>
+
+            <?php if ($page < $totalPages): ?>
+                <a href="?page=<?php echo $page + 1; ?>" class="pagination-link">&gt;</a> <!-- Next Page -->
+            <?php else: ?>
+                <span class="pagination-link disabled">&gt;</span> <!-- Disabled Next -->
+            <?php endif; ?>
+        </div>
         </div>
     </div>
 </div>
