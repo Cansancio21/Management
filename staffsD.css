@@ -348,12 +348,9 @@ a:hover {
 
 .sub-menu {
     display: none; /* Initially hide the submenu */
-    margin-top: -50px;
+    margin-top: -10px;
 }
 
-.sub-menu li {
-    padding: -5px 0; /* Add some padding to submenu items */
-}
 
 /* Style for the sidebar links */
 .sidebar a {
@@ -396,3 +393,16 @@ a:hover {
     margin-left: 10px; /* Space between the text and the icon */
     margin-top: -50px;
 }
+ul.sub-menu {
+    list-style: none;
+    padding: 0;
+    margin-left: 35px;;
+    width: 100%; /* Ensure it takes full width */
+    margin-top: -90px;
+    display: none; /* Hide submenu by default */
+}
+
+
+
+
+
