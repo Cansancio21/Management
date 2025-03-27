@@ -18,55 +18,52 @@ body {
     padding: 20px;
     background-color: #e2dddd; /* Light background for the container */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
- 
-    position: relative; /* Changed to relative for proper layout */
- 
+    height: 100vh; /* Full height of the viewport */
+    position: fixed;
 }
 
+
 .table-box {
-    margin-top: -70px; /* Adjust as needed */
-    width: 95%; 
+    margin-top: -20px;
+    width: 90%; 
     padding: 20px;
     margin-right: 10px;
-    margin-left: 10px;
+    margin-left: 30px;
     border-radius: 5px;
     background-color: #ffffff; 
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
-    height: auto; /* Allow height to adjust based on content */
-    overflow: hidden; /* Prevent scrolling within the table box */
+    height: 70vh; 
+    position: relative; /* Change to relative for sticky header */
+   
 }
-
 
 table {
     width: 100%;
     border-collapse: collapse; /* Collapse borders */
 }
 
-th {
-    position: sticky;
-    top: 0; /* Position from the top */
-    background-color: #f2f2f2; /* Background color for the header */
-    z-index: 10; /* Ensure it stays above other content */
-    padding: 10px; /* Padding for better spacing */
-    border: 1px solid #ddd; /* Optional: border for better visibility */
+thead th {
+    background-color: #c8cbd1; /* Header background color */
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
+    z-index: 10; /* Ensure it is above other content */
 }
-
 
 .table-box h2{
     text-align: left;
-    margin-top: 5px;
-    font-size: 2rem;
+    margin-top: 20px;
+    font-size: 1.7rem;
+    color: #000000;
 }
 
-.container .upper {
+.container .upper{
     border-radius: 5px;
     margin-top: -20px;
     margin-left: -20px;
-    width: 102%;
+    width: 100%;
     height: 8vh;
     background-color: #ffffff;
 }
-
 
 .upper h1{
     padding-top: 20px;
@@ -123,7 +120,7 @@ th {
     text-decoration: none; /* Remove underline from links */
     color: #ffffff; /* Default text color */
     padding: 10px 15px; /* Padding around the link */
-    transition: background-color 0.3s; /* Smooth background transition */ 
+    transition: background-color 0.3s; /* Smooth background transition */
 }
 
 footer a{
@@ -139,7 +136,6 @@ footer a{
     color: #333;
 }
 
-
 /* Back to Home link styles */
 .back-home {
     position: absolute; /* Position it at the bottom */
@@ -154,24 +150,23 @@ footer a{
 .back-home:hover {
     text-decoration: underline; /* Underline on hover */
 }
+
+/* Table styles */
 table {
     width: 100%;
-    border-collapse: collapse; /* Collapse borders */
+    border-collapse: collapse; 
     margin-top: 10px; /* Space above the table */
-    table-layout: fixed; /* Ensure fixed layout to prevent overflow */
-}
-/* Table header styles */
-th, td {
-    border: 1px solid #ccc; 
-    padding: 12px;
-    text-align: center;
-    font-size: 15px;
-    white-space: normal; /* Allows text to wrap */
-    overflow: hidden; /* Prevents content from spilling out */
-    word-wrap: break-word; /* Wraps long words properly */
-    max-width: 150px; /* Adjust based on your layout */
+    max-height: 90%; /* Set a maximum height for the table */
+    overflow-y: auto; /* Enable vertical scrolling */
+    display: block; /* Allow scrolling */
 }
 
+/* Table header styles */
+th, td {
+    border: 1px solid #ccc; /* Light gray border */
+    padding: 12px; /* More padding for better spacing */
+    text-align: center; /* Align text to the left */
+}
 
 /* Row styling */
 tr {
@@ -197,28 +192,20 @@ tr:hover {
     background-color: #ddd; /* Darker gray on hover */
 }
 
-/* Table header background */   
-th {
-    background-color: #c8cbd1; 
-    color: rgb(0, 0, 0);
-    position: sticky; /* Make header sticky */
-    top: 0; /* Stick to the top */
-    z-index: 10; /* Ensure it stays above other content */
-}
 th:nth-child(1), td:nth-child(1) {
     width: 5%;
 }
 
 th:nth-child(2), td:nth-child(2) {
-    width: 10%;
+    width: 5%;
 }
 
 th:nth-child(3), td:nth-child(3) {
-    width: 10%;
+    width: 5%;
 }
 
 th:nth-child(4), td:nth-child(4) {
-    width: 8%;
+    width: 5%;
 }
 
 
@@ -231,28 +218,10 @@ th:nth-child(6), td:nth-child(6) {
 }
 
 th:nth-child(7), td:nth-child(7) {
-    width: 8%;
-}
-
-th:nth-child(8), td:nth-child(8) {
-    width: 8%;
-}
-
-
-th:nth-child(9){
     width: 5%;
 }
-th:nth-child(10), td:nth-child(10) {
-    width: 10%;
-}
 
-th:nth-child(11), td:nth-child(11) {
-    width: 10%;
-}
 
-th:nth-child(12), td:nth-child(12) {
-    width: 10%;
-}
 /* Styling for action icons */
 td a {
     text-decoration: none; /* Remove underline from links */
@@ -290,7 +259,7 @@ a:hover {
     text-decoration: underline; /* Underline on hover */
 }
 
-.add-btn {
+.borrow-btn {
     display: inline-block;
     background-color: #cf752b;
     color: white;
@@ -301,18 +270,18 @@ a:hover {
     font-weight: lighter;
     transition: 0.3s;
     position: absolute;
-    right: 70px;
- 
+    right: 20px;
+    top: 70px;
     
 }
 
-.add-btn:hover {
+.borrow-btn:hover {
     background-color: #7494ec;
 }
 
 .export-btn {
     display: inline-block;
-    background-color: #2bcf2b;
+    background-color: #63c216;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
@@ -321,14 +290,15 @@ a:hover {
     font-weight: lighter;
     transition: 0.3s;
     position: absolute;
-    right: 220px;
-  
-    
+    right: 130px;
+    top: 70px;
 }
+
 
 .export-btn:hover {
     background-color: #7494ec;
 }
+
 
 .table-box table a {
     font-size: 18px; 
@@ -349,7 +319,6 @@ a:hover {
 .table-box a i {
     justify-content: center; 
 }
-
 
 .admin-icon {
     margin-left: 5px; /* Space between name and icon */
@@ -385,4 +354,8 @@ a:hover {
     margin-left: -100%;
 }
 
-
+.borrowed table{
+    margin-bottom: 50px;
+    margin-top: 20px;
+    padding-top: -10px;
+  }

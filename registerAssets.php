@@ -5,7 +5,8 @@ include 'db.php';
 // Initialize variables
 $assetname = "";
 $assetstatus = "";
-$assetdate = ""; 
+$assetquantity = ""; 
+$assetdate = "";
 $assetnameErr = "";
 $assetstatusError = "";
 $hasError = false; // Initialize hasError to false
@@ -20,6 +21,7 @@ if (!$conn) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $assetname = trim($_POST['asset_name']);
     $assetstatus = trim($_POST['asset_status']);
+    $assetquantity = trim($_POST['asset_quantity']);
     $assetdate = trim($_POST['date']);
 
     // Validate asset name
@@ -31,9 +33,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Insert into the appropriate table based on asset status
     if (!$hasError) {
         if ($assetstatus == "Borrowing") {
-            $sql = "INSERT INTO tbl_borrow_assets (a_name, a_status, a_date) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO tbl_borrow_assets (a_name, a_status, a_quantity, a_date) VALUES (?, ?, ?, ?)";
         } else {
-            $sql = "INSERT INTO tbl_deployment_assets (a_name, a_status, a_date) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO tbl_deployment_assets (a_name, a_status, a_quantity, a_date) VALUES (?, ?, ?, ?)";
         }
 
         $stmt = $conn->prepare($sql);
@@ -42,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Bind parameters correctly
-        $stmt->bind_param("sss", $assetname, $assetstatus, $assetdate);
+        $stmt->bind_param("ssss", $assetname, $assetstatus, $assetquantity, $assetdate);
 
         if ($stmt->execute()) {
             echo "<script type='text/javascript'>
@@ -78,6 +80,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="form-row">
                     <label for="asset_name">Asset Name:</label>
                     <input type="text" id="asset_name" name="asset_name" placeholder="Asset Name" required>
+                </div>
+                <div class="form-row">
+                    <label for="asset_quantity">Asset Quantity to Register:</label>
+                    <input type="text" id="asset_quantity" name="asset_quantity" placeholder="Asset quantity" required>
                 </div>
                 <div class="form-row">
                     <label for="asset_status">Asset Status:</label>

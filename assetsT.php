@@ -9,11 +9,11 @@ $assetsStatus = '';
 // Check if the database connection is established
 if ($conn) {
     // Fetch borrowed assets
-    $sqlBorrowed = "SELECT a_id, a_name, a_status, a_date FROM tbl_borrow_assets"; // Fetch borrowed assets
+    $sqlBorrowed = "SELECT a_id, a_name, a_status, a_quantity, a_date FROM tbl_borrow_assets"; // Fetch borrowed assets
     $resultBorrowed = $conn->query($sqlBorrowed); 
 
     // Fetch deployment assets
-    $sqlDeployment = "SELECT a_id, a_name, a_status, a_date FROM tbl_deployment_assets"; // Fetch deployment assets
+    $sqlDeployment = "SELECT a_id, a_name, a_status, a_quantity, a_date FROM tbl_deployment_assets"; // Fetch deployment assets
     $resultDeployment = $conn->query($sqlDeployment); 
 
 } else {
@@ -56,19 +56,19 @@ if ($conn) {
         </div>
         
         <div class="table-box">
-
             <div class="borrow">
             <a href="registerAssets.php" class="add-btn"><i class="fas fa-user-plus"></i> Add Assets</a>
             <a href="createTickets.php" class="export-btn"><i class="fas fa-download"></i>Export</a>
             <table>
-            <h2>For Borrowed Assets</h2>
+            <h2>Registered Assets</h2>
             <table>
                 <thead>
                     <tr>
                         <th>Asset Id</th>
                         <th>Asset Name</th>
                         <th>Asset Status</th>
-                        <th>Asset Date</th>
+                        <th>Asset Quantity</th>
+                        <th>Date Registered</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -79,7 +79,8 @@ if ($conn) {
                             echo "<tr> 
                                     <td>{$row['a_id']}</td> 
                                     <td>{$row['a_name']}</td>  
-                                    <td>{$row['a_status']}</td> 
+                                    <td>{$row['a_status']}</td>
+                                    <td>{$row['a_quantity']}</td>  
                                     <td>{$row['a_date']}</td> 
                                     <td>
                                         <a href='editC.php?id={$row['a_id']}'><i class='fas fa-edit'></i></a>
@@ -93,19 +94,17 @@ if ($conn) {
                     ?>
                 </tbody>
             </table>
-            <a href="createTickets.php" class="borrow-btn"><i class="fas fa-plus"></i>Borrow</a>
-            <a href="createTickets.php" class="return-btn"><i class="fas fa-undo"></i>Return</a>
             </div>
 
             <div class="deploy">
-            <h2>For Deployment Assets</h2>
             <table>
                 <thead>
                     <tr>
                         <th>Asset Id</th>
                         <th>Asset Name</th>
                         <th>Asset Status</th>
-                        <th>Asset Date</th>
+                        <th>Asset Quantity</th>
+                        <th>Date Registered</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -116,7 +115,8 @@ if ($conn) {
                             echo "<tr> 
                                     <td>{$row['a_id']}</td> 
                                     <td>{$row['a_name']}</td>  
-                                    <td>{$row['a_status']}</td> 
+                                    <td>{$row['a_status']}</td>
+                                    <td>{$row['a_quantity']}</td>  
                                     <td>{$row['a_date']}</td> 
                                     <td>
                                         <a href='editC.php?id={$row['a_id']}'><i class='fas fa-edit'></i></a>
@@ -130,7 +130,8 @@ if ($conn) {
                     ?>
                 </tbody>
             </table>
-
+            <a href="borrowA.php" class="borrow-btn"><i class="fas fa-plus"></i>Borrow</a>
+            <a href="createTickets.php" class="return-btn"><i class="fas fa-undo"></i>Return</a>
             </div>
            
 

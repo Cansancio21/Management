@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2025 at 09:22 AM
+-- Generation Time: Mar 27, 2025 at 10:28 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,6 +24,29 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_borrowed`
+--
+
+CREATE TABLE `tbl_borrowed` (
+  `b_id` int(50) NOT NULL,
+  `b_assets_name` varchar(100) NOT NULL,
+  `b_quantity` int(50) NOT NULL,
+  `b_technician_name` varchar(100) NOT NULL,
+  `b_date` date NOT NULL,
+  `b_technician_id` int(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_borrowed`
+--
+
+INSERT INTO `tbl_borrowed` (`b_id`, `b_assets_name`, `b_quantity`, `b_technician_name`, `b_date`, `b_technician_id`) VALUES
+(1, 'Modems', 15, 'Nyar Cansancio', '2025-03-25', 0),
+(2, 'Modems', 5, 'Tatyana Hayden', '2025-03-25', 37);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_borrow_assets`
 --
 
@@ -31,16 +54,18 @@ CREATE TABLE `tbl_borrow_assets` (
   `a_id` int(50) NOT NULL,
   `a_name` varchar(200) NOT NULL,
   `a_status` varchar(200) NOT NULL,
-  `a_date` date NOT NULL
+  `a_date` date NOT NULL,
+  `a_quantity` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_borrow_assets`
 --
 
-INSERT INTO `tbl_borrow_assets` (`a_id`, `a_name`, `a_status`, `a_date`) VALUES
-(1, 'Router', 'Borrowing', '2025-03-21'),
-(2, 'Bukog', 'Borrowing', '2025-02-26');
+INSERT INTO `tbl_borrow_assets` (`a_id`, `a_name`, `a_status`, `a_date`, `a_quantity`) VALUES
+(1, 'Router', 'Borrowing', '2025-03-21', 0),
+(2, 'Bukog', 'Borrowing', '2025-02-26', 0),
+(3, 'Modems', 'Borrowing', '2025-03-25', 0);
 
 -- --------------------------------------------------------
 
@@ -88,16 +113,18 @@ CREATE TABLE `tbl_deployment_assets` (
   `a_id` int(50) NOT NULL,
   `a_name` varchar(200) NOT NULL,
   `a_status` varchar(200) NOT NULL,
-  `a_date` date NOT NULL
+  `a_date` date NOT NULL,
+  `a_quantity` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_deployment_assets`
 --
 
-INSERT INTO `tbl_deployment_assets` (`a_id`, `a_name`, `a_status`, `a_date`) VALUES
-(1, 'Wire', 'Deployment', '2025-03-20'),
-(2, 'Wire', 'Deployment', '2025-03-20');
+INSERT INTO `tbl_deployment_assets` (`a_id`, `a_name`, `a_status`, `a_date`, `a_quantity`) VALUES
+(1, 'Wire', 'Deployment', '2025-03-20', 0),
+(2, 'Wire', 'Deployment', '2025-03-20', 0),
+(3, 'Modem', 'Deployment', '2025-03-25', 10);
 
 -- --------------------------------------------------------
 
@@ -113,14 +140,14 @@ CREATE TABLE `tbl_supp_tickets` (
   `s_subject` varchar(200) NOT NULL,
   `s_type` varchar(200) NOT NULL,
   `s_message` varchar(200) NOT NULL,
-  `status` varchar(200) NOT NULL
+  `s_status` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_supp_tickets`
 --
 
-INSERT INTO `tbl_supp_tickets` (`id`, `c_id`, `c_lname`, `c_fname`, `s_subject`, `s_type`, `s_message`, `status`) VALUES
+INSERT INTO `tbl_supp_tickets` (`id`, `c_id`, `c_lname`, `c_fname`, `s_subject`, `s_type`, `s_message`, `s_status`) VALUES
 (1, 0, 'awawawa', 'ref#-23-03-2025-211213', 'aqaqaqaqaq', '0', '', ''),
 (4, 0, 'awawa', 'ref#-23-03-2025-558320', 'awaw', '1', '', ''),
 (5, 0, 'awawa', 'ref#-23-03-2025-590610', 'awawawawaw', '0', '', ''),
@@ -207,21 +234,20 @@ INSERT INTO `tbl_user` (`u_id`, `u_fname`, `u_lname`, `u_email`, `u_username`, `
 (33, 'awawawawa', 'wawawawaawaa', 'waw@gmail.com', 'oicnasnac12', '$2y$10$lNctiWTaf5CP1FYhlhgl3ehntsiEOMfsBnjnbjlq2BKHb9WOAYPa.', 'staff', 'active'),
 (34, 'awawawawa', 'wawawawaawaa', 'waw@gmail.com', 'oicnasnac1234', '$2y$10$xVlsAy4RAGbUNwPIxTy6BuO2kCO3eoZ8aDJWw10h64CQ.RuPh6maC', 'staff', 'active'),
 (35, 'awawawa', 'wawawawawa', 'waw@gmail.com', 'oicnasnac123', '$2y$10$HrYeqM5sk0e8gTZaRnJDau0JSPQp1NAe6UC4r4NllomMSaFbPvFJG', 'admin', 'active'),
-(36, 'awawa', 'wawaw', 'awaw@gmail.com', 'andales', '$2y$10$DvWi5FD.bTmoVfrEWNn1W.iPBoX4AFKL5UPEmcxVpsf2IcYbc3VcG', 'admin', 'active'),
-(37, 'awaw', 'awawa', 'wawa@gmail.com', 'andales12', '$2y$10$y0b6bW2TeaV3wV.MLX6VP.FagPXN0f4LfM1p.hc/MA5QAg6CgP/ni', 'admin', 'active'),
-(38, 'awawawa', 'wawawaw', 'awaw@gmail.com', 'lolo', '$2y$10$OCCmNNkGjz3ny7gC3oM2Lepq7BuNg8rccTxfkZxEe2HXTqMvHlUtC', 'admin', 'active'),
-(39, 'awawa', 'awawaw', 'awaw@gmail.com', 'lolo123', '$2y$10$9XrF3ybtP6JwDvn3YY7m5.tUSYsZQqfdZcZ9nG4ADot/Wq1lF5sbO', 'admin', 'active'),
-(40, 'awawawa', 'awaw', 'awaw@gmail.com', 'lolo1233', '$2y$10$r9opYBh4vM5ierZ69CY5b.DYw9UcgYWc0KngdwSVhTe1YyNWsmkq6', 'admin', 'active'),
-(41, 'awawawa', 'awawa', 'awaw@gmail.com', 'awaw', '$2y$10$d09xnI0p1ilIOrCfxU9dSezxY45Lq5woIyFyVkPCtSOCylo.g1g3K', 'admin', 'active'),
-(42, 'awawawa', 'awawa', 'awaw@gmail.com', 'ryan111', '$2y$10$mu/oZdvy7S7o/d7DxqdsY.hyZXC4Wcz3bsfA0vG38GucXQzH5C8n.', 'admin', 'active'),
-(43, 'awawaw', 'awawaw', 'awawaw@gmail.com', 'kapoya', '$2y$10$8zW0/nPmhk1rfwbmdqJOs.ZsnHUbn2q8RafoSxDgcTp7Hf/APCLpu', 'admin', 'active'),
-(44, 'awawaw', 'awawaw', 'awaw@gmail.com', 'bro', '$2y$10$u9.JQYSG8TX.p4IcS9SOBuvjEwsbMDgRFqP3VxpR.mqP8VVLt5G.O', 'admin', 'active'),
-(45, 'awawaw', 'awawaw', 'awawawaw@gmail.com', 'kapoya12', '$2y$10$sGES0cvfv202O9aMIR8xee4qfE5TLLQ5b18COPIqKXz8jTR1PpTW6', 'admin', 'active'),
-(46, 'awawaw', 'awawaw', 'awawawaw@gmail.com', 'kapoya123', '$2y$10$G.ECPNocgOfgLs4FmYi.deDH0iBYKq6EZozEjUB19aT.t25oOUBly', 'staff', 'active');
+(36, 'Nattyy De Coco', 'Tillman', 'rage@mailinator.com', 'Natty', '$2y$10$JJd2ZIQG6nEBu8dZ7SRULufGWNQb9fl/OSeXzFi63/T6UguImRE/G', 'staff', 'active'),
+(37, 'Tatyana', 'Hayden', 'jimeruveby@mailinator.com', 'Test ni ha', '$2y$10$GiKnS6yTtPo6qudbPLqITeo4fFbcBUjN2PucdtFhfPJnjYrQbyJP6', 'technician', 'active'),
+(38, 'awawaw', 'awawawa', 'wa@gmail.com', 'kent12', '$2y$10$AU0zXIRnz9R4LXCgNsRO5OYyZL6shHx8iLB/o5iw6uk9TYeMrWthC', 'admin', 'active'),
+(39, 'awawaw', 'awawaaw', 'awa@gmail.com', 'kent123', '$2y$10$zALKAPj//43Sdr6Hl90Tu.gZbsKpiNSQMKcGFlRlOPWbEhLaAHArq', 'staff', 'active');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `tbl_borrowed`
+--
+ALTER TABLE `tbl_borrowed`
+  ADD PRIMARY KEY (`b_id`);
 
 --
 -- Indexes for table `tbl_borrow_assets`
@@ -264,10 +290,16 @@ ALTER TABLE `tbl_user`
 --
 
 --
+-- AUTO_INCREMENT for table `tbl_borrowed`
+--
+ALTER TABLE `tbl_borrowed`
+  MODIFY `b_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `tbl_borrow_assets`
 --
 ALTER TABLE `tbl_borrow_assets`
-  MODIFY `a_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `a_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_customer`
@@ -279,7 +311,7 @@ ALTER TABLE `tbl_customer`
 -- AUTO_INCREMENT for table `tbl_deployment_assets`
 --
 ALTER TABLE `tbl_deployment_assets`
-  MODIFY `a_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `a_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_supp_tickets`
@@ -297,7 +329,7 @@ ALTER TABLE `tbl_ticket`
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `u_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `u_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

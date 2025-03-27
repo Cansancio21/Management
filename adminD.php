@@ -77,11 +77,13 @@ if ($conn) {
     <div class="sidebar">
         <h2>Task Management</h2>
         <ul>
-            <li><a href="adminD.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-            <li><a href="viewU.php"><i class="fas fa-users"></i> View Users</a></li>
-            <li><a href="view_service_record.php"><i class="fas fa-file-alt"></i> View Service Record</a></li>
-            <li><a href="view_incident_report.php"><i class="fas fa-exclamation-triangle"></i> View Incident Report</a></li>
-            <li><a href="view_logs.php"><i class="fas fa-book"></i> View Logs</a></li>
+        <li><a href="adminD.php"><i class="fas fa-home"></i> Dashboard</a></li>
+        <li><a href="viewU.php"><i class="fas fa-users-cog"></i> View Users</a></li>
+        <li><a href="view_service_record.php"><i class="fas fa-clipboard-list"></i> View Service Record</a></li>
+        <li><a href="view_incident_report.php"><i class="fas fa-bell"></i> View Incident Report</a></li>
+        <li><a href="view_logs.php"><i class="fas fa-history"></i> View Logs</a></li>
+        <li><a href="borrowedT.php"><i class="fas fa-folder-open"></i> Borrowed Records</a></li>
+        <li><a href="returnT.php"><i class="fas fa-undo"></i> Return Records</a></li>
         </ul>
         <footer>
             <a href="index.php" class="back-home"><i class="fas fa-home"></i> Back to Home</a>

@@ -18,52 +18,51 @@ body {
     padding: 20px;
     background-color: #e2dddd; /* Light background for the container */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    height: 100vh; /* Full height of the viewport */
-    position: fixed;
+    position: relative; /* Changed to relative for proper layout */
+  
 }
 
 
 .table-box {
-    margin-top: -20px;
-    width: 90%; 
+    margin-top: -70px; /* Adjust as needed */
+    width: 95%; 
     padding: 20px;
     margin-right: 10px;
     margin-left: 10px;
     border-radius: 5px;
     background-color: #ffffff; 
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
-    height: 70vh; 
-    position: relative; /* Change to relative for sticky header */
-   
+    height: auto; /* Allow height to adjust based on content */
+    overflow: hidden; /* Prevent scrolling within the table box */
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse; /* Collapse borders */
+
+
+th {
+    position: sticky;
+    top: 0; /* Position from the top */
+    background-color: #f2f2f2; /* Background color for the header */
+    z-index: 10; /* Ensure it stays above other content */
+    padding: 10px; /* Padding for better spacing */
+    border: 1px solid #ddd; /* Optional: border for better visibility */
 }
 
-thead th {
-    background-color: #c8cbd1; /* Header background color */
-    position: sticky; /* Make the header sticky */
-    top: 0; /* Stick to the top */
-    z-index: 10; /* Ensure it is above other content */
-}
 
 .table-box h2{
     text-align: left;
-    margin-top: 20px;
-    font-size: 1.7rem;
-    color: #000000;
+    margin-top: 5px;
+    font-size: 2rem;
 }
 
-.container .upper{
+.container .upper {
     border-radius: 5px;
     margin-top: -20px;
     margin-left: -20px;
-    width: 100%;
+    width: 102%;
     height: 8vh;
     background-color: #ffffff;
 }
+
 
 .upper h1{
     padding-top: 20px;
@@ -75,6 +74,7 @@ thead th {
 .wrapper {
     display: flex; 
     height: 100vh; 
+    overflow: hidden;
 }
 
 /* Sidebar styles */
@@ -120,7 +120,7 @@ thead th {
     text-decoration: none; /* Remove underline from links */
     color: #ffffff; /* Default text color */
     padding: 10px 15px; /* Padding around the link */
-    transition: background-color 0.3s; /* Smooth background transition */
+    transition: background-color 0.3s; /* Smooth background transition */ 
 }
 
 footer a{
@@ -136,6 +136,7 @@ footer a{
     color: #333;
 }
 
+
 /* Back to Home link styles */
 .back-home {
     position: absolute; /* Position it at the bottom */
@@ -150,26 +151,25 @@ footer a{
 .back-home:hover {
     text-decoration: underline; /* Underline on hover */
 }
-
-/* Table styles */
 table {
     width: 100%;
-    margin-right: 10px;
-    margin-left: 90px;
-    border-collapse: collapse; 
+    border-collapse: collapse; /* Collapse borders */
     margin-top: 10px; /* Space above the table */
-    max-height: 90%; /* Set a maximum height for the table */
-    overflow-y: auto; /* Enable vertical scrolling */
-    display: block; /* Allow scrolling */
+    table-layout: fixed; /* Ensure fixed layout to prevent overflow */
 }
 
 /* Table header styles */
 th, td {
-    border: 1px solid #ccc; /* Light gray border */
-    padding: 12px; /* More padding for better spacing */
-    text-align: center; /* Align text to the left */
+    border: 1px solid #ccc; 
+    padding: 12px;
+    text-align: center;
     font-size: 15px;
+    white-space: normal; /* Allows text to wrap */
+    overflow: hidden; /* Prevents content from spilling out */
+    word-wrap: break-word; /* Wraps long words properly */
+    min-height: 40px;
 }
+
 
 /* Row styling */
 tr {
@@ -195,8 +195,16 @@ tr:hover {
     background-color: #ddd; /* Darker gray on hover */
 }
 
+/* Table header background */   
+th {
+    background-color: #c8cbd1; 
+    color: rgb(0, 0, 0);
+    position: sticky; /* Make header sticky */
+    top: 0; /* Stick to the top */
+    z-index: 10; /* Ensure it stays above other content */
+}
 th:nth-child(1), td:nth-child(1) {
-    width: 10%;
+    width: 5%;
 }
 
 th:nth-child(2), td:nth-child(2) {
@@ -208,30 +216,41 @@ th:nth-child(3), td:nth-child(3) {
 }
 
 th:nth-child(4), td:nth-child(4) {
-    width: 10%;
+    width: 8%;
 }
 
 
 th:nth-child(5), td:nth-child(5) {
-    width: 10%;
+    width: 5%;
 }
 
 th:nth-child(6), td:nth-child(6) {
-    width: 10%;
+    width: 5%;
 }
 
 th:nth-child(7), td:nth-child(7) {
-    width: 10%;
+    width: 8%;
 }
 
 th:nth-child(8), td:nth-child(8) {
-    width: 10%;
+    width: 8%;
 }
+
 
 th:nth-child(9){
+    width: 5%;
+}
+th:nth-child(10), td:nth-child(10) {
     width: 10%;
 }
 
+th:nth-child(11), td:nth-child(11) {
+    width: 10%;
+}
+
+th:nth-child(12), td:nth-child(12) {
+    width: 10%;
+}
 /* Styling for action icons */
 td a {
     text-decoration: none; /* Remove underline from links */
@@ -280,8 +299,8 @@ a:hover {
     font-weight: lighter;
     transition: 0.3s;
     position: absolute;
-    right: 90px;
-    top: 70px;
+    right: 70px;
+ 
     
 }
 
@@ -291,7 +310,7 @@ a:hover {
 
 .export-btn {
     display: inline-block;
-    background-color: #63c216;
+    background-color: #2bcf2b;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
@@ -300,53 +319,14 @@ a:hover {
     font-weight: lighter;
     transition: 0.3s;
     position: absolute;
-    right: 225px;
-    top: 70px;
+    right: 220px;
+  
+    
 }
-
 
 .export-btn:hover {
     background-color: #7494ec;
 }
-
-.borrow-btn {
-    background-color: #c23e16;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: lighter;
-    transition: 0.3s;
-    margin-left: 90px;
-    margin-top: -80px;
-    margin-bottom: 50px;
-}
-
-
-.borrow-btn:hover {
-    background-color: #7494ec;
-}
-
-.return-btn {
-    background-color: #c2b116;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: lighter;
-    transition: 0.3s;
-    margin-left: 5px;
-    margin-top: -100px;
-    margin-bottom: 50px;
-}
-
-
-.return-btn:hover {
-    background-color: #7494ec;
-}
-
 
 .table-box table a {
     font-size: 18px; 
@@ -403,13 +383,4 @@ a:hover {
     margin-left: -100%;
 }
 
-.borrow table{
-    margin-bottom: 50px;
-    margin-top: 20px;
-    padding-top: -10px;
-  }
 
-.deploy table{
-    margin-top: 20px;
-    margin-bottom: 30px;
-}
