@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $borrow_assetsname = trim($_POST['asset_name']);
     $borrowquantity = trim($_POST['borrow_quantity']);
     $borrow_techname = trim($_POST['tech_name']);
-    $borrow_techid =  trim($_POST['tech_id']);
+    $borrow_techid = trim($_POST['tech_id']);
     $borrowdate = trim($_POST['date']);
 
     // Validate asset name
@@ -35,6 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $hasError = true;
     }
 
+    // Validate technician name
     if (!preg_match("/^[a-zA-Z\s-]+$/", $borrow_techname)) {
         $borrow_technameErr = "Technician Name should not contain numbers.";
         $hasError = true;
@@ -50,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!$hasError) {
         $sqlCheckTechnician = "SELECT u_id FROM tbl_user WHERE u_id = ?";
         $stmtCheckTechnician = $conn->prepare($sqlCheckTechnician);
-        $stmtCheckTechnician->bind_param("s", $borrow_techid); // Corrected variable name
+        $stmtCheckTechnician->bind_param("s", $borrow_techid);
         $stmtCheckTechnician->execute();
         $resultCheckTechnician = $stmtCheckTechnician->get_result();
 
@@ -65,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!$hasError) {
         $sqlCheckTechName = "SELECT u_fname, u_lname FROM tbl_user WHERE u_id = ?";
         $stmtCheckTechName = $conn->prepare($sqlCheckTechName);
-        $stmtCheckTechName->bind_param("s", $borrow_techid); // Corrected variable name
+        $stmtCheckTechName->bind_param("s", $borrow_techid);
         $stmtCheckTechName->execute();
         $resultCheckTechName = $stmtCheckTechName->get_result();
 
@@ -74,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $fullName = trim($row['u_fname'] . ' ' . $row['u_lname']);
             
             if (strcasecmp($fullName, $borrow_techname) !== 0) {
-                $borrow_technameErr = "Technician Name does not exist.";
+                $borrow_technameErr = "Technician Name does not match the ID.";
                 $hasError = true;
             }
         } else {
@@ -112,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $stmtUpdate->execute();
 
                     // Redirect after successful operation
-                    header("Location: borrowedT.php");
+                    header("Location: assetsT.php");
                     exit(); // Ensure no further code is executed
                 } else {
                     die("Execution failed: " . $stmtInsert->error);
@@ -142,7 +143,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
      <div class="wrapper">
        <div class="container">
-       <a href="staffD.php" class="back-icon">
+       <a href="assetsT.php" class="back-icon">
             <i class='bx bx-arrow-back'></i>
         </a>
         <h1>Enter Details to Borrow:</h1>

@@ -154,6 +154,8 @@ footer a{
 /* Table styles */
 table {
     width: 100%;
+    margin-right: 20px;
+    margin-left: 35px;
     border-collapse: collapse; 
     margin-top: 10px; /* Space above the table */
     max-height: 90%; /* Set a maximum height for the table */
@@ -166,6 +168,7 @@ th, td {
     border: 1px solid #ccc; /* Light gray border */
     padding: 12px; /* More padding for better spacing */
     text-align: center; /* Align text to the left */
+    font-size: 15px;
 }
 
 /* Row styling */
@@ -193,34 +196,41 @@ tr:hover {
 }
 
 th:nth-child(1), td:nth-child(1) {
-    width: 5%;
+    width: 10%;
 }
 
 th:nth-child(2), td:nth-child(2) {
-    width: 5%;
+    width: 10%;
 }
 
 th:nth-child(3), td:nth-child(3) {
-    width: 5%;
+    width: 10%;
 }
 
 th:nth-child(4), td:nth-child(4) {
-    width: 5%;
+    width: 10%;
 }
 
 
 th:nth-child(5), td:nth-child(5) {
-    width: 5%;
+    width: 10%;
 }
 
 th:nth-child(6), td:nth-child(6) {
-    width: 5%;
+    width: 10%;
 }
 
 th:nth-child(7), td:nth-child(7) {
-    width: 5%;
+    width: 10%;
 }
 
+th:nth-child(8), td:nth-child(8) {
+    width: 10%;
+}
+
+th:nth-child(9){
+    width: 10%;
+}
 
 /* Styling for action icons */
 td a {
@@ -259,7 +269,7 @@ a:hover {
     text-decoration: underline; /* Underline on hover */
 }
 
-.borrow-btn {
+.add-btn {
     display: inline-block;
     background-color: #cf752b;
     color: white;
@@ -270,12 +280,12 @@ a:hover {
     font-weight: lighter;
     transition: 0.3s;
     position: absolute;
-    right: 20px;
+    right: 90px;
     top: 70px;
     
 }
 
-.borrow-btn:hover {
+.add-btn:hover {
     background-color: #7494ec;
 }
 
@@ -290,12 +300,50 @@ a:hover {
     font-weight: lighter;
     transition: 0.3s;
     position: absolute;
-    right: 130px;
+    right: 225px;
     top: 70px;
 }
 
 
 .export-btn:hover {
+    background-color: #7494ec;
+}
+
+.borrow-btn {
+    background-color: #c23e16;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: lighter;
+    transition: 0.3s;
+    margin-left: 90px;
+    margin-top: -80px;
+    margin-bottom: 50px;
+}
+
+
+.borrow-btn:hover {
+    background-color: #7494ec;
+}
+
+.return-btn {
+    background-color: #c2b116;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: lighter;
+    transition: 0.3s;
+    margin-left: 5px;
+    margin-top: -100px;
+    margin-bottom: 50px;
+}
+
+
+.return-btn:hover {
     background-color: #7494ec;
 }
 
@@ -319,6 +367,7 @@ a:hover {
 .table-box a i {
     justify-content: center; 
 }
+
 
 .admin-icon {
     margin-left: 5px; /* Space between name and icon */
@@ -354,8 +403,13 @@ a:hover {
     margin-left: -100%;
 }
 
-.borrowed table{
+.borrow table{
     margin-bottom: 50px;
     margin-top: 20px;
     padding-top: -10px;
   }
+
+.deploy table{
+    margin-top: 20px;
+    margin-bottom: 30px;
+}

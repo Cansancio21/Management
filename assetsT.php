@@ -6,13 +6,13 @@ include 'db.php';
 $assetsName = '';
 $assetsStatus = '';
 
-// Check if the database connection is established
+
 if ($conn) {
-    // Fetch borrowed assets
+    
     $sqlBorrowed = "SELECT a_id, a_name, a_status, a_quantity, a_date FROM tbl_borrow_assets"; // Fetch borrowed assets
     $resultBorrowed = $conn->query($sqlBorrowed); 
 
-    // Fetch deployment assets
+    
     $sqlDeployment = "SELECT a_id, a_name, a_status, a_quantity, a_date FROM tbl_deployment_assets"; // Fetch deployment assets
     $resultDeployment = $conn->query($sqlDeployment); 
 
@@ -21,13 +21,14 @@ if ($conn) {
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asset Registration</title>
-    <link rel="stylesheet" href="assetT.css"> 
+    <link rel="stylesheet" href="assetsT.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
 </head>
 <body>
@@ -131,7 +132,7 @@ if ($conn) {
                 </tbody>
             </table>
             <a href="borrowA.php" class="borrow-btn"><i class="fas fa-plus"></i>Borrow</a>
-            <a href="createTickets.php" class="return-btn"><i class="fas fa-undo"></i>Return</a>
+            <a href="return.php" class="return-btn"><i class="fas fa-undo"></i>Return</a>
             </div>
            
 
@@ -143,5 +144,5 @@ if ($conn) {
 </html>
 
 <?php 
-$conn->close(); // Close the database connection 
+$conn->close(); 
 ?>
