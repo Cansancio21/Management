@@ -8,22 +8,41 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
+// Initialize variables
 $firstName = '';
 $userType = '';
+$lastName = '';
 
 // Fetch user data based on the logged-in username
 if ($conn) {
-    $sqlUser = "SELECT u_fname, u_type FROM tbl_user WHERE u_username = ?";
-    $stmt = $conn->prepare($sqlUser);
+    $sqlUser  = "SELECT u_fname, u_lname, u_type FROM tbl_user WHERE u_username = ?";
+    $stmt = $conn->prepare($sqlUser );
     $stmt->bind_param("s", $_SESSION['username']);
     $stmt->execute();
-    $resultUser = $stmt->get_result();
+    $resultUser  = $stmt->get_result();
 
-    if ($resultUser->num_rows > 0) {
-        $row = $resultUser->fetch_assoc();
+    if ($resultUser ->num_rows > 0) {
+        $row = $resultUser ->fetch_assoc();
         $firstName = $row['u_fname'];
+        $lastName = $row['u_lname'];
         $userType = $row['u_type'];
     }
+
+    // Avatar handling
+    $username = $_SESSION['username'];
+    $avatarPath = 'default-avatar.png'; // Default avatar
+    $avatarFolder = 'uploads/avatars/';
+    $userAvatar = $avatarFolder . $username . '.png';
+
+    // Check if user has a custom avatar
+    if (file_exists($userAvatar)) {
+        $_SESSION['avatarPath'] = $userAvatar . '?' . time(); // Prevent caching issues
+    } else {
+        $_SESSION['avatarPath'] = 'default-avatar.png';
+    }
+
+    // Use the updated session variable
+    $avatarPath = $_SESSION['avatarPath'];
 
     // Pagination setup
     $limit = 10; // Number of tickets per page
@@ -44,6 +63,7 @@ if ($conn) {
     exit();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -144,6 +164,34 @@ if ($conn) {
     <div class="upper">
         <h1>Ticket Reports</h1>
     </div>  
+
+    <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search...">
+            <span class="search-icon">🔍</span> 
+        </div>
+        <div class="user-icon">
+    <?php 
+    $avatarPath = isset($_SESSION['avatarPath']) ? $_SESSION['avatarPath'] : 'default-avatar.png'; 
+    
+    if (!empty($avatarPath) && file_exists(str_replace('?' . time(), '', $avatarPath))) {
+        echo "<img src='" . htmlspecialchars($avatarPath, ENT_QUOTES, 'UTF-8') . "' 
+              style='width: 40px; height: 40px; border-radius: 50%; object-fit: cover;'>";
+    } else {
+        echo "<i class='bx bxs-user-circle' style='font-size: 40px; color: #555; margin-top: 10px;'></i>";
+
+    }
+    ?>
+</div>
+<div class="user-details">
+    <span><?php echo htmlspecialchars($firstName . ' ' . $lastName, ENT_QUOTES, 'UTF-8'); ?></span><br>
+    <small><?php echo htmlspecialchars(ucfirst($userType), ENT_QUOTES, 'UTF-8'); ?></small>
+</div>
+
+<a href="settings.php" class="settings-link">
+                    <i class='bx bx-cog'></i>
+                    <span>Settings</span>
+                </a>
+
 
     <div class="table-box">
         <?php if ($userType === 'staff'): ?>

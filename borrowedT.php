@@ -84,8 +84,8 @@ if ($conn) {
                                     <td>{$row['b_technician_id']}</td>    
                                     <td>{$row['b_date']}</td> 
                                     <td>
-                                        <a href='editC.php?id={$row['b_id']}'><i class='fas fa-edit'></i></a>
-                                        <a href='deleteC.php?id={$row['b_id']}'><i class='fas fa-trash'></i></a>
+                                        <a href='editR.php?id={$row['b_id']}'><i class='fas fa-edit'></i></a>
+                                        <a href='deleteR.php?id={$row['b_id']}'><i class='fas fa-trash'></i></a>
                                     </td>
                                   </tr>"; 
                         } 

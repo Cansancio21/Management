@@ -145,3 +145,12 @@ button:hover {
     color: #007BFF; /* Change color on hover */
     transform: scale(1.1); /* Scale up the icon on hover */
 }
+
+
+  /* Error message styling */
+  .error {
+    color: red; /* Red color for error messages */
+    font-size: 0.9em; /* Slightly smaller font size */
+    margin-top: 5px; /* Space between the input and the error message */
+    display: block; /* Ensure the error message is displayed as a block element */
+}

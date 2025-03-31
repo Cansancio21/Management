@@ -24,7 +24,7 @@ body {
 }
 
 .table-box {
-    margin-top: 50px; /* Adjust as needed */
+    margin-top: -40px; /* Adjust as needed */
     width: 95%; 
     padding: 20px;
     margin-right: 10px;
@@ -401,6 +401,82 @@ ul.sub-menu {
     margin-top: -90px;
     display: none; /* Hide submenu by default */
 }
+
+.search-container {
+    position: relative; /* Position relative to allow absolute positioning of the icon */
+    width: 300px; /* Set a width for the search container */
+    margin: 20px auto; /* Center the container horizontally and add top margin */
+    top: -95px;
+}
+
+.search-bar {
+    width: 100%; /* Full width of the container */
+    padding: 10px 10px 10px 40px; /* Add padding to the left for the icon */
+    border: 1px solid #ccc; /* Border for the input */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+    margin-left: -100%;
+    margin-top: 20px;
+}
+
+.search-icon {
+    position: absolute; /* Position the icon absolutely within the container */
+    left: 10px; /* Position the icon */
+    top: 65%; /* Center the icon vertically */
+    transform: translateY(-50%); /* Adjust for vertical centering */
+    color: #aaa; /* Icon color */
+    pointer-events: none; /* Prevent mouse events on the icon */
+    z-index: 1; /* Ensure the icon is above the input field */
+    margin-left: -100%;
+}
+.user-icon {
+    position: absolute;
+    left: 70px; /* Adjust as needed */
+    top: 40px;
+    transform: translateY(-50%);
+    margin-left: 50%;
+}
+
+
+.user-details {
+    position: absolute;
+    left: 120px; /* Adjust as needed */
+    top: 40px;
+    transform: translateY(-50%);
+    margin-left: 50%;
+   
+}
+
+
+.settings-link {
+    position: absolute;
+    top: 10px;
+    right: 70px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.3s ease-in-out;
+ }
+ 
+ .settings-link i {
+    font-size: 24px;
+    margin-right: 5px;
+    transition: 0.3s ease-in-out;
+ }
+ 
+ .settings-link span {
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: 0.3s ease-in-out;
+ }
+ 
+ .settings-link:hover span {
+    opacity: 1;
+    transform: translateX(0);
+ }
 
 
 

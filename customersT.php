@@ -113,7 +113,7 @@ if ($conn) {
             <li><a href="assetsT.php"><i class="fas fa-box"></i> View Assets</a></li>
             <li><a href="createTickets.php"><i class="fas fa-file-invoice"></i> Ticket Registration</a></li>
             <li><a href="addC.php"><i class="fas fa-user-plus"></i> Add Customer</a></li>
-            <li><a href="portal.php"><i class="fas fa-user-plus"></i> Register Assets</a></li>
+            <li><a href="assetsT.php"><i class="fas fa-user-plus"></i> Register Assets</a></li>
         </ul>
         <footer>
             <a href="index.php" class="back-home"><i class="fas fa-home"></i> Back to Home</a>
